@@ -1,0 +1,6 @@
+dotenv
+azure-identity
+azure-ai-documentintelligence
+azure-search-documents
+azure-ai-inference 
+tiktoken
