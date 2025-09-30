@@ -4,8 +4,8 @@ import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
 import tiktoken
-from create_embedings import get_chunk_object
-from search_index import create_search_index, upload_chunk_document, delete_index_if_exists
+from embedings import get_chunk_object
+from index import create_search_index, upload_chunk_document, delete_index_if_exists
 
 
 def parse_paragraphs(analyze_result):
