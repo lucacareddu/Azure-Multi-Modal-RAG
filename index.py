@@ -51,9 +51,11 @@ def create_search_index(search_index_name):
             facetable=True,
         ),
         SearchableField(name="header", type=SearchFieldDataType.String),
-        SearchableField(name="content", type=SearchFieldDataType.String),
-        SearchableField(name="page", type=SearchFieldDataType.String),
-        SearchableField(name="file_name", type=SearchFieldDataType.String),
+        SearchableField(name="raw_content", type=SearchFieldDataType.String, facetable=True),
+        SearchableField(name="format_content", type=SearchFieldDataType.String),
+        SearchableField(name="paragraph", type=SearchFieldDataType.Int32),
+        SearchableField(name="page", type=SearchFieldDataType.Int32),
+        SearchableField(name="source", type=SearchFieldDataType.String),
         SearchField(name="vector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
             searchable=True,
             vector_search_dimensions=1536, 
@@ -80,7 +82,8 @@ def create_search_index(search_index_name):
         name="my-semantic-config",
         prioritized_fields=SemanticPrioritizedFields(
             title_field=SemanticField(field_name="header"),
-            content_fields=[SemanticField(field_name="content")]
+            content_fields=[SemanticField(field_name="format_content")],
+            keywords_fields=[SemanticField(field_name="page"), SemanticField(field_name="paragraph")],
         )
     )
 

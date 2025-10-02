@@ -32,7 +32,7 @@ def get_embeddings_vector(text):
     return embedding
 
 def get_chunk_object(paragraph: dict)-> dict:
-    vector = get_embeddings_vector(paragraph["content"])
+    vector = get_embeddings_vector(paragraph["format_content"])
 
     return {
         "id": str(uuid.uuid4()),

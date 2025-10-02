@@ -3,165 +3,173 @@
 import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
-import re
-import tiktoken
+from azure.ai.documentintelligence.models import ParagraphRole
 from embedings import get_chunk_object
-from index import create_search_index, upload_chunk_document, delete_index_if_exists
+from index import create_search_index, delete_index_if_exists
 from storage import connect_to_storage
 from indexer import get_indexer
 
 import pickle
+import re
+
+import nltk
+# nltk.download('wordnet')
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+
+import tiktoken
 import json
 
 
-def parse_paragraphs(analyze_result):
-    table_offsets = []
-    page_content = {}
+def analyze_layout(path_to_file, save_to_file=None):
+    key = os.getenv("DOCUMENTINTELLIGENCE_API_KEY")
+    endpoint = os.getenv("DOCUMENTINTELLIGENCE_ENDPOINT")
 
-    for paragraph in analyze_result.paragraphs:  
+    document_intelligence_client = DocumentIntelligenceClient(
+        endpoint=endpoint, credential=AzureKeyCredential(key)
+    )
+
+    file = open(path_to_file, "rb")
+
+    poller = document_intelligence_client.begin_analyze_document(
+        "prebuilt-layout", body=file
+    )
+
+    result = poller.result()
+
+    if save_to_file:
+        with open(save_to_file, "wb") as fout:
+            pickle.dump(result, fout)
+
+    return result
+
+def upload_to_container(data, overwrite=True):
+    from azure.storage.blob import BlobServiceClient
+
+    storage_name = os.getenv("STORAGE_NAME")
+    account_url = f"https://{storage_name}.blob.core.windows.net"
+    api_key = os.getenv("STORAGE_API_KEY")
+
+    blob_service_client = BlobServiceClient(account_url=account_url, credential=api_key)
+
+    container_name = os.getenv("CONTAINER_NAME")
+    
+    for chunk in data:
+        local_file_name = chunk["header"]
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
+
+        # try:
+        #     blob_client.delete_blob()
+        # except:
+        #     print("Could not delete " + local_file_name)
+        #     pass
+        
+        print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
+
+        # Upload the created file
+        blob_client.upload_blob(json.dumps(chunk), overwrite=overwrite)
+
+def get_tables(analyze_result, formatted_paragraphs):
+    for table_idx, table in enumerate(analyze_result.tables):
+        print(
+            "Table # {} ({}) has {} rows and {} columns, {}".format(
+            table_idx, table.content, table.row_count, table.column_count, table.footnotes
+            )
+        )
+            
+        for cell in table.cells:
+            print(
+                "...Cell[{}][{}] has content '{}'".format(
+                cell.row_index,
+                cell.column_index,
+                cell.content.encode("utf-8"),
+                )
+            )
+    return
+
+def format_paragraphs(analyze_result):
+    table_offsets = []
+    formatted_paragraphs = []
+
+    header = None
+    for paragraph in analyze_result.paragraphs:
         for span in paragraph.spans:
+            paragraph
             if span.offset not in table_offsets:
                 for region in paragraph.bounding_regions:
-                    page_number = region.page_number
-                    if page_number not in page_content:
-                        page_content[page_number] = []
-                    page_content[page_number].append({
-                        "content_text": paragraph.content
-                    })
-    return page_content, table_offsets
+                    role = paragraph.role
+                    if role == ParagraphRole.TITLE:
+                        header = "title"
+                    elif role == ParagraphRole.SECTION_HEADING:
+                        header = paragraph.content
+                        continue
+                    if header and role != ParagraphRole.PAGE_NUMBER:
+                        par_num = len(formatted_paragraphs)+1
+                        header = header if header else f"paragraph_{len(formatted_paragraphs)+1}"
+                        content = paragraph.content
+                        page_num = int(region.page_number)
 
-# def parse_paragraphs(analyze_result):
-#     table_offsets = []
-#     paragraphs_formatted = []
+                        format_content = paragraph.content.strip().lower()
+                        format_content = re.sub(r'\d+','',format_content)
+                        format_content = re.sub(r'[^\w\s]','',format_content)
 
-#     for paragraph in analyze_result.paragraphs:
-#         for span in paragraph.spans:
-#             if span.offset not in table_offsets:
-#                 for region in paragraph.bounding_regions:
-#                     role = paragraph.role.capitalize() if paragraph.role else "unnamed_paragraph"
-#                     content = paragraph.content
-#                     page = region.page_number
-#                     paragraphs_formatted.append({
-#                         "header":role,
-#                         "format_content":"",
-#                         "raw_content":content,
-#                         "paragraph_number":"",
-#                         "page":page,
-#                         "source":"report.pdf"})
-#     print(paragraphs_formatted)
-#     return paragraphs_formatted
+                        lemmmatizer = WordNetLemmatizer()
+                        words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
+                        format_content = ' '.join(words)
 
-def format_paragraphs(raw_paragraphs):
-    p1_pars_formatted = []
-    last_header = None
+
+                        formatted_paragraphs.append({
+                            "header":header,
+                            "raw_content":content,
+                            "format_content":format_content,
+                            "paragraph":par_num,
+                            "page":page_num,
+                            "source":"report.pdf"})
+                        
+                        header = None
     
-    for page_num, raw_pars in raw_paragraphs.items():
-        for i, par in enumerate(raw_pars):
-            content = par["content_text"]
-            par_format = None
+    # get_tables(analyze_result, formatted_paragraphs)
 
-            if i==0 and not par_format:
-                par_format = {
-                        "header":"title",
-                        "content":content,
-                        "page":page_num,
-                        "file_name":"report.pdf"}
-            elif len(content) > 50:
-                par_format = {
-                        "header":last_header if last_header and len(re.sub("\d+(?:\.\d+)", "",last_header))>5 else f"paragraph_{i+1}",
-                        "content":content,
-                        "page":page_num}
-            else:
-                last_header = content
-            
-            if par_format:
-                p1_pars_formatted.append(par_format)
+    return formatted_paragraphs
 
-    return p1_pars_formatted
+def assess_tokens_number(paragraphs, max_tokens=1000):
+    tokenizer = tiktoken.get_encoding(encoding_name="cl100k_base")
+    tokens = [len(tokenizer.encode(p["format_content"], disallowed_special=())) > max_tokens for p in paragraphs]
+    assert not any(tokens)
 
-def analyze_read():
-    # key = os.getenv("DOCUMENTINTELLIGENCE_API_KEY")
-    # endpoint = os.getenv("DOCUMENTINTELLIGENCE_ENDPOINT")
 
-    # document_intelligence_client = DocumentIntelligenceClient(
-    #     endpoint=endpoint, credential=AzureKeyCredential(key)
-    # )
-
-    # file = open('sample.pdf', "rb")
-
-    # poller = document_intelligence_client.begin_analyze_document(
-    #     "prebuilt-layout", body=file
-    # )
-
-    # result = poller.result()
-
-    # with open("sample_result.pkl", "wb") as fout:
-    #     pickle.dump(result, fout)
+def main():
+    # analyze_layout('sample.pdf', save_to_file="sample_result.pkl")
 
     ### Bypass DocumentIntelligence call and load the pickle to avoid exceeding the Azure free subscription limit of 500 pages per month
 
     with open("sample_result.pkl", 'rb') as fin:
         result = pickle.load(fin)
 
-    parags = parse_paragraphs(result)[0]
-    p1_parags = format_paragraphs(parags)
+    parags = format_paragraphs(result)
 
+    assess_tokens_number(parags) # Less than 1k
 
-    # for table_idx, table in enumerate(result.tables):
-    #     print(
-    #         "Table # {} has {} rows and {} columns, {}".format(
-    #         table_idx, table.row_count, table.column_count, table.footnotes
-    #         )
-    #     )
-            
-    #     for cell in table.cells:
-    #         print(
-    #             "...Cell[{}][{}] has content '{}'".format(
-    #             cell.row_index,
-    #             cell.column_index,
-    #             cell.content.encode("utf-8"),
-    #             )
-    #         )
+    parags = [get_chunk_object(x) for x in parags] # Add id and vector fields
 
-    tokenizer = tiktoken.get_encoding(encoding_name="cl100k_base")
-    tokens = [len(tokenizer.encode(p["content"], disallowed_special=()))>1000 for p in p1_parags]
-    assert not any(tokens)
-
-    p1_parags = [get_chunk_object(x) for x in p1_parags]
-
-    search_index_name = "es1sea"
+    index_name = os.getenv("INDEX_NAME")
 
     print("Deleting search index if it exists...")
-    delete_index_if_exists(search_index_name)
+    delete_index_if_exists(index_name)
 
     print("Creating new search index...")
-    create_search_index(search_index_name)
-    print(f"Search index '{search_index_name}' created.")
+    create_search_index(index_name)
+    print(f"Search index '{index_name}' created.")
 
+    print("Creating new data source connection...")
     connect_to_storage()
 
-    from azure.identity import DefaultAzureCredential
-    from azure.core.credentials import AzureKeyCredential
-    from azure.storage.blob import BlobServiceClient
-
-    account_url = "https://es1sto.blob.core.windows.net"
+    print("Loading data into the container...")
+    upload_to_container(parags, overwrite=True)
     
-    blob_service_client = BlobServiceClient(account_url, credential=os.getenv("STORAGE_API_KEY"))
-    # for par in p1_parags:
-    #     local_file_name = par["header"]
-    #     blob_client = blob_service_client.get_blob_client(container="es1cont", blob=local_file_name)
-
-    #     print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
-
-    #     # Upload the created file
-    #     blob_client.upload_blob(json.dumps(par))
-    
+    print("Creating new indexer...")
     get_indexer()
-
-    # print("Uploading chunks to search index...")
-    # for par in p1_parags:
-    #     upload_chunk_document(par, search_index_name)
-
 
 
 
@@ -171,7 +179,7 @@ if __name__ == "__main__":
 
     try:
         load_dotenv(find_dotenv())
-        analyze_read()
+        main()
     except HttpResponseError as error:
         if error.error is not None:
             print(f"Received service error: {error.error}")
