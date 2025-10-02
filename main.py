@@ -12,9 +12,9 @@ from indexer import get_indexer
 import pickle
 import re
 
-import nltk
+# import nltk
 # nltk.download('wordnet')
-nltk.download('stopwords')
+# nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
