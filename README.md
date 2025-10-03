@@ -1,4 +1,4 @@
-### 🤖 RAG pipeline with Azure tools via the Python APIs.
+### 🤖 RAG pipeline with Azure tools via Python APIs.
 
 - Azure AI Document Intelligence for extracting text and tables from PDF files
 - Azure Blob Storage to store PDFs and preprocessed chunks of text along with their vector embeddings
