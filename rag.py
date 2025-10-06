@@ -1,6 +1,23 @@
+import os
+from dotenv import load_dotenv
+load_dotenv(".env", override=True)
+
 from openai import AzureOpenAI
 
 from rag_utils import SpinnerThread
+
+
+chat_endpoint = os.getenv("CHAT_ENDPOINT")
+chat_api_key = os.getenv("CHAT_API_KEY")
+chat_deployment = os.getenv("CHAT_DEPLOYMENT")
+api_version = "2024-12-01-preview"
+
+embedding_deployment = os.getenv("EMBEDDING_DEPLOYMENT")
+
+search_endpoint = os.getenv("SEARCH_ENDPOINT")
+search_api_key = os.getenv("SEARCH_API_KEY")
+index_name = os.getenv("INDEX_NAME")
+semant_config_name = os.getenv("SEMANTIC_CONFIGURATION_NAME")
 
 
 def get_openai_client():
@@ -129,23 +146,5 @@ def main():
 
 
 
-
 if __name__=="__main__":
-    import os
-    from dotenv import load_dotenv
-
-    load_dotenv(".env", override=True)
-
-    chat_endpoint = os.getenv("CHAT_ENDPOINT")
-    chat_api_key = os.getenv("CHAT_API_KEY")
-    chat_deployment = os.getenv("CHAT_DEPLOYMENT")
-    api_version = "2024-12-01-preview"
-
-    embedding_deployment = os.getenv("EMBEDDING_DEPLOYMENT")
-
-    search_endpoint = os.getenv("SEARCH_ENDPOINT")
-    search_api_key = os.getenv("SEARCH_API_KEY")
-    index_name = os.getenv("INDEX_NAME")
-    semant_config_name = os.getenv("SEMANTIC_CONFIGURATION_NAME")
-
     main()
