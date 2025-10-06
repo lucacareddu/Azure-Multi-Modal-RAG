@@ -5,14 +5,19 @@ from modules.storage import Storage
 from modules.indexer import Indexer
 
 
-def create_index():
+def create_index(use_vector: bool = True):
     # pdf_file = 'sample.pdf'
     pkl_file = "sample_result.pkl"
 
     doc = DocumentProcessor()
-    emb = Embedder(format_content_field="format_content")
-    index = Index(title_field="header")
+
+    if use_vector:
+        emb = Embedder(format_content_field="format_content")
+
+    index = Index(title_field="header", use_vector=use_vector)
+
     stor = Storage(title_field="header")
+
     indexer = Indexer()
 
     print("\nRetrieving information...")
@@ -22,11 +27,12 @@ def create_index():
     print("\nFormatting text...")
     paragraphs = doc.format_paragraphs(result)
 
-    print("\nAssessing tokens number...")
-    assert emb.tokens_number_test(paragraphs) ==  "succeded" # Less than 1k
+    if use_vector:
+        print("\nAssessing tokens number...")
+        assert emb.tokens_number_test(paragraphs) ==  "succeded" # Less than 1k
 
-    print("\nEmbedding text...")
-    data = [emb.get_chunk_object(x, add_id=True) for x in paragraphs] # Add id and vector fields
+        print("\nEmbedding text...")
+        paragraphs = [emb.get_chunk_object(x) for x in paragraphs] # Add id and vector fields
 
     print("\nDeleting search index if it exists...")
     index.delete_index_if_exists()
@@ -38,7 +44,7 @@ def create_index():
     stor.connect_to_container()
 
     print("\nLoading data into the container...")
-    stor.upload_to_container(data, overwrite=True)
+    stor.upload_to_container(paragraphs, overwrite=True)
     
     print("\nCreating new indexer...")
     indexer.build_indexer()
@@ -48,4 +54,12 @@ def create_index():
 
 
 if __name__ == "__main__":
-    create_index()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--no-vector", action="store_false", help="not create embeddings")
+
+    args = parser.parse_args()
+    use_vector = args.use_vector
+
+    create_index(use_vector=use_vector)

@@ -1,4 +1,5 @@
 import os
+import uuid
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -75,7 +76,7 @@ class DocumentProcessor():
                 )
         return
 
-    def format_paragraphs(self, analyze_result):
+    def format_paragraphs(self, analyze_result, add_id: bool = True):
         table_offsets = []
         formatted_paragraphs = []
 
@@ -105,8 +106,10 @@ class DocumentProcessor():
                             words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
                             format_content = ' '.join(words)
 
+                            form_par = {"id": str(uuid.uuid4())} if add_id else {}
 
                             formatted_paragraphs.append({
+                                **form_par,
                                 "header":header,
                                 "raw_content":content,
                                 "format_content":format_content,
