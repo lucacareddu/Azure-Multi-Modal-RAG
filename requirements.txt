@@ -2,6 +2,9 @@ azure-identity
 azure-ai-documentintelligence
 azure-search-documents
 azure-ai-inference 
+dotenv
+fastapi
+gradio
 openai
 tiktoken
-dotenv
+uvicorn
