@@ -1,4 +1,5 @@
 import os
+import glob
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -14,6 +15,7 @@ nltk.download('stopwords', quiet=True)
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+import json
 import pickle
 
 
@@ -22,13 +24,19 @@ class DocumentProcessor():
         Scan and format information from pdfs
     """
 
-    def __init__(self):
+    def __init__(self, root_path: str, splits_dir: str = "splits"):
+        splits_path = os.path.join(root_path, splits_dir)
+        assert os.path.isdir(splits_path)
+
+        self.root_path = root_path
+        self.splits_path = splits_path
+
         self.document_endpoint = os.getenv("DOCUMENT_ENDPOINT")
         self.document_api_key = os.getenv("DOCUMENT_API_KEY")
 
     def get_document_client(self):
         document_intelligence_client = DocumentIntelligenceClient(
-            endpoint=self.endpoint, credential=AzureKeyCredential(self.key)
+            endpoint=self.document_endpoint, credential=AzureKeyCredential(self.document_api_key)
         )
         return document_intelligence_client
 
@@ -38,64 +46,107 @@ class DocumentProcessor():
 
         return result
     
-    def create_from_layout(self, path_to_file, save_to_file=None):
+    def create_from_layout(self, save_to_file="results.pkl"):
         document_intelligence_client = self.get_document_client()
 
-        file = open(path_to_file, "rb")
+        pdf_files = glob.glob("*.pdf", root_dir=self.splits_path)
+        json_files = glob.glob("*.json", root_dir=self.splits_path)
 
-        poller = document_intelligence_client.begin_analyze_document(
-            "prebuilt-layout", body=file
-        )
+        pdf_files.sort()
+        json_files.sort()
 
-        result = poller.result()
+        assert len(pdf_files) == len(json_files)
+
+        results = []
+
+        for pdf_name, json_name in zip(pdf_files, json_files):
+            pdf_path = os.path.join(self.splits_path, pdf_name)
+            json_path = os.path.join(self.splits_path, json_name)
+
+            pdf_file = open(pdf_path, "rb")
+
+            poller = document_intelligence_client.begin_analyze_document(
+                "prebuilt-layout", body=pdf_file
+            )
+
+            result = poller.result()
+
+            with open(json_path, "r") as json_file:
+                json_file = json.load(json_file)
+
+            results.append({
+                **json_file,
+                "result": result
+                })
 
         document_intelligence_client.close() # add try-except
 
         if save_to_file:
             with open(save_to_file, "wb") as fout:
-                pickle.dump(result, fout)
+                pickle.dump(results, fout)         
 
-        return result
+        return results
     
-    def format_tables(self, analyze_result, formatted_paragraphs):
+    def get_tables(self, analyze_result, visualize=False):
+        tables, spans = [], []
+
         for table_idx, table in enumerate(analyze_result.tables):
-            print(
-                "Table # {} ({}) has {} rows and {} columns, {}".format(
-                table_idx, table.content, table.row_count, table.column_count, table.footnotes
+            table_min_offset = min([span["offset"] for span in table.spans])
+            table_max_length = max([span["length"] for span in table.spans])
+            table_span = {"offset": table_min_offset, "length": table_max_length}
+
+            spans.append(table_span)
+
+            header = "Table{} with {} rows and {} columns.".format(
+                (f" ({table.footnotes[-1].content})" if table.footnotes else ""), table.row_count, table.column_count
                 )
-            )
+            
+            if visualize:
+                print(header)
+
+            content = ""
                 
             for cell in table.cells:
-                print(
-                    "...Cell[{}][{}] has content '{}'".format(
-                    cell.row_index,
-                    cell.column_index,
-                    cell.content.encode("utf-8"),
-                    )
-                )
-        return
+                cell_to_string = "Cell[{}][{}]: {}".format(
+                            cell.row_index,
+                            cell.column_index,
+                            cell.content,#.encode("utf-8"),
+                            )
+
+                if visualize:
+                    print(cell_to_string)
+                
+                content += " " + cell_to_string
+            
+            tables.append({"header":header, "content":content})
+
+        return tables, spans
 
     def format_paragraphs(self, analyze_result):
-        table_offsets = []
+        file_name = analyze_result["file_name"]
+        split_offset = analyze_result["split_offset"]
+        result = analyze_result["result"]
+        url = analyze_result["url"]
+
         formatted_paragraphs = []
 
+        tables, tables_spans = self.get_tables(result)
+
         header = None
-        for paragraph in analyze_result.paragraphs:
+        for paragraph in result.paragraphs:
             for span in paragraph.spans:
-                paragraph
-                if span.offset not in table_offsets:
-                    for region in paragraph.bounding_regions:
-                        role = paragraph.role
-                        if role == ParagraphRole.TITLE:
-                            header = "title"
-                        elif role == ParagraphRole.SECTION_HEADING:
-                            header = paragraph.content
-                            continue
-                        if header and role != ParagraphRole.PAGE_NUMBER:
-                            par_num = len(formatted_paragraphs)+1
-                            header = header if header else f"paragraph_{len(formatted_paragraphs)+1}"
+                for region in paragraph.bounding_regions:
+                    role = paragraph.role
+                    if role == ParagraphRole.TITLE:
+                        header = "title"
+                    elif role == ParagraphRole.SECTION_HEADING:
+                        header = paragraph.content
+                        continue
+                    if role != ParagraphRole.PAGE_NUMBER:
+                        if header:
+                            # par_num = len(formatted_paragraphs)+1
                             content = paragraph.content
-                            page_num = int(region.page_number)
+                            page_num = int(region.page_number) + int(split_offset) - 1
 
                             format_content = paragraph.content.strip().lower()
                             format_content = re.sub(r'\d+','',format_content)
@@ -105,17 +156,62 @@ class DocumentProcessor():
                             words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
                             format_content = ' '.join(words)
 
-
                             formatted_paragraphs.append({
                                 "header":header,
                                 "raw_content":content,
                                 "format_content":format_content,
-                                "paragraph":par_num,
                                 "page":page_num,
-                                "source":"report.pdf"})
-                            
-                            header = None
-        
-        # self.format_tables(analyze_result, formatted_paragraphs)
+                                "source":file_name,
+                                "url":url})
+                        else:
+                            for table, tspan in zip(tables, tables_spans):
+                                if tspan["offset"] <= span["offset"] <= (tspan["offset"]+tspan["length"]):
+                                    # paragraph is/contains a table
+                                    # par_num = len(formatted_paragraphs)+1
+                                    header = table["header"]
+                                    content = table["content"]
+                                    page_num = int(region.page_number) + int(split_offset) - 1
+                                    
+                                    if header not in [p["header"] for p in formatted_paragraphs]:
+                                        formatted_paragraphs.append({
+                                            "header":header,
+                                            "raw_content":content,
+                                            "format_content":content,
+                                            "page":page_num,
+                                            "source":file_name,
+                                            "url":url})
+                                    
+                        header = None
 
         return formatted_paragraphs
+    
+    def visualize_result(self, result):
+        for i, res in enumerate(result):
+            print(f"Chunk #{i+1}")
+            for par in res:
+                for k,v in par.items():
+                    print(k)
+                    print(v)
+                    print()
+                input("")
+                print("\n\n\n\n")
+
+    def flatten_result(self, result):
+        flattened_results = []
+
+        for res in result:
+            flattened_results.extend(res)
+
+        return flattened_results
+    
+    def format_result(self, analyze_result, flatten=False):
+        formatted_results = []
+
+        for res in analyze_result:
+            formatted_results.append(self.format_paragraphs(res))
+
+        if flatten:
+            formatted_results = self.flatten_result(formatted_results)
+
+        return formatted_results
+    

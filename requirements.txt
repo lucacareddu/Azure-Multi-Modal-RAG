@@ -6,5 +6,6 @@ dotenv
 fastapi
 gradio
 openai
+pypdf2
 tiktoken
 uvicorn
