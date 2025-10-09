@@ -27,25 +27,25 @@ def create_index():
     print("\nAssessing tokens number...")
     assert emb.tokens_number_test(paragraphs) ==  "succeded" # Less than 1k
 
-#     print("\nEmbedding text...")
-#     data = [emb.get_chunk_object(x, add_id=True) for x in paragraphs] # Add id and vector fields
+    print("\nEmbedding text...")
+    data = [emb.get_chunk_object(x, add_id=True) for x in paragraphs] # Add id and vector fields
 
-#     print("\nDeleting search index if it exists...")
-#     index.delete_index_if_exists()
+    print("\nDeleting search index if it exists...")
+    index.delete_index_if_exists()
 
-#     print("\nCreating new search index...")
-#     index.create_search_index()
+    print("\nCreating new search index...")
+    index.create_search_index()
 
-#     print("\nCreating new data source connection...")
-#     stor.connect_to_container()
+    print("\nCreating new data source connection...")
+    stor.connect_to_container()
 
-#     print("\nLoading data into the container...")
-#     stor.upload_to_container(data, overwrite=True)
+    print("\nLoading data into the container...")
+    stor.upload_to_container(data, overwrite=True)
     
-#     print("\nCreating new indexer...")
-#     indexer.build_indexer()
+    print("\nCreating new indexer...")
+    indexer.build_indexer()
 
-#     print("\nFinished.")
+    print("\nFinished.")
 
 
 

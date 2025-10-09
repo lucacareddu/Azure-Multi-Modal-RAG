@@ -128,34 +128,60 @@ class DocumentProcessor():
         result = analyze_result["result"]
         url = analyze_result["url"]
 
-        formatted_paragraphs = []
-
         tables, tables_spans = self.get_tables(result)
 
+        formatted_paragraphs = []
+
         header = None
+
         for paragraph in result.paragraphs:
             for span in paragraph.spans:
                 for region in paragraph.bounding_regions:
+                    
+                    # check if paragraph is/contains a table
+                    table = None
+                    for t, s in zip(tables, tables_spans):
+                        if s["offset"] <= span["offset"] <= (s["offset"]+s["length"]):
+                            table = t
+
+                    # if table, check if not already in results
+                    if table and (not formatted_paragraphs or table["content"] != formatted_paragraphs[-1]["raw_content"]):
+                        table_header = table["header"]
+                        content = table["content"]
+                        page_num = int(region.page_number) + int(split_offset) - 1
+
+                        formatted_paragraphs.append({
+                            "header":table_header,
+                            "raw_content":content,
+                            "format_content":content,
+                            "page":page_num,
+                            "source":file_name,
+                            "url":url})
+                                
                     role = paragraph.role
-                    if role == ParagraphRole.TITLE:
-                        header = "title"
-                    elif role == ParagraphRole.SECTION_HEADING:
-                        header = paragraph.content
-                        continue
-                    if role != ParagraphRole.PAGE_NUMBER:
-                        if header:
-                            # par_num = len(formatted_paragraphs)+1
-                            content = paragraph.content
-                            page_num = int(region.page_number) + int(split_offset) - 1
 
-                            format_content = paragraph.content.strip().lower()
-                            format_content = re.sub(r'\d+','',format_content)
-                            format_content = re.sub(r'[^\w\s]','',format_content)
+                    if not table and role:            
+                        if role in [ParagraphRole.TITLE, ParagraphRole.SECTION_HEADING]:
+                            header = paragraph.content
+                        
+                    elif not table and not role:
+                        content = paragraph.content
+                        page_num = int(region.page_number) + int(split_offset) - 1
 
-                            lemmmatizer = WordNetLemmatizer()
-                            words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
-                            format_content = ' '.join(words)
+                        # normalize text
+                        format_content = paragraph.content.strip().lower()
+                        format_content = re.sub(r'\d+','',format_content)
+                        format_content = re.sub(r'[^\w\s]','',format_content)
 
+                        lemmmatizer = WordNetLemmatizer()
+                        words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
+                        format_content = ' '.join(words)
+
+                        if formatted_paragraphs and header == formatted_paragraphs[-1]["header"]:
+                            # append to existing paragraph
+                            formatted_paragraphs[-1]["raw_content"] += "\n" + content
+                            formatted_paragraphs[-1]["format_content"] += " " + format_content
+                        else:
                             formatted_paragraphs.append({
                                 "header":header,
                                 "raw_content":content,
@@ -163,31 +189,12 @@ class DocumentProcessor():
                                 "page":page_num,
                                 "source":file_name,
                                 "url":url})
-                        else:
-                            for table, tspan in zip(tables, tables_spans):
-                                if tspan["offset"] <= span["offset"] <= (tspan["offset"]+tspan["length"]):
-                                    # paragraph is/contains a table
-                                    # par_num = len(formatted_paragraphs)+1
-                                    header = table["header"]
-                                    content = table["content"]
-                                    page_num = int(region.page_number) + int(split_offset) - 1
-                                    
-                                    if header not in [p["header"] for p in formatted_paragraphs]:
-                                        formatted_paragraphs.append({
-                                            "header":header,
-                                            "raw_content":content,
-                                            "format_content":content,
-                                            "page":page_num,
-                                            "source":file_name,
-                                            "url":url})
-                                    
-                        header = None
 
         return formatted_paragraphs
     
     def visualize_result(self, result):
         for i, res in enumerate(result):
-            print(f"Chunk #{i+1}")
+            print(f"Split #{i+1}\n")
             for par in res:
                 for k,v in par.items():
                     print(k)
