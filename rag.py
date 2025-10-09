@@ -6,6 +6,8 @@ from openai import AzureOpenAI
 
 from rag_utils import SpinnerThread
 
+from typing import Dict, List
+
 
 chat_endpoint = os.getenv("CHAT_ENDPOINT")
 chat_api_key = os.getenv("CHAT_API_KEY")
@@ -31,10 +33,12 @@ def get_openai_client():
         api_key=chat_api_key,
     )
 
-def get_response(messages):
+def get_response(messages: List[Dict], search_type: str = "vector_semantic_hybrid"):
     """
     Returns a response from the OpenAI client.
     """
+
+    assert search_type in ['simple', 'semantic', 'vector', 'vector_simple_hybrid', 'vector_semantic_hybrid']
 
     client = get_openai_client()
 
@@ -47,15 +51,11 @@ def get_response(messages):
                             "type": "api_key",
                             "key": str(search_api_key),
                         },
-                        "query_type": "vector",
-                        "embedding_dependency": {
-                            "type": "deployment_name",
-                            "deployment_name": str(embedding_deployment),
-                        },
-                        "semantic_configuration": str(semant_config_name),
+                        "query_type": str(search_type),
                         "in_scope": True,
                         "top_n_documents": 3,
                         "strictness": 3,
+                        "semantic_configuration" : str(semant_config_name),
                         "fields_mapping": {
                             "content_fields_separator": "\\n",
                             "title_field": "header",
@@ -64,12 +64,19 @@ def get_response(messages):
                             ],
                             "filepath_field": "source",
                             # "url_field": "url",
-                            "vector_fields": [
-                                "vector"
-                            ]
+                            # "vector_fields": [
+                            #     "vector"
+                            # ]
                         }
                     }
                 }
+    
+    if "vector" in search_type:
+        data_source["parameters"]["embedding_dependency"] = {
+                                                "type": "deployment_name",
+                                                "deployment_name": str(embedding_deployment),
+                                            }
+        data_source["parameters"]["fields_mapping"]["vector_fields"] = ["vector"]
     
     response = client.chat.completions.create(
         messages=messages,
@@ -85,7 +92,7 @@ def get_response(messages):
     return response
 
 
-def main():
+def main(search_type: str):
     history = [{
                 "role": "system",
                 "content": "You are an expert report analyzer that provide relevant information to users querying it",
@@ -109,7 +116,7 @@ def main():
         spinner_thread.start()
 
         try:
-            response = get_response(messages) # LLM response
+            response = get_response(messages, search_type=search_type) # LLM response
             error = None
         except Exception as e:
             error = f"\n⛔ {e}\n"
@@ -147,4 +154,12 @@ def main():
 
 
 if __name__=="__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--search-type", type=str, default="vector_semantic_hybrid", choices=['simple', 'semantic', 'vector', 'vector_simple_hybrid', 'vector_semantic_hybrid'], help="type of search (default: 'vector_semantic_hybrid')")
+
+    args = parser.parse_args()
+    search_type = args.search_type
+
+    main(search_type=search_type)

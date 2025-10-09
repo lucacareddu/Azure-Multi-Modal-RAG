@@ -1,5 +1,6 @@
 import os
 import glob
+import uuid
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -122,7 +123,7 @@ class DocumentProcessor():
 
         return tables, spans
 
-    def format_paragraphs(self, analyze_result):
+    def format_paragraphs(self, analyze_result, add_id: bool = True):
         file_name = analyze_result["file_name"]
         split_offset = analyze_result["split_offset"]
         result = analyze_result["result"]
@@ -150,7 +151,10 @@ class DocumentProcessor():
                         content = table["content"]
                         page_num = int(region.page_number) + int(split_offset) - 1
 
+                        form_par = {"id": str(uuid.uuid4())} if add_id else {}
+
                         formatted_paragraphs.append({
+                            **form_par,
                             "header":table_header,
                             "raw_content":content,
                             "format_content":content,
@@ -176,13 +180,17 @@ class DocumentProcessor():
                         lemmmatizer = WordNetLemmatizer()
                         words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
                         format_content = ' '.join(words)
+                        
 
                         if formatted_paragraphs and header == formatted_paragraphs[-1]["header"]:
                             # append to existing paragraph
                             formatted_paragraphs[-1]["raw_content"] += "\n" + content
                             formatted_paragraphs[-1]["format_content"] += " " + format_content
                         else:
+                            form_par = {"id": str(uuid.uuid4())} if add_id else {}
+                            
                             formatted_paragraphs.append({
+                                **form_par,
                                 "header":header,
                                 "raw_content":content,
                                 "format_content":format_content,

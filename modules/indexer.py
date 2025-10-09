@@ -40,7 +40,7 @@ class Indexer():
             data_source_name=self.data_source_name,
             # skillset_name=self.skillset_name, # not needed this time
             # Map the metadata_storage_name field to the title field in the index to display the PDF title in the search results  
-            # field_mappings=[FieldMapping(source_field_name=field, target_field_name=field) for field in ['header', 'raw_content', 'format_content', 'paragraph_number', 'page', 'source', 'vector']],
+            # field_mappings=[FieldMapping(source_field_name=field, target_field_name=field) for field in ['header', 'raw_content', 'format_content', 'page', 'source', 'url', 'vector']],
             parameters=indexer_parameters # this replaces the field mappings
         )  
 

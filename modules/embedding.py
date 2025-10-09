@@ -1,5 +1,4 @@
 import os
-import uuid
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -48,18 +47,12 @@ class Embedder():
         embedding = response.data[0].embedding
         return embedding
 
-    def get_chunk_object(self, paragraph: Dict, add_id=True) -> Dict:
+    def get_chunk_object(self, paragraph: Dict) -> Dict:
         vector = self.get_embedding_vector(paragraph[self.format_content_field])
 
         chunk = {
                 **paragraph,
                 'vector': vector
-            }
-        
-        if add_id:
-            chunk = {
-                "id": str(uuid.uuid4()),
-                **chunk
             }
         
         return chunk

@@ -68,8 +68,8 @@ class Storage():
     def upload_to_container(self, data, overwrite=True):
         blob_service_client = self.get_storage_client()
         
-        for chunk in data:
-            local_file_name = chunk[self.title_field]
+        for i, chunk in enumerate(data):
+            local_file_name = chunk[self.title_field] + f"_{i+1}"
             blob_client = self.get_blob_client(storage_client=blob_service_client, file_name=local_file_name)
             
             try:

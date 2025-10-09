@@ -28,7 +28,7 @@ class Index():
         Build index and upload json chunks
     """
 
-    def __init__(self, title_field: str = "header"):
+    def __init__(self, title_field: str = "header", use_vector: bool = True):
         self.search_endpoint = os.getenv("SEARCH_ENDPOINT")
         self.search_api_key = os.getenv("SEARCH_API_KEY")
 
@@ -38,6 +38,7 @@ class Index():
         self.sem_conf_name = os.getenv("SEMANTIC_CONFIGURATION_NAME")
 
         self.title_field = title_field
+        self.use_vector = use_vector
 
     def get_search_client(self):
         search_client = SearchClient(
@@ -92,44 +93,50 @@ class Index():
             SearchableField(name="header", type=SearchFieldDataType.String),
             SearchableField(name="raw_content", type=SearchFieldDataType.String, facetable=True),
             SearchableField(name="format_content", type=SearchFieldDataType.String),
-            SearchableField(name="paragraph", type=SearchFieldDataType.Int32),
             SearchableField(name="page", type=SearchFieldDataType.Int32),
             SearchableField(name="source", type=SearchFieldDataType.String),
-            SearchField(name="vector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
-                searchable=True,
-                vector_search_dimensions=1536, 
-                vector_search_profile_name=self.vec_profile_name,
-            ),
+            SearchableField(name="url", type=SearchFieldDataType.String),
         ]
 
-        # Set the vector search configuration  
-        vector_search = VectorSearch(
-            algorithms=[
-                HnswAlgorithmConfiguration(
-                    name=self.vec_alg_conf_name
+        if self.use_vector: # otherwise use keyword-search only
+
+            # Add vector field
+            fields.append(
+                SearchField(name="vector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+                    searchable=True,
+                    vector_search_dimensions=1536, 
+                    vector_search_profile_name=self.vec_profile_name,
+                    )
                 )
-            ],
-            profiles=[
-                VectorSearchProfile(
-                    name=self.vec_profile_name,
-                    algorithm_configuration_name=self.vec_alg_conf_name,
-                )
-            ]
-        )
+
+            # Set the vector search configuration  
+            vector_search = VectorSearch(
+                algorithms=[
+                    HnswAlgorithmConfiguration(
+                        name=self.vec_alg_conf_name
+                    )
+                ],
+                profiles=[
+                    VectorSearchProfile(
+                        name=self.vec_profile_name,
+                        algorithm_configuration_name=self.vec_alg_conf_name,
+                    )
+                ]
+            )
 
         # Set the semantic configuration 
         semantic_config = SemanticConfiguration(
             name=self.sem_conf_name,
             prioritized_fields=SemanticPrioritizedFields(
                 title_field=SemanticField(field_name="header"),
-                content_fields=[SemanticField(field_name="format_content")],
-                keywords_fields=[SemanticField(field_name="page"), SemanticField(field_name="paragraph")],
+                content_fields=[SemanticField(field_name="raw_content")],
+                keywords_fields=[SemanticField(field_name="page"), SemanticField(field_name="source")],
             )
         )
 
         semantic_search = SemanticSearch(configurations=[semantic_config])
         
-        search_index = SearchIndex(name=self.index_name, fields=fields, vector_search=vector_search, semantic_search=semantic_search)
+        search_index = SearchIndex(name=self.index_name, fields=fields, vector_search=vector_search if self.use_vector else None, semantic_search=semantic_search)
         
         client = self.get_search_index_client()
         result = client.create_or_update_index(search_index) # add try-except
