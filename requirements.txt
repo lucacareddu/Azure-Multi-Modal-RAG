@@ -5,7 +5,11 @@ azure-ai-inference
 dotenv
 fastapi
 gradio
+langchain
+langchain-openai
+langgraph
 openai
 pypdf2
 tiktoken
+typing_extensions
 uvicorn

@@ -8,6 +8,8 @@ from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
 from azure.ai.documentintelligence.models import ParagraphRole
 
+from image_agents import compile_graph, draw_mermaid
+
 import re
 
 import nltk
@@ -25,13 +27,21 @@ class DocumentProcessor():
         Scan and format information from pdfs
     """
 
-    def __init__(self, root_path: str, splits_dir: str = "splits"):
+    def __init__(self, root_path: str, splits_dir: str = "splits", images_dir: str = "images", use_images = True):
         splits_path = os.path.join(root_path, splits_dir)
         assert os.path.isdir(splits_path)
 
         self.root_path = root_path
         self.splits_path = splits_path
 
+        if use_images:
+            images_path = os.path.join(root_path, images_dir)
+            assert os.path.isdir(images_path)
+            
+            self.images_path = images_path
+
+        self.use_images = use_images
+        
         self.document_endpoint = os.getenv("DOCUMENT_ENDPOINT")
         self.document_api_key = os.getenv("DOCUMENT_API_KEY")
 
@@ -45,9 +55,33 @@ class DocumentProcessor():
         with open(path_to_file, 'rb') as fin:
             result = pickle.load(fin)
 
+        # images_results = None
+        # if self.use_images:
+        #     images_results = self.get_images()
+        
+        # results = {"documents": result["documents"], "images": images_results}
+
+        # save_to_file=os.path.basename(path_to_file)
+        # if save_to_file:
+        #     with open(save_to_file, "wb") as fout:
+        #         pickle.dump(results, fout)   
+
         return result
     
-    def create_from_layout(self, save_to_file="results.pkl"):
+    def get_images(self):
+        image_workflow = compile_graph()
+        draw_mermaid()
+
+        results = []
+
+        for image in os.listdir(self.images_path):
+            image_path = os.path.join(self.images_path, image)
+            result = image_workflow.invoke({"image": image_path})
+            results.append(result)
+
+        return results
+
+    def create_from_layout(self, save_to_file="results.pkl", verbose=True):
         document_intelligence_client = self.get_document_client()
 
         pdf_files = glob.glob("*.pdf", root_dir=self.splits_path)
@@ -59,6 +93,9 @@ class DocumentProcessor():
         assert len(pdf_files) == len(json_files)
 
         results = []
+
+        if verbose:
+            print("   Reading documents...")
 
         for pdf_name, json_name in zip(pdf_files, json_files):
             pdf_path = os.path.join(self.splits_path, pdf_name)
@@ -82,12 +119,20 @@ class DocumentProcessor():
 
         document_intelligence_client.close() # add try-except
 
+        images_results = None
+        if self.use_images:
+            if verbose:
+                print("   Reading images...")
+            images_results = self.get_images()
+        
+        results = {"documents": results, "images": images_results}
+
         if save_to_file:
             with open(save_to_file, "wb") as fout:
                 pickle.dump(results, fout)         
 
         return results
-    
+
     def get_tables(self, analyze_result, visualize=False):
         tables, spans = [], []
 
@@ -122,6 +167,17 @@ class DocumentProcessor():
             tables.append({"header":header, "content":content})
 
         return tables, spans
+
+    def normalize_text(self, text):
+        format_text = text.strip().lower()
+        format_text = re.sub(r'\d+','',format_text)
+        format_text = re.sub(r'[^\w\s]','',format_text)
+
+        lemmmatizer = WordNetLemmatizer()
+        words = [lemmmatizer.lemmatize(word) for word in format_text.split() if word not in set(stopwords.words('english'))]
+        format_text = ' '.join(words)
+
+        return format_text
 
     def format_paragraphs(self, analyze_result, add_id: bool = True):
         file_name = analyze_result["file_name"]
@@ -172,15 +228,7 @@ class DocumentProcessor():
                         content = paragraph.content
                         page_num = int(region.page_number) + int(split_offset) - 1
 
-                        # normalize text
-                        format_content = paragraph.content.strip().lower()
-                        format_content = re.sub(r'\d+','',format_content)
-                        format_content = re.sub(r'[^\w\s]','',format_content)
-
-                        lemmmatizer = WordNetLemmatizer()
-                        words = [lemmmatizer.lemmatize(word) for word in format_content.split() if word not in set(stopwords.words('english'))]
-                        format_content = ' '.join(words)
-                        
+                        format_content = self.normalize_text(content)                        
 
                         if formatted_paragraphs and header == formatted_paragraphs[-1]["header"]:
                             # append to existing paragraph
@@ -199,10 +247,39 @@ class DocumentProcessor():
                                 "url":url})
 
         return formatted_paragraphs
+
+    def format_images(self, analyze_result, add_id: bool = True):
+        formatted_images = []
+
+        for res in analyze_result:
+            image_path = res["image"]
+            image_name = os.path.basename(image_path)
+
+            res = res["result"]
+
+            header = "Image: " + res.title
+            content = res.description
+            format_content = self.normalize_text(content)
+
+            form_par = {"id": str(uuid.uuid4())} if add_id else {}
+                        
+            formatted_images.append([{
+                **form_par,
+                "id": str(uuid.uuid4()),
+                "header": header,
+                "raw_content": content,
+                "format_content": format_content,
+                "source": image_name,
+                "page": None,
+                "url": None
+                }
+            ])
+        
+        return formatted_images
     
     def visualize_result(self, result):
         for i, res in enumerate(result):
-            print(f"Split #{i+1}\n")
+            print(f"Chunk #{i+1}\n")
             for par in res:
                 for k,v in par.items():
                     print(k)
@@ -220,10 +297,16 @@ class DocumentProcessor():
         return flattened_results
     
     def format_result(self, analyze_result, flatten=False):
+        documents_results = analyze_result["documents"]
+        images_results = analyze_result["images"]
+
         formatted_results = []
 
-        for res in analyze_result:
-            formatted_results.append(self.format_paragraphs(res))
+        for doc_res in documents_results:
+            formatted_results.append(self.format_paragraphs(doc_res))
+
+        if self.use_images and images_results:
+            formatted_results.extend(self.format_images(images_results))
 
         if flatten:
             formatted_results = self.flatten_result(formatted_results)

@@ -5,11 +5,12 @@ from modules.storage import Storage
 from modules.indexer import Indexer
 
 
-def create_index(use_vector: bool = True):
+def create_index(use_image: bool = True, use_vector: bool = True):
+
     pdf_root_dir = "Contoso Corp."
     pkl_file = "results.pkl"
 
-    doc = DocumentProcessor(root_path=pdf_root_dir)
+    doc = DocumentProcessor(root_path=pdf_root_dir, use_images=use_image)
 
     if use_vector:
         emb = Embedder(format_content_field="format_content")
@@ -45,6 +46,9 @@ def create_index(use_vector: bool = True):
     print("\nCreating new data source connection...")
     stor.connect_to_container()
 
+    print("\nErasing all blobs in the container...")
+    stor.erase_container()
+
     print("\nLoading data into the container...")
     stor.upload_to_container(paragraphs, overwrite=True)
     
@@ -59,9 +63,11 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--no-vector", action="store_false", help="not create embeddings")
-
+    parser.add_argument("-ni", "--no-image", action="store_false", help="not embed images")
+    parser.add_argument("-nv", "--no-vector", action="store_false", help="not create embeddings")
     args = parser.parse_args()
+
+    use_image = args.no_image
     use_vector = args.no_vector
 
-    create_index(use_vector=use_vector)
+    create_index(use_image=use_image, use_vector=use_vector)

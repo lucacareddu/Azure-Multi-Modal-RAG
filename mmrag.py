@@ -3,8 +3,12 @@ from dotenv import load_dotenv
 load_dotenv(".env", override=True)
 
 from openai import AzureOpenAI
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents import SearchClient
+from azure.search.documents.models import VectorizedQuery
 
-from rag_utils import SpinnerThread
+import re
+from rag_utils import SpinnerThread, local_image_to_data_url
 
 from typing import Dict, List
 
@@ -29,9 +33,30 @@ def get_openai_client():
     
     return AzureOpenAI(
         api_version=api_version,
-        azure_endpoint=chat_endpoint,
+        azure_endpoint="https://es1open.openai.azure.com",
         api_key=chat_api_key,
     )
+
+def get_search_client():
+    search_client = SearchClient(
+        endpoint=search_endpoint,
+        credential=AzureKeyCredential(search_api_key),
+        index_name=index_name
+    )
+    return search_client
+
+def get_embedding(text):
+    client = get_openai_client()
+    get_embeddings_response = client.embeddings.create(model=str(embedding_deployment), input=str(text))
+    return get_embeddings_response.data[0].embedding
+
+def retrieve(search_query: str):
+    client = get_search_client()
+    search_vector = get_embedding(search_query)
+    result = client.search(search_query, top=3, vector_queries=[
+        VectorizedQuery(vector=search_vector, k_nearest_neighbors=50, fields="vector")],
+        query_type="semantic", semantic_configuration_name=semant_config_name)
+    return result
 
 def get_response(messages: List[Dict], search_type: str = "vector_semantic_hybrid"):
     """
@@ -41,35 +66,6 @@ def get_response(messages: List[Dict], search_type: str = "vector_semantic_hybri
     assert search_type in ['simple', 'semantic', 'vector', 'vector_simple_hybrid', 'vector_semantic_hybrid']
 
     client = get_openai_client()
-
-    data_source = {
-                    "type": "azure_search",
-                    "parameters": {
-                        "endpoint": search_endpoint,
-                        "index_name": index_name,
-                        "authentication": {
-                            "type": "api_key",
-                            "key": str(search_api_key),
-                        },
-                        "query_type": str(search_type),
-                        "in_scope": True,
-                        "top_n_documents": 3,
-                        "strictness": 3,
-                        "semantic_configuration" : str(semant_config_name),
-                        "fields_mapping": {
-                            "content_fields_separator": "\\n",
-                            "title_field": "header",
-                            "content_fields": [
-                                "raw_content"
-                            ],
-                            "filepath_field": "source",
-                            "url_field": "url",
-                            # "vector_fields": [
-                            #     "vector"
-                            # ]
-                        }
-                    }
-                }
     
     if "vector" in search_type:
         data_source["parameters"]["embedding_dependency"] = {
@@ -106,14 +102,39 @@ def main(search_type: str):
 
         if user_input.lower() == "exit":
             break
+
+        for doc in retrieve(user_input):
+            print(doc.keys())
         
-        msg = {"role": "user", "content": user_input}
+        user_words = re.split(r'"|\'', user_input)
+        image_url = None
+        for x in user_words:
+            if x.endswith((".png", ".jpeg", ".jpg")):
+                local_image_name = x
+                image_path = os.path.join("Contoso Corp.", "images", local_image_name)
+                image_url = local_image_to_data_url(image_path)        
+        
+        if image_url:
+            msg = {"role": "user", "content": [           
+                        { 
+                            "type": "text", 
+                            "text": "Describe this picture:" 
+                        },
+                        { 
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"{image_url}"
+                            }
+                        }
+                    ]}
+        else:
+            msg = {"role": "user", "content": user_input}
+
         messages = history + [msg]
         response = None
         
-        
-        spinner_thread = SpinnerThread() # spinner for entertainment while waiting llm generation
-        spinner_thread.start()
+        # spinner_thread = SpinnerThread() # spinner for entertainment while waiting llm generation
+        # spinner_thread.start()
 
         try:
             response = get_response(messages, search_type=search_type) # LLM response
@@ -121,8 +142,8 @@ def main(search_type: str):
         except Exception as e:
             error = f"\n⛔ {e}\n"
 
-        spinner_thread.stop()
-        spinner_thread.join()
+        # spinner_thread.stop()
+        # spinner_thread.join()
 
         if error:
             print(error)
