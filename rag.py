@@ -4,7 +4,7 @@ load_dotenv(".env", override=True)
 
 from openai import AzureOpenAI
 
-from rag_utils import SpinnerThread
+from utils.azure_utils import SpinnerThread
 
 from typing import Dict, List
 

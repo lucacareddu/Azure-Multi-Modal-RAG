@@ -1,14 +1,15 @@
-from modules.document import DocumentProcessor
-from modules.embedding import Embedder
-from modules.index import Index
-from modules.storage import Storage
-from modules.indexer import Indexer
+from index_modules.document import DocumentProcessor
+from index_modules.embedding import Embedder
+from index_modules.index import Index
+from index_modules.storage import Storage
+from index_modules.indexer import Indexer
 
 
 def create_index(use_image: bool = True, use_vector: bool = True):
 
     pdf_root_dir = "Contoso Corp."
-    pkl_file = "results.pkl"
+    raw_pkl_file = "data/results.pkl"
+    format_pkl_file = "data/sources.pkl"
 
     doc = DocumentProcessor(root_path=pdf_root_dir, use_images=use_image)
 
@@ -22,13 +23,13 @@ def create_index(use_image: bool = True, use_vector: bool = True):
     indexer = Indexer()
 
     print("\nRetrieving information...")
-    # result = doc.create_from_layout(save_to_file=pkl_file)
-    result = doc.create_from_pkl(path_to_file=pkl_file)
+    # result = doc.create_from_layout(save_to_file=raw_pkl_file)
+    result = doc.create_from_pkl(path_to_file=raw_pkl_file)
 
     print("\nFormatting text...")
     result = doc.format_result(result)
     # doc.visualize_result(result)
-    paragraphs = doc.flatten_result(result)
+    paragraphs = doc.flatten_result(result, save_to_file=format_pkl_file)
 
     if use_vector:
         print("\nAssessing tokens number...")

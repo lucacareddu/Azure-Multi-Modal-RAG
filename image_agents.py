@@ -4,7 +4,7 @@ from langchain.schema import HumanMessage
 from typing_extensions import TypedDict
 from pydantic import BaseModel, Field
 
-from utils import get_openai_client, get_document_client, local_image_to_data_url
+from utils.azure_utils import get_openai_client, get_document_client, local_image_to_data_url
 
 
 class ResultOutput(BaseModel):
@@ -95,11 +95,11 @@ def draw_mermaid():
 
     png_image = app.get_graph().draw_mermaid_png()
 
-    with open("graph.png", "wb") as f:
+    with open("image_agents_graph.png", "wb") as f:
         f.write(png_image)
 
 
-
+draw_mermaid()
 ### USAGE 
        
 # app = compile_graph()

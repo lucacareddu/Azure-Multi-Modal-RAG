@@ -51,6 +51,10 @@ class DocumentProcessor():
         )
         return document_intelligence_client
 
+    def save_result(self, result, save_to_file):
+        with open(save_to_file, "wb") as fout:
+            pickle.dump(result, fout)
+
     def create_from_pkl(self, path_to_file):
         with open(path_to_file, 'rb') as fin:
             result = pickle.load(fin)
@@ -128,8 +132,7 @@ class DocumentProcessor():
         results = {"documents": results, "images": images_results}
 
         if save_to_file:
-            with open(save_to_file, "wb") as fout:
-                pickle.dump(results, fout)         
+            self.save_result(result=results, save_to_file=save_to_file)         
 
         return results
 
@@ -288,11 +291,14 @@ class DocumentProcessor():
                 input("")
                 print("\n\n\n\n")
 
-    def flatten_result(self, result):
+    def flatten_result(self, result, save_to_file=None):
         flattened_results = []
 
         for res in result:
             flattened_results.extend(res)
+        
+        if save_to_file:
+            self.save_result(result=res, save_to_file=save_to_file)  
 
         return flattened_results
     
