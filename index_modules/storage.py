@@ -65,6 +65,32 @@ class Storage():
 
         indexer_client.close() # add try-except
 
+    def list_container(self):
+        storage_client = self.get_storage_client()
+        container_client = storage_client.get_container_client(self.container_name)
+
+        blob_list = container_client.list_blobs()
+
+        contents = []
+
+        for blob in blob_list: # add try-except
+            blob_name = blob.name
+            blob_client = self.get_blob_client(storage_client=storage_client, file_name=blob_name)
+            content = blob_client.download_blob(encoding="utf-8").content_as_text()
+            
+            try:
+                content = content.replace("null", "None")
+                content_as_dict = eval(content)
+            except Exception as e:
+                print(e)
+
+            contents.append(content_as_dict)
+
+        container_client.close()
+        storage_client.close() 
+
+        return contents
+
     def erase_container(self):
         storage_client = self.get_storage_client()
         container_client = storage_client.get_container_client(self.container_name)
@@ -82,16 +108,25 @@ class Storage():
         container_client.close()
         storage_client.close() 
 
-    def upload_to_container(self, data, erase_container=False, overwrite=True):
+    def upload_to_container(self, data, erase_container=False, overwrite=False):
         if erase_container:
             self.erase_container()
 
         blob_service_client = self.get_storage_client()
         
-        for i, chunk in enumerate(data):
-            local_file_name = chunk[self.title_field] + f"_{i+1}"
+        for chunk in data:
+            local_file_name = chunk[self.title_field]
+
             blob_client = self.get_blob_client(storage_client=blob_service_client, file_name=local_file_name)
             
+            if not overwrite:
+                iterator = 0
+                while blob_client.exists():
+                    local_file_name = chunk[self.title_field] + f"_{iterator+1}"
+                    blob_client = self.get_blob_client(storage_client=blob_service_client, file_name=local_file_name)
+                
+                chunk[self.title_field] = local_file_name # for coherency
+
             try:
                 blob_client.upload_blob(json.dumps(chunk), overwrite=overwrite)
                 print("\n   Uploaded to Azure Storage as blob: " + local_file_name)

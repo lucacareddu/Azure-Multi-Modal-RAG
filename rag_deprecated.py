@@ -4,16 +4,16 @@ load_dotenv(".env", override=True)
 
 from openai import AzureOpenAI
 
-from utils.azure_utils import SpinnerThread
+from utils.utils import SpinnerThread
 
 from typing import Dict, List
 
 
-chat_endpoint = os.getenv("CHAT_ENDPOINT")
-chat_api_key = os.getenv("CHAT_API_KEY")
-chat_deployment = os.getenv("CHAT_DEPLOYMENT")
-api_version = "2024-12-01-preview"
+chat_endpoint = os.getenv("OPENAI_ENDPOINT")
+api_version = os.getenv("OPENAI_API_VERSION")
+chat_api_key = os.getenv("OPENAI_API_KEY")
 
+chat_deployment = os.getenv("CHAT_DEPLOYMENT")
 embedding_deployment = os.getenv("EMBEDDING_DEPLOYMENT")
 
 search_endpoint = os.getenv("SEARCH_ENDPOINT")
@@ -159,7 +159,7 @@ if __name__=="__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--search-type", type=str, default="vector_semantic_hybrid", choices=['simple', 'semantic', 'vector', 'vector_simple_hybrid', 'vector_semantic_hybrid'], help="type of search (default: 'vector_semantic_hybrid')")
+    parser.add_argument("-s", "--search-type", type=str, default="vector", choices=['simple', 'semantic', 'vector', 'vector_simple_hybrid', 'vector_semantic_hybrid'], help="type of search (default: 'vector')")
 
     args = parser.parse_args()
     search_type = args.search_type

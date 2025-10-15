@@ -7,11 +7,10 @@ from index_modules.indexer import Indexer
 
 def create_index(use_image: bool = True, use_vector: bool = True):
 
-    pdf_root_dir = "Contoso Corp."
-    raw_pkl_file = "data/results.pkl"
-    format_pkl_file = "data/sources.pkl"
+    pdf_root = "Contoso Corp."
+    pkl_file = "data/results.pkl"
 
-    doc = DocumentProcessor(root_path=pdf_root_dir, use_images=use_image)
+    doc = DocumentProcessor(root_path=pdf_root, use_images=use_image)
 
     if use_vector:
         emb = Embedder(format_content_field="format_content")
@@ -23,13 +22,13 @@ def create_index(use_image: bool = True, use_vector: bool = True):
     indexer = Indexer()
 
     print("\nRetrieving information...")
-    # result = doc.create_from_layout(save_to_file=raw_pkl_file)
-    result = doc.create_from_pkl(path_to_file=raw_pkl_file)
+    # result = doc.create_from_layout(save_to_file=pkl_file)
+    result = doc.create_from_pkl(path_to_file=pkl_file)
 
     print("\nFormatting text...")
     result = doc.format_result(result)
     # doc.visualize_result(result)
-    paragraphs = doc.flatten_result(result, save_to_file=format_pkl_file)
+    paragraphs = doc.flatten_result(result)
 
     if use_vector:
         print("\nAssessing tokens number...")
@@ -51,7 +50,7 @@ def create_index(use_image: bool = True, use_vector: bool = True):
     stor.erase_container()
 
     print("\nLoading data into the container...")
-    stor.upload_to_container(paragraphs, overwrite=True)
+    stor.upload_to_container(paragraphs)
     
     print("\nCreating new indexer...")
     indexer.build_indexer()
@@ -64,11 +63,11 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-ni", "--no-image", action="store_false", help="not embed images")
-    parser.add_argument("-nv", "--no-vector", action="store_false", help="not create embeddings")
+    parser.add_argument("-ni", "--no-image", action="store_true", help="not extract images")
+    parser.add_argument("-nv", "--no-vector", action="store_true", help="not create embeddings")
     args = parser.parse_args()
 
-    use_image = args.no_image
-    use_vector = args.no_vector
+    use_image = not args.no_image
+    use_vector = not args.no_vector
 
     create_index(use_image=use_image, use_vector=use_vector)

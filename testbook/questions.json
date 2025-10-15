@@ -1,0 +1,108 @@
+[
+  {
+    "question": "How does Contoso's data classification into three levels influence its cloud security policies, particularly regarding data at rest and in transit?",
+    "target_sources": [
+      "2 Perform data classification analysis into three levels",
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 4 columns.",
+      "Table with 4 rows and 4 columns._1",
+      "Contoso's data sensitivity classification",
+      "Contoso's data sensitivity classification_1"
+    ]
+  },
+  {
+    "question": "What is the percentage of Contoso's workforce that is mobile-only, and how does this impact their device management strategy?",
+    "target_sources": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Contoso's IT infrastructure and needs"
+    ]
+  },
+  {
+    "question": "Which cities are identified as regional hubs in Contoso's global network infrastructure, and what is their approximate employee count?",
+    "target_sources": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution"
+    ]
+  },
+  {
+    "question": "How does Contoso's use of ExpressRoute Premium enhance its network performance and connectivity between the Paris headquarters and other Microsoft datacenters?",
+    "target_sources": [
+      "Contoso's use of ExpressRoute"
+    ]
+  },
+  {
+    "question": "In what ways does Contoso ensure compliance with regional data storage and encryption regulations across its international operations?",
+    "target_sources": [
+      "1 Adhere to regional regulatory requirements"
+    ]
+  },
+  {
+    "question": "Compare the data retention periods for Level 1, Level 2, and Level 3 data in Contoso's information protection policies. What are the durations?",
+    "target_sources": [
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 4 columns._1"
+    ]
+  },
+  {
+    "question": "Which key cities are connected by Contoso's regional hub WAN links, and what color represents these links in the network map?",
+    "target_sources": [
+      "Image: Contoso's Global Networking Infrastructure"
+    ]
+  },
+  {
+    "question": "How many regional domains are part of Contoso's Active Directory forest, and which city hosts the central domain?",
+    "target_sources": [
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ]
+  },
+  {
+    "question": "What are the primary functions of Contoso's application datacenters located in Paris, according to their existing IT infrastructure?",
+    "target_sources": [
+      "Contoso's existing IT infrastructure"
+    ]
+  },
+  {
+    "question": "How does Contoso's cloud adoption strategy support its goal of scaling down on-premises datacenters, especially regarding legacy systems?",
+    "target_sources": [
+      "5 Scale down on-premises datacenters",
+      "Azure IaaS Infrastructure as a Service",
+      "Azure IaaS Server-based workloads",
+      "Contoso's IT infrastructure and needs"
+    ]
+  },
+  {
+    "question": "Which Microsoft cloud services are mapped to Contoso's business needs for SaaS, PaaS, and IaaS, and what are their specific roles?",
+    "target_sources": [
+      "Mapping Contoso's business needs to Microsoft's cloud offerings",
+      "Our Mission",
+      "Table with 4 rows and 4 columns."
+    ]
+  },
+  {
+    "question": "What are the main components of Contoso's workplace safety program, and how do they contribute to preventing workplace violence?",
+    "target_sources": [
+      "Purpose",
+      "Contoso Electronics' Workplace Safety Program",
+      "Workplace Safety",
+      "Workplace Violence"
+    ]
+  },
+  {
+    "question": "How does Contoso's privacy policy address the handling of personal information collected from customers and employees?",
+    "target_sources": [
+      "Privacy Policy"
+    ]
+  },
+  {
+    "question": "What are the key features of Contoso's network analysis that are necessary to accommodate Microsoft's cloud offerings?",
+    "target_sources": [
+      "Contoso's network analysis"
+    ]
+  },
+  {
+    "question": "How does Contoso's organizational structure support its global operations, particularly in terms of office distribution and regional autonomy?",
+    "target_sources": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ]
+  }
+]

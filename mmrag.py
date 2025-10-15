@@ -1,80 +1,37 @@
-from utils.azure_utils import *
-
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
-from langchain_core.messages import AIMessage, HumanMessage
+from utils.azure_utils import get_response, SEARCH_TYPES
 
 from pydantic import BaseModel, Field
-from typing import Dict, List
+from typing import List
+
+from utils.utils import SpinnerThread
 
 
 SYSTEM_MESSAGE_TEMPLATE = (
-"""\
+"""
 You're an expert of Contoso corporation that can answer all user questions.
 Given a user question and a tagged list of retrieved sources ordered by relevance, provide a comprehensive response, grounded on the provided sources, that answer the user query.
-In your answer, always ground your statements by citing the sources using their tag (doc id within squared brackets) - i.e. [doc_id].
+In your answer, always ground your statements by citing the sources using their tags; source tags are within square brackets, e.g.: [doc_i]
 Before answering provide also some sentences explaining how you interpreted the intent of the user query.
-In general, allow user queries that ask to manipulate information and to reason about sources relationships for personal purposes but ensure the topics are related to retrieved information.
+In general, allow also user queries that ask to manipulate information and to reason about sources relationships for personal purposes but ensure the topics in the queries are related to the retrieved information.
 If the topic of the user query is not related to the retrieved sources, just state: 'The requested information is not available in the retrieved data. Please try another query or topic.'
 When the user query is related to the topics in the retrieved sources the argument 'related' is positive, otherwise negative.
 
 RETRIEVED SOURCES:
 
-{retrieved_sources}
+{sources}
 
-You must cite sources by their tag [doc_i] in order to ground your statements.
-NOT cite by their title or else.
+You MUST cite sources by their tag [doc_i] in order to ground your statements.
+Do NOT cite sources by their title or other fields.
 """
 )
 
 class Response(BaseModel):
-    intent: List[str] = Field("One or more sentences that represent how you interpreted the user query. They can be questions, queries, etc.")
     related: bool = Field("True if the user query is related to the retrieved sources else False")
+    intent: List[str] = Field("One or more sentences that represent how you interpreted the user query. They can be questions, queries, reasoning, etc.")
     answer: str = Field("Comprehensive but compact answer to the user query grounded on the provided sources cited with their tags, i.e. [doc_i]")
 
 
-def get_response(query: str, messages: List[Dict], search_type: str = "vector_text"):
-    """
-    Returns a response from the OpenAI client.
-    """
-
-    assert search_type in search_types
-
-    llm = get_openai_client()
-    llm = llm.with_structured_output(Response)
-
-    use_semantic_search = 'semantic' in search_type
-
-    search_results = retrieve(query, semantic=use_semantic_search)
-
-    sources_formatted = format_sources(search_results)
-    # with open("all_sources.txt","r") as fin:
-    #     sources_formatted = fin.read()
-        # print(sources_formatted)
-
-    sys_msg = PromptTemplate.from_template(SYSTEM_MESSAGE_TEMPLATE).format(retrieved_sources=sources_formatted)
-    sys_msg = sys_msg.strip("\n")
-
-    # print(sys_msg)
-
-    new_messages = ChatPromptTemplate(
-            [
-                ("system", "{sys_msg}"),
-                ("human", "{query}"),
-            ]
-    ).format_messages(sys_msg=sys_msg, query=query)
-
-    # print(new_messages)
-
-    chat = messages + new_messages
-
-    # print(chat)
-
-    response = llm.invoke(chat)
-
-    return response.answer, response.intent, response.related, sources_formatted
-
-
-def main(search_type: str):
+def main(search_type: str, use_history: bool = True):
     history = []
     
     while True:
@@ -109,15 +66,23 @@ def main(search_type: str):
         # else:
         #     msg = {"role": "user", "content": user_query}
 
-        # messages = history
+        messages = history if use_history else []
 
         answer, intent, related, sources, error = None, None, None, None, None
         
-        spinner_thread = SpinnerThread() # spinner for entertainment while waiting llm generation
+        spinner_thread = SpinnerThread() # spinner for entertainment while waiting the response
         spinner_thread.start()
 
         try:
-            answer, intent, related, sources = get_response(query=user_query, messages=history, search_type=search_type) # LLM response
+            response, sources, _ = get_response(query=user_query, 
+                                             sys_template=SYSTEM_MESSAGE_TEMPLATE, 
+                                             messages=messages, 
+                                             search_type=search_type, 
+                                             openai_kwargs={"temperature":0.1, "max_tokens":None},
+                                             output_schema=Response) # LLM response + retrieved sources
+
+            # extract results from output schema
+            related, intent, answer = response.related, response.intent, response.answer
         except Exception as e:
             error = f"\n⛔ {e}\n"
 
@@ -131,7 +96,7 @@ def main(search_type: str):
             print("\n🤖 Answer: ", answer)
 
             if related:
-                # user query is related to the topics in the retrieved sources
+                # user query is related to the topics of the retrieved sources
                 
                 if intent:
                     print(f"\n🎯 Intent: {intent}")
@@ -140,8 +105,8 @@ def main(search_type: str):
                     print(f"\n📚 Sources:\n\n{sources}")
 
                 # update messages history
-                history.append(HumanMessage(content=user_query))
-                history.append(AIMessage(content=answer))
+                history.append({"role": "user", "content": f"{user_query}"})
+                history.append({"role": "assistant", "content": f"{answer}"})
         
         input("\n↩️  Press a key..")
 
@@ -154,15 +119,22 @@ if __name__=="__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("-nh",
+                        "--no-history",
+                        action="store_true",
+                        help="prevent from passing chat history to llm"
+    )
     parser.add_argument("-s", 
                         "--search-type", 
                         type=str, 
                         default="vector_text", 
-                        choices=search_types, 
+                        choices=SEARCH_TYPES, 
                         help="type of search (default: 'vector_text')"
-                        )
+    )
 
     args = parser.parse_args()
+
+    use_history = not args.no_history
     search_type = args.search_type
 
-    main(search_type=search_type)
+    main(use_history=use_history, search_type=search_type)

@@ -1,0 +1,343 @@
+[
+  {
+    "questions_path": "testbook/questions.json",
+    "file_name": "experiment_N_5_10_VT_0.1.json",
+    "configuration": {
+      "use_history": false,
+      "top_n": 5,
+      "knn": 10,
+      "search_type": "vector_text",
+      "temperature": 0.1
+    },
+    "help": "'passed' field == (related and intent)",
+    "mean_cited_acc": 0.8076923076923077,
+    "mean_retrieved_acc": 0.8,
+    "std_cited_acc": 0.3192281948202239,
+    "std_retrieved_acc": 0.34399612400917157
+  },
+  {
+    "question": "How does Contoso's data classification into three levels influence its cloud security policies, particularly regarding data at rest and in transit?",
+    "answer": "Contoso's data classification into three levels significantly influences its cloud security policies by establishing tailored security requirements for each data level. For data at rest and in transit, Contoso applies different encryption, authentication, and access controls based on the data's sensitivity level. For example, Level 1 data, which has low business value, is protected with basic encryption and authentication measures, while Level 3 data, which is highly sensitive, requires the highest levels of encryption, multi-factor authentication, and granular auditing. This tiered approach ensures that the most critical data receives the strongest protections, aligning security measures with the data's value and sensitivity, as outlined in the classification analysis and security policies [doc_1, doc_2, doc_3, doc_4].",
+    "passed": true,
+    "cited": [
+      "2 Perform data classification analysis into three levels",
+      "Contoso's data sensitivity classification",
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 2 columns."
+    ],
+    "retrieved": [
+      "2 Perform data classification analysis into three levels",
+      "Contoso's data sensitivity classification",
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 2 columns.",
+      "Security"
+    ],
+    "target": [
+      "2 Perform data classification analysis into three levels",
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 4 columns.",
+      "Table with 4 rows and 4 columns._1",
+      "Contoso's data sensitivity classification",
+      "Contoso's data sensitivity classification_1"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 0.5
+  },
+  {
+    "question": "What is the percentage of Contoso's workforce that is mobile-only, and how does this impact their device management strategy?",
+    "answer": "The retrieved sources do not provide specific information about the percentage of Contoso's workforce that is mobile-only. However, it is noted that Contoso's mobile-only workforce is expanding, which underscores the importance of effective device management to ensure the protection of intellectual property and to facilitate more efficient access to resources [doc_1]. This growing mobile workforce likely necessitates robust device management solutions, such as those provided by Microsoft Intune/EMS, to manage iOS and Android devices securely and efficiently, supporting the company's broader cloud and mobility strategies [doc_3].",
+    "passed": true,
+    "cited": [
+      "3 Improve mobile workforce productivity, device management, and access",
+      "Mapping Contoso's business needs to Microsoft's cloud offerings"
+    ],
+    "retrieved": [
+      "3 Improve mobile workforce productivity, device management, and access",
+      "Contoso's existing IT infrastructure",
+      "Mapping Contoso's business needs to Microsoft's cloud offerings",
+      "SaaS cloud offerings Office 365, EMS, and Dynamics 365",
+      "Table with 4 rows and 4 columns._1"
+    ],
+    "target": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Contoso's IT infrastructure and needs"
+    ],
+    "cited_acc": NaN,
+    "retrieved_acc": 0.0
+  },
+  {
+    "question": "Which cities are identified as regional hubs in Contoso's global network infrastructure, and what is their approximate employee count?",
+    "answer": "The regional hubs in Contoso's global network infrastructure are cities such as New York, Tokyo, Moscow, and Johannesburg. Each of these hubs employs approximately 2,000 workers. These hubs serve as key connectivity points within Contoso's worldwide network, linking regional offices and satellite offices through high-bandwidth WAN links [doc_2].",
+    "passed": true,
+    "cited": [
+      "Image: Contoso's Global Networking Infrastructure"
+    ],
+    "retrieved": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Image: Contoso's Global Networking Infrastructure",
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure",
+      "Contoso's existing IT infrastructure",
+      "Consistent performance for administration of distributed Azure PaaS apps"
+    ],
+    "target": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution"
+    ],
+    "cited_acc": 0.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "How does Contoso's use of ExpressRoute Premium enhance its network performance and connectivity between the Paris headquarters and other Microsoft datacenters?",
+    "answer": "Contoso's use of ExpressRoute Premium significantly enhances its network performance and connectivity by providing a dedicated, high-quality WAN connection from its Paris headquarters to Microsoft peering locations and datacenters. Specifically, the ExpressRoute Premium allows Contoso to reach any Microsoft datacenter on any continent from any peering location, ensuring global connectivity and reducing latency. This setup guarantees predictable performance and a 99.9% uptime SLA, which is crucial for high-demand applications and services such as Skype-based communications [doc_1]. Additionally, the premium service carries traffic over the Microsoft cloud network, which is optimized for performance and reliability, thereby supporting the company's needs for consistent and high-quality connectivity across its distributed infrastructure.",
+    "passed": true,
+    "cited": [
+      "Contoso's use of ExpressRoute"
+    ],
+    "retrieved": [
+      "Contoso's use of ExpressRoute",
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "Contoso's existing IT infrastructure",
+      "Image: Contoso's Global Networking Infrastructure",
+      "4 Add ExpressRoute Premium for the Paris campus"
+    ],
+    "target": [
+      "Contoso's use of ExpressRoute"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "In what ways does Contoso ensure compliance with regional data storage and encryption regulations across its international operations?",
+    "answer": "Contoso ensures compliance with regional data storage and encryption regulations by adhering to specific regulatory requirements in different regions, which helps prevent fines and maintain good relations with local governments. This is achieved by implementing data security policies that include encrypting customer data when stored or transferred, restricting access to authorized personnel only, and regularly auditing their data security programs to ensure they function as intended. These measures are part of Contoso's comprehensive data security program, which also involves employee training on data security policies and procedures [doc_1][doc_2].",
+    "passed": true,
+    "cited": [
+      "1 Adhere to regional regulatory requirements",
+      "Data Security"
+    ],
+    "retrieved": [
+      "1 Adhere to regional regulatory requirements",
+      "Data Security",
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 4 columns._1",
+      "Privacy Policy"
+    ],
+    "target": [
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "Compare the data retention periods for Level 1, Level 2, and Level 3 data in Contoso's information protection policies. What are the durations?",
+    "answer": "In Contoso's information protection policies, the data retention periods vary based on the data level. For Level 1 data, the retention period is 6 months. For Level 2 data, it is 2 years. For Level 3 data, the retention period extends to 7 years. These durations are designed to match the business value and sensitivity of the data, with higher-value data retained for longer periods to ensure proper protection and compliance [doc_1].",
+    "passed": true,
+    "cited": [
+      "Table with 4 rows and 4 columns._1"
+    ],
+    "retrieved": [
+      "Table with 4 rows and 4 columns._1",
+      "Table with 4 rows and 3 columns.",
+      "2 Perform data classification analysis into three levels",
+      "Contoso's data sensitivity classification",
+      "Contoso's data sensitivity classification_1"
+    ],
+    "target": [
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 4 columns._1"
+    ],
+    "cited_acc": 0.5,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "Which key cities are connected by Contoso's regional hub WAN links, and what color represents these links in the network map?",
+    "answer": "Contoso's regional hub WAN links connect key cities such as Paris, Sao Paulo, and Johannesburg to the core network. These links are depicted in orange on the network map, illustrating the regional connections that facilitate communication between the regional centers and the core network [doc_1].",
+    "passed": true,
+    "cited": [
+      "Image: Contoso's Global Networking Infrastructure"
+    ],
+    "retrieved": [
+      "Image: Contoso's Global Networking Infrastructure",
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure",
+      "Contoso's use of ExpressRoute",
+      "Contoso's network analysis"
+    ],
+    "target": [
+      "Image: Contoso's Global Networking Infrastructure"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "How many regional domains are part of Contoso's Active Directory forest, and which city hosts the central domain?",
+    "answer": "Contoso's Active Directory forest comprises seven regional domains: NAM (North America), EUR (Europe), AFR (Africa), MES (Middle East), ASA (Asia), and AUS (Australia) [doc_1]. The central or headquarters domain is located in Paris, which is marked as the headquarters on the map [doc_1].",
+    "passed": true,
+    "cited": [
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ],
+    "retrieved": [
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure",
+      "Contoso's existing IT infrastructure",
+      "Image: Contoso's Global Networking Infrastructure",
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "2 Perform data classification analysis into three levels"
+    ],
+    "target": [
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "What are the primary functions of Contoso's application datacenters located in Paris, according to their existing IT infrastructure?",
+    "answer": "Contoso's application datacenters in Paris serve several key functions within their existing IT infrastructure. They host various servers that provide remote access to the intranet and web proxy services for workers in the Paris headquarters. Additionally, these datacenters are responsible for hosting the company's public website, which allows customers to place orders for products, parts, or supplies. They also support the partner extranet, facilitating communication and collaboration with partners. These functions are integral to Contoso's centralized on-premises IT setup and are detailed in the company's infrastructure overview [doc_2].",
+    "passed": true,
+    "cited": [
+      "Contoso's existing IT infrastructure"
+    ],
+    "retrieved": [
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "Contoso's existing IT infrastructure",
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "5 Scale down on-premises datacenters",
+      "Azure IaaS Server-based workloads"
+    ],
+    "target": [
+      "Contoso's existing IT infrastructure"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "How does Contoso's cloud adoption strategy support its goal of scaling down on-premises datacenters, especially regarding legacy systems?",
+    "answer": "Contoso's cloud adoption strategy supports its goal of scaling down on-premises datacenters by migrating legacy and archival systems to cloud-based servers, which reduces the need for maintaining extensive on-premises infrastructure [doc_2]. This approach allows Contoso to focus its IT resources on high-value workloads while moving less frequently used or legacy systems to the cloud, thereby decreasing the complexity and size of its on-premises datacenters [doc_1]. Additionally, by leveraging cloud services for temporary needs such as end-of-quarter processing, Contoso can efficiently manage short-term resource demands without expanding its physical infrastructure [doc_1, doc_2]. This strategic shift not only optimizes operational efficiency but also aligns with their goal of reducing on-premises hardware and associated maintenance costs.",
+    "passed": true,
+    "cited": [
+      "5 Scale down on-premises datacenters",
+      "Azure IaaS Infrastructure as a Service"
+    ],
+    "retrieved": [
+      "5 Scale down on-premises datacenters",
+      "Azure IaaS Infrastructure as a Service",
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "Contoso's existing IT infrastructure",
+      "Contoso's IT infrastructure and needs"
+    ],
+    "target": [
+      "5 Scale down on-premises datacenters",
+      "Azure IaaS Infrastructure as a Service",
+      "Azure IaaS Server-based workloads",
+      "Contoso's IT infrastructure and needs"
+    ],
+    "cited_acc": 0.6666666666666666,
+    "retrieved_acc": 0.75
+  },
+  {
+    "question": "Which Microsoft cloud services are mapped to Contoso's business needs for SaaS, PaaS, and IaaS, and what are their specific roles?",
+    "answer": "Contoso has mapped various Microsoft cloud services to meet its business needs across SaaS, PaaS, and IaaS categories. For SaaS, Contoso utilizes Office 365, EMS, and Dynamics 365, which provide highly available and performant cloud-based applications for productivity, security, and enterprise resource planning, respectively [doc_3]. For PaaS, although not explicitly detailed in the sources, the focus on consistent performance and application deployment suggests the use of Azure PaaS services that support app development and management, especially considering the distributed nature of their applications [doc_1]. Regarding IaaS, Contoso extends its on-premises data center to Azure, deploying servers that are extensions of their Paris datacenter, ensuring consistent performance for legacy apps, archival storage, and processing needs [doc_1]. These services collectively support Contoso\u2019s infrastructure, application deployment, and business operations in the cloud.",
+    "passed": true,
+    "cited": [
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "SaaS cloud offerings Office 365, EMS, and Dynamics 365"
+    ],
+    "retrieved": [
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "2 Perform data classification analysis into three levels",
+      "SaaS cloud offerings Office 365, EMS, and Dynamics 365",
+      "Contoso's network analysis",
+      "Contoso in the Microsoft Cloud"
+    ],
+    "target": [
+      "Mapping Contoso's business needs to Microsoft's cloud offerings",
+      "Our Mission",
+      "Table with 4 rows and 4 columns."
+    ],
+    "cited_acc": NaN,
+    "retrieved_acc": 0.0
+  },
+  {
+    "question": "What are the main components of Contoso's workplace safety program, and how do they contribute to preventing workplace violence?",
+    "answer": "Contoso's workplace safety program includes several key components that work together to create a safe environment and prevent workplace violence. These components are hazard identification and risk assessment, safety training, provision of personal protective equipment (PPE), emergency preparedness, reporting procedures, safety inspections, and record keeping [doc_2].\n\nHazard identification and risk assessment help in proactively identifying potential safety threats, including those that could lead to violence. Safety training educates employees on recognizing warning signs of violence and responding appropriately. The provision of PPE ensures physical safety in hazardous situations. Emergency preparedness protocols prepare employees to respond effectively to incidents, minimizing harm. Encouraging reporting of safety concerns and conducting regular inspections help in early detection and resolution of issues that could escalate into violence. Lastly, maintaining accurate records ensures ongoing monitoring and improvement of safety measures.\n\nTogether, these components foster a comprehensive approach to workplace safety, significantly contributing to the prevention of workplace violence by addressing risks proactively and ensuring employees are well-informed and prepared [doc_2].",
+    "passed": true,
+    "cited": [
+      "Contoso Electronics' Workplace Safety Program"
+    ],
+    "retrieved": [
+      "Workplace Violence",
+      "Contoso Electronics' Workplace Safety Program",
+      "Prevention and Response",
+      "Training and Education",
+      "Purpose"
+    ],
+    "target": [
+      "Purpose",
+      "Contoso Electronics' Workplace Safety Program",
+      "Workplace Safety",
+      "Workplace Violence"
+    ],
+    "cited_acc": 0.3333333333333333,
+    "retrieved_acc": 0.75
+  },
+  {
+    "question": "How does Contoso's privacy policy address the handling of personal information collected from customers and employees?",
+    "answer": "Contoso's privacy policy emphasizes a strong commitment to protecting the privacy and security of personal information collected from customers, employees, and partners. The policy states that Contoso collects, stores, and uses personal information for various purposes such as providing services, processing orders, responding to inquiries, and marketing communications. Additionally, the company may collect information from third parties like partners and vendors to better understand customers and improve services. Importantly, Contoso explicitly states that it will not sell or rent personal information to third parties. The company has implemented measures to protect data security, including physical, technical, and administrative safeguards, and uses secure servers and encryption technology for data transmission. Customers and employees have the right to access, review, and request corrections or deletions of their personal information by contacting the Privacy Officer. The policy also notes that updates may be made to the policy, with notifications posted on their website [doc_1].",
+    "passed": true,
+    "cited": [
+      "Privacy Policy"
+    ],
+    "retrieved": [
+      "Privacy Policy",
+      "Whistleblower Policy",
+      "2 Perform data classification analysis into three levels",
+      "Prevention and Response",
+      "Contoso's existing IT infrastructure"
+    ],
+    "target": [
+      "Privacy Policy"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "What are the key features of Contoso's network analysis that are necessary to accommodate Microsoft's cloud offerings?",
+    "answer": "Contoso's network analysis highlights several key features essential for supporting Microsoft's cloud offerings. These include ensuring consistent performance for administration of distributed Azure PaaS applications across different datacenters, particularly from the Paris campus where all application developers and core infrastructure administrators are located [doc_3]. Additionally, the analysis emphasizes the importance of network modifications to support various categories of cloud services, ensuring that the infrastructure can handle the specific requirements of Microsoft's cloud solutions [doc_1]. Proper network adjustments are crucial for maintaining performance, security, and connectivity, which are all vital for a successful cloud deployment.",
+    "passed": true,
+    "cited": [
+      "Contoso's network analysis",
+      "Consistent performance for administration of distributed Azure PaaS apps"
+    ],
+    "retrieved": [
+      "Contoso's network analysis",
+      "2 Perform data classification analysis into three levels",
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "Security",
+      "SaaS cloud offerings Office 365, EMS, and Dynamics 365"
+    ],
+    "target": [
+      "Contoso's network analysis"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  },
+  {
+    "question": "How does Contoso's organizational structure support its global operations, particularly in terms of office distribution and regional autonomy?",
+    "answer": "Contoso's organizational structure is designed to effectively support its global operations through a three-tier office distribution system and a balance of centralized management with regional autonomy. The headquarters, located in Paris, employs 15,000 workers and manages all datacenters and internet infrastructure, serving as the central hub for the company's operations [doc_1]. Surrounding the headquarters are regional hubs in key cities like New York, Tokyo, Moscow, and Johannesburg, each with approximately 2,000 workers, primarily supporting sales and support functions. These hubs are connected to the headquarters via high-bandwidth WAN links, facilitating efficient communication and coordination [doc_1]. Additionally, satellite offices in cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, with around 250 workers, focus mainly on sales and support, and are connected to regional hubs [doc_1]. This structure allows for regional autonomy, enabling local offices to operate efficiently while maintaining centralized control over core infrastructure and management. The regional domains in Active Directory further support this setup by providing regional autonomy in authentication and authorization, while still being managed centrally from the headquarters [doc_2]. Overall, this distribution and structure enable Contoso to operate seamlessly across multiple regions, leveraging regional hubs for localized support and centralized management for consistency and control.",
+    "passed": true,
+    "cited": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ],
+    "retrieved": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure",
+      "Image: Contoso's Global Networking Infrastructure",
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's existing IT infrastructure"
+    ],
+    "target": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution",
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ],
+    "cited_acc": 1.0,
+    "retrieved_acc": 1.0
+  }
+]

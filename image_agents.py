@@ -4,7 +4,8 @@ from langchain.schema import HumanMessage
 from typing_extensions import TypedDict
 from pydantic import BaseModel, Field
 
-from utils.azure_utils import get_openai_client, get_document_client, local_image_to_data_url
+from utils.azure_utils import get_openai_client, get_document_client
+from utils.utils import local_image_to_data_url
 
 
 class ResultOutput(BaseModel):

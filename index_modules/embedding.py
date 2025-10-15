@@ -17,7 +17,7 @@ class Embedder():
 
     def __init__(self, format_content_field: str = "format_content"):
         self.endpoint = os.getenv("EMBEDDING_ENDPOINT")
-        self.api_key = os.getenv("EMBEDDING_API_KEY")
+        self.api_key = os.getenv("OPENAI_API_KEY")
         self.model_deployment = os.getenv("EMBEDDING_DEPLOYMENT")
 
         self.format_content_field = format_content_field
