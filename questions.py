@@ -1,5 +1,5 @@
 from utils.azure_utils import get_response
-from utils.utils import tags_to_headers
+from utils.utils import tags_to_sources
 
 from pydantic import BaseModel, Field
 from typing import List
@@ -83,9 +83,9 @@ for question in questions:
                             output_schema=SourcesResponse)
     
     sources_tags = response.sources
-    sources_id = tags_to_headers(tags=sources_tags, sources=sources_list)
+    sources_headers, sources_contents = tags_to_sources(tags=sources_tags, sources=sources_list, source_content=True)
 
-    targets.append({"question": question, "target_sources": sources_id})
+    targets.append({"question": question, "target_headers": sources_headers, "target_contents": sources_contents})
 
 
 with open(json_name,"w") as f:

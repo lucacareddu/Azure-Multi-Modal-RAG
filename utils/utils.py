@@ -9,9 +9,14 @@ import threading
 import time
 
 
-def tags_to_headers(tags: List, sources: List, header_field: str = "header"):
+def tags_to_sources(tags: List, sources: List, source_content: bool = False, header_field: str = "header", content_field: str = "raw_content"):
     indices = set(int(re.findall(r"doc_(\d+)", tag)[0]) for tag in tags)
     sources_headers = [sources[i-1][header_field] for i in indices]
+
+    if source_content:
+        sources_contents = [sources[i-1][content_field] for i in indices]
+        return sources_headers, sources_contents
+    
     return sources_headers
 
 

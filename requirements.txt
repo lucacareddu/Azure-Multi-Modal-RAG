@@ -11,6 +11,7 @@ langchain-openai
 langgraph
 openai
 pypdf2
+ragas
 tiktoken
 typing_extensions
 uvicorn

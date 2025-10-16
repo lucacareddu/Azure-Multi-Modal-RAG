@@ -2,7 +2,7 @@ import os
 
 from mmrag import SYSTEM_MESSAGE_TEMPLATE, Response
 from utils.azure_utils import get_response, SEARCH_TYPES
-from utils.utils import tags_to_headers
+from utils.utils import tags_to_sources
 
 import re
 import numpy as np
@@ -37,7 +37,8 @@ def main(config, file_name):
         questions_json = json.load(f)
     
     questions = [x["question"] for x in questions_json]
-    target_sources = [x["target_sources"] for x in questions_json]
+    target_sources = [x["target_headers"] for x in questions_json]
+    target_contents = [x["target_contents"] for x in questions_json]
     
     history = []
 
@@ -49,7 +50,7 @@ def main(config, file_name):
 
     result_dict = []
 
-    for i, (query, target) in enumerate(zip(questions, target_sources)):
+    for i, (query, target, content) in enumerate(zip(questions, target_sources, target_contents)):
         print(f"Testing query #{i+1}...")
 
         response, _, sources = get_response(query=query, 
@@ -71,8 +72,8 @@ def main(config, file_name):
         
         sources_tags = re.findall(r"doc_\d+", answer)
 
-        cited = tags_to_headers(tags=sources_tags, sources=sources)
-        retrieved = [s["header"] for s in sources]
+        cited, cited_contents = tags_to_sources(tags=sources_tags, sources=sources, source_content=True)
+        retrieved, retrieved_contents = [s["header"] for s in sources], [s["raw_content"] for s in sources]
 
         cited_sources.append(cited)
         retrieved_sources.append(retrieved)
@@ -86,9 +87,12 @@ def main(config, file_name):
         result_dict.append({"question": query, 
                             "answer": answer, 
                             "passed": passed,
-                            "cited": cited, 
+                            "cited": cited,
+                            "cited_content": cited_contents, 
                             "retrieved": retrieved, 
+                            "retrieved_content": retrieved_contents,
                             "target": target, 
+                            "target_content": content,
                             "cited_acc": cited_accuracy, 
                             "retrieved_acc": retrieved_accuracy})
         
