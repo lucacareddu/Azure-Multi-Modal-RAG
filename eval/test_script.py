@@ -22,12 +22,11 @@ from ragas.metrics import (AnswerRelevancy,
                            LLMContextPrecisionWithoutReference,
                            LLMContextRecall)
 
-from langchain_openai.chat_models import AzureChatOpenAI
-from langchain_openai import AzureOpenAIEmbeddings
+from utils.azure_utils import get_chatopenai_client, get_embeddings_client
 
 import numpy as np
-from math import sqrt, floor, ceil
 import matplotlib.pyplot as plt
+from math import sqrt, floor, ceil
 
 import time
 
@@ -44,42 +43,9 @@ exp_path = "/home/luca/lipari-esercizi/rag/testbook/experiment_N_5_10_VT_0.1.jso
 # exp_name = os.path.basename(exp_path).replace(".json","")
 
 # result_root = os.path.join(deepeval_root, exp_name)
-# os.makedirs(result_root, exist_ok=1)
+# os.makedirs(result_root)
 
 # os.environ["DEEPEVAL_RESULTS_FOLDER"] = result_root
-
-### OPENAI SETUP (RAGAS) ###
-
-openai_endpoint = os.getenv("OPENAI_ENDPOINT")
-openai_api_version = os.getenv("OPENAI_API_VERSION")
-openai_api_key = os.getenv("OPENAI_API_KEY")
-
-chat_deployment = os.getenv("CHAT_DEPLOYMENT")
-embedding_deployment = os.getenv("EMBEDDING_DEPLOYMENT")
-
-def get_openai_client():
-    """
-    Returns an instance of the AzureChatOpenAI client.
-    """
-    
-    return AzureChatOpenAI(
-        azure_endpoint=openai_endpoint,
-        api_version=openai_api_version,
-        api_key=openai_api_key,
-        azure_deployment=chat_deployment
-    )
-
-def get_embeddings_client():
-    """
-    Returns an instance of the AzureOpenAIEmbeddings client.
-    """
-
-    return AzureOpenAIEmbeddings(
-        azure_endpoint=openai_endpoint,
-        openai_api_version=openai_api_version,
-        api_key=openai_api_key,
-        model=embedding_deployment
-    )
 
 ### DEEPEVAL METRICS ###
 
@@ -101,23 +67,23 @@ deepeval_metrics = [answer_relevancy, faithfulness, hallucination, contextual_re
 
 ragas_threshold = 0.5
 
-answer_relevancy = AnswerRelevancy(llm=get_openai_client(), embeddings=get_embeddings_client())
-faithfulness = Faithfulness(llm=get_openai_client())
-groundedness = ResponseGroundedness(llm=get_openai_client())
+answer_relevancy = AnswerRelevancy(llm=get_chatopenai_client(), embeddings=get_embeddings_client())
+faithfulness = Faithfulness(llm=get_chatopenai_client())
+groundedness = ResponseGroundedness(llm=get_chatopenai_client())
 cheating_critic = AspectCritic(
                     name="cheating",
                     definition="Is the submission somehow intended to ...",
-                    llm=get_openai_client()
+                    llm=get_chatopenai_client()
                 )
 
-contextual_precision = LLMContextPrecisionWithoutReference(llm=get_openai_client())
-contextual_recall = LLMContextRecall(llm=get_openai_client())
+contextual_precision = LLMContextPrecisionWithoutReference(llm=get_chatopenai_client())
+contextual_recall = LLMContextRecall(llm=get_chatopenai_client())
 
 ragas_metrics = []
 
 
 with open(exp_path, "r") as f:
-    data = json.load(f)[1:2] # skip my header
+    data = json.load(f)[1:] # skip my header
 
 metrics_results = {}
 
@@ -144,7 +110,7 @@ for idx, question in enumerate(data):
             print("Deepeval evaluation failed.")
 
             print("\nTaking a 10s nap...\n")
-            time.sleep(10)
+            time.sleep(10) # because of the too many (parallel) requests per minute to OpenAI while using a free tier sub
     
     deepeval_summary = {m["name"]: {"success": m["success"], "result": {"score": m["score"], "reason": m["reason"]}} for m in deepeval_result['metrics_data']}
     
@@ -212,9 +178,11 @@ for idx, question in enumerate(data):
     print('\n' * 10)
 
     # if idx % 2 == 0:
-    #     print("\nTaking a nap...\n")
+    #     print("\nTaking a 10s nap...\n")
     #     time.sleep(10) # because of the too many (parallel) requests per minute to OpenAI while using a free tier sub
 
+
+### PLOT GLOBAL DEEPEVAL STATISTICS
 
 factor = sqrt(len(metrics_results))
 ROWS = ceil(factor)

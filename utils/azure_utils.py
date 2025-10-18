@@ -10,6 +10,7 @@ from azure.search.documents.models import VectorizedQuery
 from index.storage import Storage
 
 from openai import AzureOpenAI
+from langchain_openai.chat_models import AzureChatOpenAI
 from langchain_openai import AzureOpenAIEmbeddings
 
 from pydantic import BaseModel
@@ -36,6 +37,18 @@ semant_config_name = os.getenv("SEMANTIC_CONFIGURATION_NAME")
 
 SEARCH_TYPES = ['text', 'semantic', 'vector', 'semantic_text', 'semantic_vector', 'vector_text','vector_text_semantic']
 
+
+def get_chatopenai_client():
+    """
+    Returns an instance of the AzureChatOpenAI client.
+    """
+    
+    return AzureChatOpenAI(
+        azure_endpoint=openai_endpoint,
+        api_version=openai_api_version,
+        api_key=openai_api_key,
+        azure_deployment=chat_deployment
+    )
 
 def get_openai_client():
     """
