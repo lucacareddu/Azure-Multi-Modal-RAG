@@ -8,7 +8,7 @@ from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
 from azure.ai.documentintelligence.models import ParagraphRole
 
-from image_agents import compile_graph, draw_mermaid
+from agents.image_agents import compile_graph, draw_mermaid
 
 import re
 

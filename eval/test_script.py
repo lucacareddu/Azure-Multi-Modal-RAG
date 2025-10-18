@@ -25,6 +25,10 @@ from ragas.metrics import (AnswerRelevancy,
 from langchain_openai.chat_models import AzureChatOpenAI
 from langchain_openai import AzureOpenAIEmbeddings
 
+import numpy as np
+from math import sqrt, floor, ceil
+import matplotlib.pyplot as plt
+
 import time
 
 import json
@@ -112,9 +116,10 @@ contextual_recall = LLMContextRecall(llm=get_openai_client())
 ragas_metrics = []
 
 
-
 with open(exp_path, "r") as f:
-    data = json.load(f)[1:] # skip my header
+    data = json.load(f)[1:2] # skip my header
+
+metrics_results = {}
 
 for idx, question in enumerate(data):
     print(f"QUESTION {idx+1}:")
@@ -130,7 +135,16 @@ for idx, question in enumerate(data):
                                     expected_output=question["answer"] # for contextual precision and recall metrics
                                     )
     
-    deepeval_result = evaluate([deepeval_test_case], metrics=deepeval_metrics).model_dump()["test_results"][0]
+    deepeval_result = None
+
+    while deepeval_result is None:
+        try:
+            deepeval_result = evaluate([deepeval_test_case], metrics=deepeval_metrics).model_dump()["test_results"][0]
+        except:
+            print("Deepeval evaluation failed.")
+
+            print("\nTaking a 10s nap...\n")
+            time.sleep(10)
     
     deepeval_summary = {m["name"]: {"success": m["success"], "result": {"score": m["score"], "reason": m["reason"]}} for m in deepeval_result['metrics_data']}
     
@@ -174,15 +188,57 @@ for idx, question in enumerate(data):
                 print(f"{k.capitalize()}: {v}")
 
     print()
-    print(f"Retriever Accuracy: {question['retrieved_acc']}")
-    print(f"LLM Precision: {question['cited_acc']}")
+    print(f"Retriever Uncertainity (FN): {question['retriever_unc']}")
+    print(f"Generator Uncertainity (FN): {question['generator_unc']}")
+    print(f"Oracle Uncertainity (FN): {question['oracle_unc']}")
     print()
 
     print("+++++++++++++++++++ MY SUMMARY +++++++++++++++++++\n")
 
 
+    if not metrics_results:
+        metrics_results = {metric.capitalize():[data["result"]["score"]] for metric, data in deepeval_summary.items()}
+        metrics_results["Retriever Uncertainity"] = [question["retriever_unc"]]
+        metrics_results["Generator Uncertainity"] = [question["generator_unc"]]
+        metrics_results["Oracle Uncertainity"] = [question["oracle_unc"]]
+    else:
+        for metric, data in deepeval_summary.items():
+            metrics_results[metric.capitalize()].append(data["result"]["score"])
+        metrics_results["Retriever Uncertainity"].append(question["retriever_unc"])
+        metrics_results["Generator Uncertainity"].append(question["generator_unc"])
+        metrics_results["Oracle Uncertainity"].append(question["oracle_unc"])
+
+
     print('\n' * 10)
 
-    if idx % 2 == 0:
-        print("\nTaking a nap...\n")
-        time.sleep(10) # because of the too many (parallel) requests per minute to OpenAI while using a free tier sub
+    # if idx % 2 == 0:
+    #     print("\nTaking a nap...\n")
+    #     time.sleep(10) # because of the too many (parallel) requests per minute to OpenAI while using a free tier sub
+
+
+factor = sqrt(len(metrics_results))
+ROWS = ceil(factor)
+COLS = floor(factor)
+
+px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
+fig, ax = plt.subplots(ROWS,COLS, figsize=(1920*px, 1080*px))
+fig.suptitle("Metrics statistics", fontsize="xx-large", fontweight='bold')
+
+for i, (metric, scores) in enumerate(metrics_results.items()):
+    x,y = i//ROWS, i%ROWS
+
+    scores = np.array(scores)
+    if "hallucination" not in metric.lower() and "uncertainity" not in metric.lower():
+        passed, failed = scores[scores >= deepeval_threshold], scores[scores < deepeval_threshold]
+    else:
+        passed, failed = scores[scores < deepeval_threshold], scores[scores >= deepeval_threshold]
+
+    ax[x,y].hist([passed, failed], color=["green", "red"])#, edgecolor="black")
+    ax[x,y].set_xlim((0.0, 1.0))
+    ax[x,y].axvline(x = deepeval_threshold, color = 'b', linestyle = "--", linewidth = 1)
+    ax[x,y].set_title(metric)
+
+
+fig.legend(labels=["threshold", "passed", "failed"], ncols=3, fontsize="large", loc="upper right")
+plt.savefig("metrics_statistics.png")
+plt.show()

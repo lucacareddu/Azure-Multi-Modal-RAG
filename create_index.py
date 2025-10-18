@@ -1,8 +1,8 @@
-from index_modules.document import DocumentProcessor
-from index_modules.embedding import Embedder
-from index_modules.index import Index
-from index_modules.storage import Storage
-from index_modules.indexer import Indexer
+from index.document import DocumentProcessor
+from index.embedding import Embedder
+from index.index import Index
+from index.storage import Storage
+from index.indexer import Indexer
 
 
 def create_index(use_image: bool = True, use_vector: bool = True):

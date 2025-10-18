@@ -7,7 +7,7 @@ from azure.ai.documentintelligence import DocumentIntelligenceClient
 from azure.search.documents import SearchClient
 from azure.search.documents.models import VectorizedQuery
 
-from index_modules.storage import Storage
+from index.storage import Storage
 
 from openai import AzureOpenAI
 from langchain_openai import AzureOpenAIEmbeddings
