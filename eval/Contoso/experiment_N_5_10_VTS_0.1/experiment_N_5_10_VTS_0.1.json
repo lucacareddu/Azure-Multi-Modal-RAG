@@ -1,0 +1,38 @@
+{
+  "Answer relevancy": {
+    "mean": 0.80501924001924,
+    "std": 0.2416901042932142
+  },
+  "Faithfulness": {
+    "mean": 0.9561111111111111,
+    "std": 0.09586191200283617
+  },
+  "Hallucination": {
+    "mean": 0.3022222222222222,
+    "std": 0.3899604285084182
+  },
+  "Contextual relevancy": {
+    "mean": 0.41745807068175483,
+    "std": 0.21283337276682265
+  },
+  "Contextual precision": {
+    "mean": 0.9109259259259258,
+    "std": 0.10011935606831283
+  },
+  "Contextual recall": {
+    "mean": 0.7533333333333334,
+    "std": 0.23271346234276077
+  },
+  "Retriever Uncertainity": {
+    "mean": 0.1611111111111111,
+    "std": 0.2404984535768151
+  },
+  "Generator Uncertainity": {
+    "mean": 0.6,
+    "std": 0.28284271247461906
+  },
+  "Oracle Uncertainity": {
+    "mean": 0.2688888888888889,
+    "std": 0.3516030309283819
+  }
+}

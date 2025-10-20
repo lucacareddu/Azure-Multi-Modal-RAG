@@ -8,7 +8,7 @@ from utils.utils import SpinnerThread
 
 SYSTEM_MESSAGE_TEMPLATE = (
 """
-You're an expert of Contoso corporation that can answer all user questions.
+You're an helpful AI assistant that can answer all user questions.
 Given a user question and a tagged list of retrieved sources ordered by relevance, provide a comprehensive response, grounded on the provided sources, that answer the user query.
 In your answer, always ground your statements by citing the sources using their tags; source tags are within square brackets, e.g.: [doc_i]
 Before answering provide also some sentences explaining how you interpreted the intent of the user query.

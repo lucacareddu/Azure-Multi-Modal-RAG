@@ -24,9 +24,10 @@ from ragas.metrics import (AnswerRelevancy,
 
 from utils.azure_utils import get_chatopenai_client, get_embeddings_client
 
+from math import sqrt, floor, ceil
 import numpy as np
 import matplotlib.pyplot as plt
-from math import sqrt, floor, ceil
+from matplotlib.ticker import MaxNLocator
 
 import time
 
@@ -37,15 +38,17 @@ import json
 
 os.environ["AZURE_OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-# deepeval_root = "deepeval_tests"
+deepeval_root = "eval"
 
-exp_path = "/home/luca/lipari-esercizi/rag/testbook/experiment_N_5_10_VT_0.1.json"
-# exp_name = os.path.basename(exp_path).replace(".json","")
+exp_path = "/home/luca/lipari-esercizi/rag/testbook/experiment_N_5_10_VTS_0.1.json"
+exp_name = os.path.basename(exp_path).replace(".json","")
 
-# result_root = os.path.join(deepeval_root, exp_name)
-# os.makedirs(result_root)
+result_root = os.path.join(deepeval_root, exp_name)
+os.makedirs(result_root, exist_ok=True)
 
-# os.environ["DEEPEVAL_RESULTS_FOLDER"] = result_root
+result_path = os.path.join(result_root, exp_name)
+
+# os.environ["DEEPEVAL_RESULTS_FOLDER"] = result_root # with Confident AI platform
 
 ### DEEPEVAL METRICS ###
 
@@ -182,7 +185,7 @@ for idx, question in enumerate(data):
     #     time.sleep(10) # because of the too many (parallel) requests per minute to OpenAI while using a free tier sub
 
 
-### PLOT GLOBAL DEEPEVAL STATISTICS
+### PLOT DEEPEVAL STATISTICS
 
 factor = sqrt(len(metrics_results))
 ROWS = ceil(factor)
@@ -201,12 +204,21 @@ for i, (metric, scores) in enumerate(metrics_results.items()):
     else:
         passed, failed = scores[scores < deepeval_threshold], scores[scores >= deepeval_threshold]
 
-    ax[x,y].hist([passed, failed], color=["green", "red"])#, edgecolor="black")
+    ax[x,y].hist([passed, failed], bins="fd", color=["green", "red"])#, edgecolor="black")
     ax[x,y].set_xlim((0.0, 1.0))
+    ax[x,y].yaxis.set_major_locator(MaxNLocator(integer=True))
     ax[x,y].axvline(x = deepeval_threshold, color = 'b', linestyle = "--", linewidth = 1)
     ax[x,y].set_title(metric)
 
 
 fig.legend(labels=["threshold", "passed", "failed"], ncols=3, fontsize="large", loc="upper right")
-plt.savefig("metrics_statistics.png")
+plt.savefig(result_path+".png")
 plt.show()
+
+
+### SAVE GLOBAL STATISTICS
+
+with open(result_path+".json", "w") as f:
+    global_results = {metric: {"mean": np.nanmean(np.array(scores)), "std": np.nanstd(np.array(scores))} for metric, scores in metrics_results.items()}
+
+    json.dump(global_results, f, indent=2)

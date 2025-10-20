@@ -13,22 +13,18 @@
     "mean_retriever_unc": 0.20555555555555557,
     "std_retriever_unc": 0.3203971301176936,
     "mean_generator_unc": 0.6666666666666666,
-    "std_generator_unc": 0.2599145158615724,
-    "mean_oracle_unc": 0.24102564102564103,
-    "std_oracle_unc": 0.3130096107734631
+    "std_generator_unc": 0.24944382578492943,
+    "mean_oracle_unc": 0.330952380952381,
+    "std_oracle_unc": 0.4004886471082358
   },
   {
     "question": "How does Contoso's data classification into three levels influence its choice of Microsoft cloud security features?",
-    "answer": "Contoso's classification of data into three levels significantly influences its choice of Microsoft cloud security features. By categorizing data based on its sensitivity and business value, Contoso can tailor security measures to each level, ensuring appropriate protection. For example, data with high business value (Level 3) is protected with the highest levels of encryption, multi-factor authentication, and auditing, aligning with the most stringent security requirements [doc_3]. This classification enables Contoso to implement specific access controls, encryption standards, and monitoring protocols suitable for each data level, thereby optimizing security resources and compliance efforts across their cloud environment [doc_1, doc_2].",
+    "answer": "Contoso's classification of data into three levels significantly influences its choice of Microsoft cloud security features by enabling tailored protection measures for each data level. For example, data classified as high business value (Level 3) requires the highest levels of encryption, multi-factor authentication, and auditing, which are supported by Microsoft cloud security features such as advanced encryption protocols and comprehensive access controls [doc_3]. Similarly, medium and low-value data are protected with appropriate security measures like strong authentication and data loss prevention, aligning with the specific needs of each data level [doc_3]. This classification-driven approach ensures that Contoso applies the most suitable security features to safeguard its data effectively while optimizing resource use.",
     "passed": true,
     "cited": [
-      "2 Perform data classification analysis into three levels",
-      "Contoso's data sensitivity classification",
       "Table with 4 rows and 3 columns."
     ],
     "cited_content": [
-      "Contoso performed a careful review and determined the three levels, which was used to determine the Microsoft cloud offering features to protect Contoso's most valuable data.\n3 Determine access, retention, and information protection policies for data levels Based on the data levels, Contoso determined detailed requirements, which will be used to qualify future IT workloads being moved to the cloud.\nCloud security resources\nMicrosoft Cloud Security for Enterprise Architects\nhttp://aka.ms/doudarchsecurity\n1811\nInformation Protection for Office 365\nhttp://aka.ms/o365infoprotect\nSecurity in a Cloud-Enabled World Microsoft Virtual Academy Course http://aka.ms/securecustomermva\nMicrosoft",
-      "Using the information in Microsoft's Data Classification Toolkit, Contoso performed an analysis of their data and determined the following levels.",
       " Cell[0][0]: Level 1: Low business value Cell[0][1]: Level 2: Medium business value Cell[0][2]: Level 3: High business value Cell[1][0]: Data is encrypted and available only to authenticated users Cell[1][1]: Level 1 plus strong authentication and data loss protection Cell[1][2]: Level 2 plus the highest levels of encryption, authentication, and auditing Cell[2][0]: Provided for all data stored on premises and in cloud- based storage and workloads, such as Office 365. Data\nbetween the service and client devices.\nis encrypted while it resides in the service and in transit Cell[2][1]: Strong authentication includes multi-factor authentication with SMS validation. Data loss prevention ensures that sensitive or critical information does not travel outside the on-premises network. Cell[2][2]: The highest levels of encryption for data at rest and in the cloud, compliant with regional regulations, combined with multi-factor authentication with smart cards and granular auditing and alerting. Cell[3][0]: Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers. Cell[3][1]: Examples of Level 2 data are financial and legal information and research and development data for new products. Cell[3][2]: Examples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
     ],
     "retrieved": [
@@ -62,12 +58,12 @@
       "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
     ],
     "retriever_unc": 0.5,
-    "generator_unc": 0.4,
+    "generator_unc": 0.8,
     "oracle_unc": 0.0
   },
   {
     "question": "What percentage of Contoso's workforce is mobile-only, and how does this impact their device management strategy?",
-    "answer": "Contoso has approximately 25% of its workforce that is mobile-only, with a higher percentage in regional hubs and satellite offices [contoso_organization.png]. This significant mobile-only segment necessitates robust device management strategies to ensure the protection of intellectual property and to facilitate efficient access to resources. As a result, Contoso emphasizes device management solutions that support mobile workforce needs, including secure access and device security measures [Microsoft-Cloud-Architecture-Example.pdf, PAGE 2].",
+    "answer": "Contoso has approximately 25% of its workforce that is mobile-only, with a higher percentage in regional hubs and satellite offices [contoso_organization.png]. This significant mobile-only segment necessitates robust device management strategies to ensure the protection of intellectual property and to facilitate efficient access to resources. As a result, Contoso emphasizes device management solutions tailored for mobile workers, including secure access controls and device security protocols, to support this expanding mobile workforce [Microsoft-Cloud-Architecture-Example.pdf, PAGE: 2].",
     "passed": true,
     "cited": [],
     "cited_content": [],
@@ -97,7 +93,7 @@
   },
   {
     "question": "In which cities does Contoso have regional hubs, and what is the approximate number of employees in each hub?",
-    "answer": "Contoso has regional hubs in several key cities around the world, including New York, Tokyo, Moscow, and Johannesburg. Each of these regional hubs employs approximately 2,000 workers, with about 60% of the staff in these hubs engaged in sales and support activities, totaling roughly 1,200 employees per hub [doc_4].",
+    "answer": "Contoso's regional hubs are located in cities such as New York, Tokyo, Moscow, and Johannesburg. Each regional hub employs approximately 2,000 workers, with about 60% of the staff in sales and support roles [doc_4].",
     "passed": true,
     "cited": [
       "Image: Contoso's Global Organizational Structure and Office Distribution"
@@ -131,7 +127,7 @@
   },
   {
     "question": "How does Contoso ensure compliance with regional data storage and encryption regulations across its global infrastructure?",
-    "answer": "Contoso ensures compliance with regional data storage and encryption regulations by adhering to specific regulatory requirements in each region, as outlined in their cloud architecture guidelines. They implement the highest levels of encryption for data at rest and in transit, in accordance with regional regulations, and utilize strong authentication methods such as multi-factor authentication and granular auditing to protect data [doc_1][doc_2][doc_4]. Additionally, Contoso's global infrastructure, including regional hubs and satellite offices, is designed to meet these compliance standards through secure network connections and data management practices, ensuring that sensitive data like customer and partner personally identifiable information is properly protected across all regions [doc_3][doc_5].",
+    "answer": "Contoso ensures compliance with regional data storage and encryption regulations by adhering to specific regulatory requirements in each region, as outlined in their cloud architecture guidelines. They implement data encryption at various levels, including data at rest and in transit, using the highest levels of encryption to meet regional standards. Additionally, Contoso employs strong authentication methods, such as multi-factor authentication, and enforces least privilege access controls to protect sensitive data. Their global infrastructure, which includes regional hubs and satellite offices connected via high-bandwidth WAN links, is designed to support these compliance measures across different jurisdictions. This comprehensive approach helps Contoso prevent fines and maintain good relations with local governments, ensuring they meet regional regulatory requirements effectively [doc_1, doc_2, doc_3, doc_4, doc_5].",
     "passed": true,
     "cited": [
       "1 Adhere to regional regulatory requirements",
@@ -175,10 +171,18 @@
   },
   {
     "question": "What are the key differences between Contoso's on-premises datacenter functions and their cloud-based counterparts in Azure IaaS?",
-    "answer": "The retrieved sources do not provide specific details comparing Contoso's on-premises datacenter functions directly with their cloud-based counterparts in Azure IaaS. Therefore, I cannot provide a detailed comparison based on the available information. Please try another query or topic.",
-    "passed": false,
-    "cited": [],
-    "cited_content": [],
+    "answer": "Contoso's on-premises datacenter functions and their cloud-based counterparts in Azure IaaS differ in several key aspects. On-premises datacenter functions are managed locally, with physical infrastructure and direct control over hardware and network configurations. In contrast, Azure IaaS provides virtualized resources managed by Microsoft, allowing for scalable and flexible deployment of servers and storage. For example, Contoso's need for consistent performance across distributed Azure datacenters is addressed through Azure's cloud network, which ensures reliable access to distributed resources, as highlighted in the need for consistent performance for distributed Azure PaaS apps [doc_3]. Additionally, Azure IaaS allows for reserving private address space for virtual networks (VNets) and subnets, facilitating network planning and performance tuning, which is more dynamic compared to static on-premises network configurations [doc_4]. Furthermore, Azure's cloud environment supports dedicated WAN connections like ExpressRoute, providing predictable performance and high uptime, which can be more reliable than traditional internet-based connections used in on-premises setups [doc_5]. Overall, the transition from on-premises to Azure IaaS offers enhanced scalability, network performance, and managed infrastructure, aligning with Contoso's operational needs.",
+    "passed": true,
+    "cited": [
+      "Consistent performance for administration of distributed Azure PaaS apps",
+      "6 Reserve private address space for Azure VNets",
+      "Contoso's use of ExpressRoute"
+    ],
+    "cited_content": [
+      "All of Contoso's application developers and core infrastructure IT administrators are in the Paris campus.\nWith Azure PaaS apps distributed to different Azure datacenters around the world, Contoso needs consistent performance from the Paris campus to administer the apps and their storage resources, which consist of TB of documents.\nMicrosoft cloud network\nMicrosoft cloud network\nMicrosoft cloud network\nMicrosoft cloud network\nMicrosoft cloud network\nConsistent performance for administration of servers in Azure IaaS\nContoso's datacenter administrators are in the Paris campus and the servers to be deployed in Azure are an extension of the Paris datacenter.\nContoso needs consistent performance to these new servers for access to legacy apps and archival storage and for end-of-quarter processing.",
+      "Based on the numbers of projected short and long-term servers in Azure IaaS, reserve private address space for Azure VNets and their subnets.\nCloud networking resources\nMicrosoft Cloud Networking for Enterprise Architects http://aka.ms/cloudarchnetworking\nNetwork planning and performance tuning for Office 365 http://aka.ms/tune\nExpressRoute for Office 365 http://aka.ms/expressrouteoffice365\nMicrosoft",
+      "ExpressRoute is a dedicated WAN connection from your location to a Microsoft peering location that connects your network to the Microsoft cloud network. ExpressRoute connections provide predictable performance and a 99.9% uptime SLA.\nWith an ExpressRoute connection, you are connected to the Microsoft cloud network and all the Microsoft datacenter locations in the same continent. The traffic between the cloud peering location and the destination Microsoft datacenter is carried over the Microsoft cloud network.\nWith ExpressRoute Premium, you can reach any Microsoft datacenter on any continent from any Microsoft peering location on any continent. The traffic between continents is carried over the Microsoft cloud network.\nBased on the analysis of current and future traffic to Microsoft's cloud offerings and its requirements for high quality of service for Skype-based communications, Contoso has performed a network assessment and implemented an any-to-any (MPLS-based) ExpressRoute Premium connection from the Paris headquarters to the Microsoft peering location in Europe."
+    ],
     "retrieved": [
       "Table with 4 rows and 3 columns.",
       "Table with 4 rows and 2 columns.",
@@ -202,12 +206,12 @@
       "Contoso uses a mostly centralized on-premises IT infrastructure, with application datacenters in the Paris headquarters.\nHeadquarters\nDMZ\nInternet\nApplication datacenters\nRemote access/ proxy\nRemote and mobile-only workers\nPublic web site\nOn-premises workers\nPartner extranet\nInternal firewall\nExternal firewall\nIn Contoso's DMZ, different sets of servers provide:\n. Remote access to the Contoso intranet and web proxying for workers in the Paris headquarters.\n\u00b7 Hosting for the Contoso public web site, from which customers can order products, parts, or supplies.\n\u00b7 Hosting for the Contoso partner extranet for partner communication and collaboration."
     ],
     "retriever_unc": 1.0,
-    "generator_unc": 1.0,
-    "oracle_unc": NaN
+    "generator_unc": 0.4,
+    "oracle_unc": 1.0
   },
   {
     "question": "Which cities are connected to Contoso's Paris headquarters via high-bandwidth WAN links, and what is the significance of these connections?",
-    "answer": "The cities connected to Contoso's Paris headquarters via high-bandwidth WAN links are New York, Tokyo, Moscow, and Johannesburg. These connections are significant because they facilitate efficient and reliable communication between the headquarters and regional hubs, supporting the company's global operations. The high-bandwidth WAN links ensure that data transfer is fast and secure, which is crucial for maintaining seamless business processes and supporting the company's worldwide infrastructure [doc_1].",
+    "answer": "The cities connected to Contoso's Paris headquarters via high-bandwidth WAN links are New York, Tokyo, Moscow, and Johannesburg. These connections are significant because they facilitate efficient and reliable communication between the headquarters and regional hubs, supporting the company's global operations. The high-bandwidth WAN links ensure that data transfer is fast and dependable, which is crucial for maintaining seamless business processes, supporting remote and mobile workers, and enabling centralized management of the company's infrastructure across different continents [doc_1].",
     "passed": true,
     "cited": [
       "Image: Contoso's Global Organizational Structure and Office Distribution"
@@ -241,7 +245,7 @@
   },
   {
     "question": "How does Contoso's use of ExpressRoute Premium enhance its connectivity to Microsoft datacenters across different continents?",
-    "answer": "Contoso's use of ExpressRoute Premium significantly enhances its global connectivity by allowing access to any Microsoft datacenter on any continent from any peering location, thanks to the premium features of ExpressRoute. This setup ensures that traffic between continents is carried over the Microsoft cloud network, providing predictable performance and a high uptime SLA of 99.9%. Specifically, Contoso has implemented an any-to-any (MPLS-based) ExpressRoute Premium connection from its Paris headquarters to the Microsoft peering location in Europe, which facilitates high-quality, reliable, and flexible connectivity to Microsoft datacenters worldwide [doc_1].",
+    "answer": "Contoso's use of ExpressRoute Premium significantly enhances its connectivity to Microsoft datacenters across different continents by allowing access to any Microsoft datacenter worldwide from any peering location. This is made possible through the ExpressRoute Premium feature, which provides an any-to-any (MPLS-based) connection, ensuring that traffic between continents is carried over the Microsoft cloud network with high reliability and performance. This setup supports Contoso's requirements for predictable performance and high-quality service for its global operations, including Skype-based communications and distributed application management [doc_1].",
     "passed": true,
     "cited": [
       "Contoso's use of ExpressRoute"
@@ -275,7 +279,7 @@
   },
   {
     "question": "What are the main components of Contoso's workplace safety and violence prevention programs, and how do they interrelate?",
-    "answer": "Contoso Electronics has established a comprehensive Workplace Violence Prevention Program that includes several key components designed to ensure a safe and respectful work environment. These components include prevention policies, response procedures, and training and education initiatives. The prevention policy emphasizes a zero-tolerance stance against violence, threats, or abuse and encourages employees to report suspicious activities immediately [doc_1][doc_4]. In the event of an incident, the company commits to prompt and appropriate responses, including thorough investigations and disciplinary actions [doc_4]. To support these efforts, Contoso provides regular training and education to employees on recognizing potential signs of violence, responding effectively, and understanding the company's zero-tolerance policy [doc_5]. These components are interconnected: prevention policies set the foundation, reporting mechanisms enable quick response, and training ensures employees are prepared to uphold and act according to the program, creating a cohesive safety framework.",
+    "answer": "Contoso Electronics has established a comprehensive Workplace Violence Prevention Program aimed at ensuring a safe, respectful, and healthy work environment for all employees [doc_1]. The main components of this program include prevention, response, and training. The prevention aspect involves a zero-tolerance policy for violence, threats, or abuse, with clear procedures for employees to report suspicious activity or incidents immediately to supervisors or Human Resources [doc_4]. In terms of response, the company commits to prompt and appropriate action following any incident, including thorough investigations and disciplinary measures when necessary [doc_4]. Additionally, the program emphasizes regular training and education for employees on recognizing signs of workplace violence, responding effectively, and understanding the company's zero-tolerance stance [doc_5]. These components are interconnected: prevention policies set the foundation, response procedures ensure incidents are managed properly, and training equips employees with the knowledge to prevent and handle workplace violence effectively, creating a cohesive safety framework [doc_1, doc_4, doc_5].",
     "passed": true,
     "cited": [
       "Workplace Violence",
@@ -319,7 +323,7 @@
   },
   {
     "question": "How does Contoso's Active Directory forest support cloud-based authentication and regional management autonomy?",
-    "answer": "Contoso's Active Directory (AD) forest is designed to support both centralized management and regional autonomy. The worldwide AD forest is centered around the 'contoso.com' domain and includes seven regional domains, such as NAM, EUR, AFR, MES, ASA, and AUS, each representing different geographic areas [doc_1]. The map indicates that the AD forest connections between the headquarters in Paris and regional hubs facilitate centralized management while allowing regional autonomy. This structure supports cloud-based authentication and authorization by enabling regional domains to manage local resources independently, yet remain connected to the global AD infrastructure. Additionally, the centralized forest supports cloud-based authentication by leveraging accounts and groups from the contoso.com forest, ensuring seamless access across regions and to cloud services [doc_1].",
+    "answer": "Contoso's Active Directory forest is designed to support both centralized management and regional autonomy. The worldwide AD forest is centered around the 'contoso.com' domain and includes seven regional domains, each representing different geographic areas such as North America, Europe, Africa, Middle East, Asia, and Australia [doc_1]. The map illustrates connections between the headquarters in Paris and regional hubs, indicating a structure that allows regional management while maintaining centralized control. This setup facilitates cloud-based authentication and authorization by leveraging accounts and groups from the contoso.com forest, enabling users across different regions to authenticate via the cloud seamlessly [doc_1]. This architecture ensures regional autonomy in management tasks while supporting a unified, cloud-enabled authentication system.",
     "passed": true,
     "cited": [
       "Image: Contoso's Global Windows Server Active Directory Infrastructure"
@@ -353,14 +357,12 @@
   },
   {
     "question": "What are the specific security policies Contoso implements to protect customer data in the cloud, especially regarding encryption and access control?",
-    "answer": "Contoso Electronics implements comprehensive security policies to protect customer data in the cloud. These policies include encrypting all customer data both at rest and during transfer, ensuring that data stored on disks or other storage mediums is encrypted, and restricting access to customer data to authorized personnel only [doc_2]. Additionally, Contoso enforces strict access control measures, requiring that account permissions follow the principle of least privilege, which limits what users can do based on their roles [doc_1]. The company also mandates the use of complex, regularly updated passwords and employs encryption technologies such as HTTPS and IPsec for secure data transmission [doc_1]. These policies collectively help safeguard customer data against unauthorized access and breaches.",
+    "answer": "Contoso Electronics has established comprehensive security policies to safeguard customer data in the cloud. These policies include encrypting all customer data both at rest and during transfer, ensuring that data stored on disks or other storage media is encrypted, and that data transmitted over the Internet is protected using secure protocols such as HTTPS or IPsec [doc_2]. Additionally, access to customer data is restricted to authorized personnel only, following the principle of least privilege, which means permissions are carefully managed to limit access based on necessity [doc_2]. These measures are part of their broader commitment to data security, including regular audits, employee training, and strict password policies, to maintain the confidentiality and integrity of customer information.",
     "passed": true,
     "cited": [
-      "Table with 4 rows and 2 columns.",
       "Data Security"
     ],
     "cited_content": [
-      " Cell[0][0]: Strong authentication to cloud resources Cell[0][1]: Cloud resource access must be authenticated and, where possible, leverage multi-factor authentication. Cell[1][0]: Encryption for traffic across the Internet Cell[1][1]: No data sent across the Internet is in plain text form. Always use HTTPS connections, IPsec, or other end -to-end data encryption methods. Cell[2][0]: Encryption for data at rest in the cloud Cell[2][1]: All data stored on disks or elsewhere in the cloud must be in an encrypted form. Cell[3][0]: ACLs for least privilege access Cell[3][1]: Account permissions to access resources in the cloud and what they are allowed to do must follow least-privilege guidelines.",
       "Data Security at Contoso Electronics\nAt Contoso Electronics, data security is of the utmost importance. We understand that the security of our customers' data is paramount and we are committed to protecting it. We have a comprehensive data security program in place to ensure that all customer data is kept secure and confidential.\nData Security Policies:\n\u00b7 All employees must adhere to data security policies and procedures established by Contoso Electronics.\n. All customer data must be encrypted when stored or transferred.\n\u00b7 Access to customer data must be restricted to authorized personnel only.\n\u00b7 All computers, servers, and other digital devices used to store customer data must be protected with up-to-date anti-virus and security software.\n\u00b7 All passwords used to access customer data must be complex and regularly updated.\n\u00b7 All customer data must be backed up regularly and stored securely.\n\u00b7 All customer data must be destroyed securely when no longer needed.\nData Security Training:\nAll employees must complete data security training at the start of employment and annually thereafter. This training will cover topics such as data security policies and procedures, encryption, access control, password security, and data backup and destruction.\nData Security Audits:\nContoso Electronics will conduct regular audits of our data security program to ensure that it is functioning as intended. Audits will cover topics such as system security, access control, and data protection.\nIf you have any questions or concerns about Contoso Electronics' data security program, please contact our data security team. We are committed to keeping your data secure and we appreciate your continued trust. Thank you for being a valued customer."
     ],
     "retrieved": [
@@ -388,12 +390,12 @@
       " Cell[0][0]: Level 1: Low business value Cell[0][1]: Level 2: Medium business value Cell[0][2]: Level 3: High business value Cell[1][0]: Data is encrypted and available only to authenticated users Cell[1][1]: Level 1 plus strong authentication and data loss protection Cell[1][2]: Level 2 plus the highest levels of encryption, authentication, and auditing Cell[2][0]: Provided for all data stored on premises and in cloud- based storage and workloads, such as Office 365. Data\nbetween the service and client devices.\nis encrypted while it resides in the service and in transit Cell[2][1]: Strong authentication includes multi-factor authentication with SMS validation. Data loss prevention ensures that sensitive or critical information does not travel outside the on-premises network. Cell[2][2]: The highest levels of encryption for data at rest and in the cloud, compliant with regional regulations, combined with multi-factor authentication with smart cards and granular auditing and alerting. Cell[3][0]: Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers. Cell[3][1]: Examples of Level 2 data are financial and legal information and research and development data for new products. Cell[3][2]: Examples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
     ],
     "retriever_unc": 0.3333333333333333,
-    "generator_unc": 0.6,
-    "oracle_unc": 0.5
+    "generator_unc": 0.8,
+    "oracle_unc": 1.0
   },
   {
     "question": "How does Contoso's global network map illustrate the connection between satellite offices and regional hubs?",
-    "answer": "Contoso's global network map illustrates that satellite offices are connected to regional hubs via satellite office WAN links, which are depicted in blue on the map [doc_1]. This connection structure highlights the direct links between satellite offices and regional centers, facilitating communication and data transfer within the company's worldwide infrastructure.",
+    "answer": "Contoso's global network map illustrates that satellite offices are connected to regional hubs via satellite office WAN links, which are depicted in blue on the map [doc_1]. This connection setup highlights the direct links between satellite offices and regional centers, facilitating communication and data transfer within Contoso's extensive worldwide infrastructure.",
     "passed": true,
     "cited": [
       "Image: Contoso's Global Networking Infrastructure"
@@ -427,7 +429,7 @@
   },
   {
     "question": "Which Microsoft cloud offerings are mapped to Contoso's business needs for productivity, customer management, and device management?",
-    "answer": "Contoso's business needs for productivity, customer management, and device management are mapped to specific Microsoft cloud offerings as follows: Office 365 provides the primary personal and group productivity applications in the cloud, supporting collaboration and communication needs [doc_1]. For customer management, Dynamics 365 is used to manage customer and vendor relationships via cloud-based solutions [doc_1]. Regarding device management, Contoso utilizes Intune/EMS to manage iOS and Android devices, ensuring security and efficient access for their mobile workforce [doc_1, doc_2].",
+    "answer": "Contoso's business needs for productivity, customer management, and device management are mapped to specific Microsoft cloud offerings as follows: Office 365 provides the primary personal and group productivity applications in the cloud, supporting collaboration and communication [doc_1]. For customer management, Dynamics 365 is used to manage customer and vendor relationships in a cloud-based environment [doc_1]. Regarding device management, Contoso utilizes Intune/EMS to manage iOS and Android devices, ensuring security and compliance for mobile workforce devices [doc_1, doc_2].",
     "passed": true,
     "cited": [
       "Mapping Contoso's business needs to Microsoft's cloud offerings",
@@ -463,7 +465,7 @@
   },
   {
     "question": "How does Contoso's network analysis inform the necessary changes to accommodate Microsoft's cloud services?",
-    "answer": "Contoso's network analysis provides a detailed assessment of the current network infrastructure and identifies the changes required to support Microsoft's cloud services effectively. This analysis helps determine the necessary network upgrades, configurations, and connections to ensure high performance, reliability, and security when accessing cloud resources. For example, the analysis likely considers the deployment of dedicated connections like ExpressRoute, which offers predictable performance and high uptime, as well as the classification of data sensitivity to implement appropriate security measures. Overall, the network analysis guides Contoso in making informed decisions to optimize their network for seamless and secure cloud service integration [doc_1].",
+    "answer": "Contoso's network analysis provides a detailed assessment of the current network infrastructure and identifies the changes required to support Microsoft's cloud offerings effectively. This analysis helps determine the necessary network modifications, such as implementing dedicated connections like ExpressRoute, to ensure high performance, reliability, and security when accessing Microsoft cloud services. Specifically, the analysis considers traffic patterns, performance requirements, and data sensitivity, guiding Contoso in making informed decisions to optimize their network for cloud integration [doc_1].",
     "passed": true,
     "cited": [
       "Contoso's network analysis"
@@ -497,7 +499,7 @@
   },
   {
     "question": "What are the core values of Contoso Electronics, and how might these influence their approach to cloud security and data privacy?",
-    "answer": "Contoso Electronics' core values include quality, integrity, innovation, teamwork, respect, excellence, accountability, and community, as outlined in their employee handbook [doc_5]. These values likely influence their approach to cloud security and data privacy by emphasizing the importance of protecting customer data with high standards of security and confidentiality, fostering a culture of honesty and responsibility, and encouraging innovative solutions to safeguard information. Their commitment to data security is reflected in policies that mandate encryption, restricted access, regular training, and audits, aligning with their values of integrity, excellence, and accountability [doc_3, doc_4].",
+    "answer": "Contoso Electronics' core values include quality, integrity, innovation, teamwork, respect, excellence, accountability, and community [doc_5]. These values likely influence their approach to cloud security and data privacy in several ways. For instance, their emphasis on integrity and respect suggests a strong commitment to protecting customer data and maintaining trust, which is reflected in their comprehensive data security policies, such as encryption, restricted access, and regular audits [doc_4]. Their focus on quality and excellence indicates that they prioritize high standards in their security measures, ensuring data is protected both at rest and in transit, and that security protocols are consistently followed and improved. Innovation may drive them to adopt advanced security technologies and practices, while their commitment to accountability ensures they are responsible for safeguarding personal information and complying with relevant laws and regulations [doc_3, doc_4, doc_5].",
     "passed": true,
     "cited": [
       "Privacy Policy",
@@ -535,7 +537,7 @@
   },
   {
     "question": "How does Contoso's Whistleblower Policy ensure confidentiality and prevent retaliation when reporting unethical activities?",
-    "answer": "Contoso's Whistleblower Policy emphasizes the importance of confidentiality and protection for individuals reporting unethical activities. The policy states that the identity of the whistleblower will be kept confidential to the extent permitted by law, ensuring that those who report misconduct can do so without fear of exposure [doc_1]. Additionally, the policy explicitly prohibits retaliation of any kind against whistleblowers, and any employee who retaliates will face disciplinary action, up to termination [doc_1]. These measures are designed to create a safe environment for reporting and to uphold ethical standards within the organization.",
+    "answer": "Contoso's Whistleblower Policy ensures confidentiality by keeping the identity of the whistleblower protected to the extent permitted by law, which encourages employees to report unethical activities without fear of exposure [doc_1]. Additionally, the policy explicitly prohibits retaliation of any kind against whistleblowers, stating that any employee who retaliates will face disciplinary action, up to termination [doc_1]. These measures collectively foster a safe environment for reporting misconduct while safeguarding the rights of those who come forward.",
     "passed": true,
     "cited": [
       "Definition:"

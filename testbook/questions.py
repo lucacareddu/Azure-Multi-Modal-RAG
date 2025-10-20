@@ -27,6 +27,22 @@ SOURCES:
 """
 )
 
+SYSTEM_QUESTIONS_MESSAGE_TEMPLATE = (
+"""
+You're an expert report analyzer.
+Given images, tables, and charts present in a report regarding AI readiness in companies, craft questions about the information depending on the user query.
+In order to create more interesting and challenging queries, when possible, TRY to compare different tables, images, and paragraphs contents by exploiting existing relationships.
+Be PRECISE when formulating questions about numbers and percentages present in tables or images.
+You can use all the information sources to create connections so do NOT focus just on the first or last ones.
+
+SOURCES:
+
+{sources}
+
+NOT focus only on the former or the latter sources, instead, when connections exist, exploit possible sources.
+"""
+)
+
 SYSTEM_SOURCES_MESSAGE_TEMPLATE = (
 """
 You're an expert of Contoso Corporation.
@@ -46,10 +62,31 @@ Do NOT cite sources by their title or other fields.
 """
 )
 
+SYSTEM_SOURCES_MESSAGE_TEMPLATE = (
+"""
+You're an helpful AI assistant.
+Given images, tables, and charts and other information present in a report regarding AI readiness in companies along with a user query, find all the sources that match the query.
+Find and then populate the list of the tags sources ([doc_i]) whose contents contain the information needed to answer the user query.
+Information is redundant among sources so, in case of ties, insert all the tags into the list.
+Do NOT insert tags whose source contents are not related to the user query and so cannot contribute to an answer; be PRECISE.
+Do NOT attempt to write the answer to the query, just report all the tags (e.g., [doc_i] for document i).
+You can use all the information sources so do NOT focus just on the first or last ones.
+
+SOURCES:
+
+{sources}
+
+You MUST cite sources by their tag [doc_i].
+Do NOT cite sources by their title or other fields.
+"""
+)
+
 USER_QUESTIONS_QUERY = f"Generate {quest_num} tricky and independent questions about the Contoso Corp."
 
+USER_QUESTIONS_QUERY = f"Generate {quest_num} tricky and independent questions about the Microsoft study about AI readiness in companies and HPO"
+
 class QuestionsResponse(BaseModel):
-    questions: List[str] = Field(f"List of {quest_num} challenging questions about Contoso Corp. involving also numbers and percentages.")
+    questions: List[str] = Field(f"List of {quest_num} challenging questions about involving also numbers and percentages.")
 
 class SourcesResponse(BaseModel):
     sources: List[str] = Field(f"List of [doc_i]")

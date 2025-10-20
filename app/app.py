@@ -1,71 +1,93 @@
+from fastapi import FastAPI
 import gradio as gr
-
-from requests_api import send_message
-
-from server import app
 import uvicorn
 
-from rag import get_response
+from mmrag import SYSTEM_MESSAGE_TEMPLATE, Response
+from utils.azure_utils import get_response
 
-with gr.Blocks() as demo:
-    gr.Markdown("# Chat with an LLM via FastAPI")
-    chatbot = gr.Chatbot()
-    state = gr.State()
 
-    with gr.Row():
-        user_input = gr.Textbox(show_label=False, placeholder="Type your message here...")
-        submit_button = gr.Button("Send")
-    
-    with gr.Row(visible=False) as action_buttons:
-        accept_button = gr.Button("Accept")
-        reject_button = gr.Button("Reject")
+### FASTAPI BACKEND ###
 
-    def handle_message(user_message, chat_history, state):
-        # if "session_id" not in state:
-        #     session_id = create_session()
-        #     state["session_id"] = session_id
-        # session_id = state.get("session_id")
-        response_data = send_message(user_message)
-        bot_reply = response_data.get("answer", "No response")
-        chat_history.append((user_message, bot_reply))
+app = FastAPI()
 
-        if response_data.get("state") == "WAITING_FOR_CONFIRMATION":
-            return chat_history, state, gr.update(visible=True)
+@app.get("/status")
+async def health_check():
+    return {"status":"UP"}
+
+
+### GRADIO FRONTEND ###
+
+def gradio_bot_response(query, chat, state):
+    if not state.get("history", None): ### REAL CHAT HISTORY
+        state["history"] = []
+
+    response, sources, _ = get_response(query=query, 
+                                        sys_template=SYSTEM_MESSAGE_TEMPLATE, 
+                                        messages=state["history"], # remove citations from chat history
+                                        search_type="vector_text", 
+                                        openai_kwargs={"temperature":0.1, "max_tokens":None},
+                                        output_schema=Response) # LLM response + retrieved sources
+
+    # extract results from output schema
+    related, intent, answer = response.related, response.intent, response.answer
+
+    chat.append(gr.ChatMessage(role="user", content=query))
+    chat.append(gr.ChatMessage(role="assistant", content=answer))
+
+    if related:
+        chat.append(
+                    gr.ChatMessage(
+                        role="assistant",
+                        content="The user query is related to the knowledge base.",
+                        metadata={"title": "✅ Related", "status":"done"}))
+        chat.append(
+                    gr.ChatMessage(
+                        role="assistant",
+                        content="\n".join([f"• {x}" for x in intent]),
+                        metadata={"title": "🎯 Intent", "status":"done"}))
+        chat.append(
+                    gr.ChatMessage(
+                        role="assistant",
+                        content=sources,
+                        metadata={"title": "📚 Citations", "status":"done"}))
         
-        return chat_history, state, gr.update(visible=False)
+        ### REAL CHAT HISTORY UPDATE
+        user_msg = {"role": "user", "content": f"{query}"}
+        bot_msg = {"role": "assistant", "content": f"{answer}"}
+
+        state["history"].extend([user_msg, bot_msg])
+
+    else:
+        chat.append(
+                    gr.ChatMessage(
+                        role="assistant",
+                        content="The user query is NOT related to the knowledge base.",
+                        metadata={"title": "❌ Related", "status":"done"}))
+
+    return "", chat, state # first output clears the user input Textbox
+
+
+with gr.Blocks(theme=gr.themes.Ocean()) as demo:
+    gr.Markdown("# RAG with FastAPI + Gradio")
+    chatbot = gr.Chatbot(type="messages")
+    state = gr.State(value={})
+
+    user_input = gr.Textbox(show_label=False, placeholder="Type your message here...", submit_btn=True)
     
-    submit_button.click(
-        handle_message,
+    user_input.submit(
+        gradio_bot_response,
         inputs=[user_input, chatbot, state],
-        outputs=[chatbot, state, action_buttons],
+        outputs=[user_input, chatbot, state],
+        show_progress_on=[chatbot, state],
     )
-
-    # def handle_accept(chat_history, state):
-    #     session_id = state.get("session_id")
-    #     response = accept_action(session_id)
-    #     chat_history.append(("Action accepted", response.get("response")))
-    #     return chat_history, state, gr.update(visible=False)
     
-    # def handle_reject(chat_history, state):
-    #     session_id = state.get("session_id")
-    #     response = reject_action(session_id, "User rejected the action")
-    #     chat_history.append(("Action rejected", response.get("response")))
-    #     return chat_history, state, gr.update(visible=False)
-    
-    # accept_button.click(handle_accept, inputs=[chatbot, state], outputs=[chatbot, state, action_buttons])
-    
-    # reject_button.click(handle_reject, inputs=[chatbot, state], outputs=[chatbot, state, action_buttons])
-
-demo.launch()
-
 
 app = gr.mount_gradio_app(app, demo, path="/")
 
 
+
 if __name__ == "__main__":
-    # mounting at the root path
     uvicorn.run(
-        app="main:app",
-        # host=os.getenv("UVICORN_HOST"),  
-        # port=int(os.getenv("UVICORN_PORT"))
+        app="app:app",
+        reload=True,
     )

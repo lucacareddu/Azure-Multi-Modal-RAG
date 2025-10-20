@@ -7,8 +7,8 @@ from index.indexer import Indexer
 
 def create_index(use_image: bool = True, use_vector: bool = True):
 
-    pdf_root = "Contoso Corp."
-    pkl_file = "data/results.pkl"
+    pdf_root = "Microsoft AI study"
+    pkl_file = "data/microsoftStudy_results.pkl"
 
     doc = DocumentProcessor(root_path=pdf_root, use_images=use_image)
 

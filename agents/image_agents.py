@@ -4,7 +4,7 @@ from langchain.schema import HumanMessage
 from typing_extensions import TypedDict
 from pydantic import BaseModel, Field
 
-from utils.azure_utils import get_openai_client, get_document_client
+from utils.azure_utils import get_chatopenai_client, get_document_client
 from utils.utils import local_image_to_data_url
 
 
@@ -19,7 +19,7 @@ class State(TypedDict):
     result: ResultOutput
 
 def description_agent(state: State) -> State:
-    llm = get_openai_client()
+    llm = get_chatopenai_client()
     image_url = local_image_to_data_url(state["image"])
 
     message = HumanMessage(
@@ -50,7 +50,7 @@ def text_extractor_agent(state: State) -> State:
     return {"extracted_text": extracted_text}
 
 def result_agent(state: State) -> State:
-    llm = get_openai_client()
+    llm = get_chatopenai_client()
     llm = llm.with_structured_output(ResultOutput)
 
     prompt = f"""

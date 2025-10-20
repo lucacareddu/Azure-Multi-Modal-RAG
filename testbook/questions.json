@@ -1,163 +1,143 @@
 [
   {
-    "question": "How does Contoso's data classification into three levels influence its choice of Microsoft cloud security features?",
+    "question": "What percentage of employees at High Performing Organizations (HPOs) report that their organization always demonstrates key performance indicators related to AI, compared to the overall reported percentage at typical organizations?",
     "target_headers": [
-      "2 Perform data classification analysis into three levels",
-      "Table with 4 rows and 3 columns.",
-      "Table with 4 rows and 4 columns._1",
-      "Training and Education",
-      "Contoso's data sensitivity classification",
-      "Contoso's data sensitivity classification_1"
+      "Industries"
     ],
     "target_contents": [
-      "Contoso performed a careful review and determined the three levels, which was used to determine the Microsoft cloud offering features to protect Contoso's most valuable data.\n3 Determine access, retention, and information protection policies for data levels Based on the data levels, Contoso determined detailed requirements, which will be used to qualify future IT workloads being moved to the cloud.\nCloud security resources\nMicrosoft Cloud Security for Enterprise Architects\nhttp://aka.ms/doudarchsecurity\n1811\nInformation Protection for Office 365\nhttp://aka.ms/o365infoprotect\nSecurity in a Cloud-Enabled World Microsoft Virtual Academy Course http://aka.ms/securecustomermva\nMicrosoft",
-      " Cell[0][0]: Level 1: Low business value Cell[0][1]: Level 2: Medium business value Cell[0][2]: Level 3: High business value Cell[1][0]: Data is encrypted and available only to authenticated users Cell[1][1]: Level 1 plus strong authentication and data loss protection Cell[1][2]: Level 2 plus the highest levels of encryption, authentication, and auditing Cell[2][0]: Provided for all data stored on premises and in cloud- based storage and workloads, such as Office 365. Data\nbetween the service and client devices.\nis encrypted while it resides in the service and in transit Cell[2][1]: Strong authentication includes multi-factor authentication with SMS validation. Data loss prevention ensures that sensitive or critical information does not travel outside the on-premises network. Cell[2][2]: The highest levels of encryption for data at rest and in the cloud, compliant with regional regulations, combined with multi-factor authentication with smart cards and granular auditing and alerting. Cell[3][0]: Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers. Cell[3][1]: Examples of Level 2 data are financial and legal information and research and development data for new products. Cell[3][2]: Examples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
-      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
-      "Contoso Electronics will provide regular training and education to all employees on workplace violence prevention and response. This training will include information on recognizing potential signs of workplace violence, strategies for responding to incidents, and the company's zero tolerance policy.\nWe are committed to creating a safe and secure work environment for all of our employees. By following the guidelines outlined in this program, we can ensure that our workplace is free from violence and abuse.",
-      "Using the information in Microsoft's Data Classification Toolkit, Contoso performed an analysis of their data and determined the following levels.",
-      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
+      "Top five industries with highest representation include:\n12.1% Healthcare\n11.9% Technology\n10.4% Retail\n9.3% Financial services\n9.0% Manufacturing\n17%\n61%\n17%\nEMEA\nNAMER\n5%\nAPAC\nLATAM\n17%\nHigh Performing Organizations (HPOs) are respondents that, when asked to evaluate their organization's performance, reported their organization is \"always\" delivering on at least 6/10 (more than half) of the performance indicators presented."
     ]
   },
   {
-    "question": "What percentage of Contoso's workforce is mobile-only, and how does this impact their device management strategy?",
+    "question": "How does the perception of AI's organizational value differ between individual contributors at HPOs and those at typical organizations, and what is the average percentage point difference?",
     "target_headers": [
-      "Image: Contoso's Global Organizational Structure and Office Distribution"
+      "Image: Perceptions of AI Value at HPOs vs. Typical Organizations by Role"
     ],
     "target_contents": [
-      "The image depicts a world map illustrating Contoso's worldwide organization, highlighting its three-tier office structure. The headquarters, located in Paris, employs 15,000 workers and houses all datacenters and internet infrastructure. Regional hubs, each with approximately 2,000 workers and serving 60% sales and support staff, are connected to Paris via high-bandwidth WAN links and are situated in cities like New York, Tokyo, Moscow, and Johannesburg. Satellite offices, with around 250 workers and 80% sales and support staff, are located in key cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, connected to regional hubs. Overall, 25% of Contoso's workforce is mobile-only, with a higher percentage in regional hubs and satellite offices, emphasizing the company's focus on supporting mobile workers."
+      "A bar chart comparing perceptions of AI's organizational value among roles in HPOs and typical organizations. At HPOs, 91% of leaders, 63% of managers, and 54% of individual contributors believe AI is effective. In typical organizations, these figures are 65% for leaders, 51% for managers, and 24% for individual contributors. The chart highlights that individual contributors at HPOs are significantly more likely to see AI as valuable compared to their counterparts in typical organizations."
     ]
   },
   {
-    "question": "In which cities does Contoso have regional hubs, and what is the approximate number of employees in each hub?",
+    "question": "In the Microsoft study, what is the reported percentage of employees at HPOs who feel considered and respected during change, and how does this compare to the percentage at typical organizations?",
     "target_headers": [
-      "Image: Contoso's Global Organizational Structure and Office Distribution"
+      "HPOs excel at ensuring people are at the center of change"
     ],
     "target_contents": [
-      "The image depicts a world map illustrating Contoso's worldwide organization, highlighting its three-tier office structure. The headquarters, located in Paris, employs 15,000 workers and houses all datacenters and internet infrastructure. Regional hubs, each with approximately 2,000 workers and serving 60% sales and support staff, are connected to Paris via high-bandwidth WAN links and are situated in cities like New York, Tokyo, Moscow, and Johannesburg. Satellite offices, with around 250 workers and 80% sales and support staff, are located in key cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, connected to regional hubs. Overall, 25% of Contoso's workforce is mobile-only, with a higher percentage in regional hubs and satellite offices, emphasizing the company's focus on supporting mobile workers."
+      "Experiences during change at HPOs versus typical organizations uncover a people-centric approach as a key differentiator\nFelt considered and respected\nFelt included in decisions\nAble to give feedback\nFelt cared for and supported\nEncouraged to celebrate milestones\nReceived consistent communication\n59%\n94%\n60%\n94%\n66%\n98%\n64%\n96%\n66%\n98%\n66%\n98%\nTypical org\nPercent favorable\nHPO"
     ]
   },
   {
-    "question": "How does Contoso ensure compliance with regional data storage and encryption regulations across its global infrastructure?",
+    "question": "What proportion of employees at HPOs use AI tools daily, and how does this compare to the proportion at typical organizations?",
     "target_headers": [
-      "1 Adhere to regional regulatory requirements",
-      "Contoso's data sensitivity classification"
+      "Image: Comparison of AI Tool Provision and Usage Between High-Performing and Typical Organizations"
     ],
     "target_contents": [
-      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations.",
-      "Using the information in Microsoft's Data Classification Toolkit, Contoso performed an analysis of their data and determined the following levels."
+      "The bar chart compares high-performing organizations (HPOs) and typical organizations regarding AI tool provision and usage frequency. 48% of HPOs provide many AI tools, compared to 26% of typical organizations. Both groups mostly provide a moderate number of tools (27% HPO, 31% typical), while 19% HPOs and 32% typical organizations provide only a few, and 6% HPOs versus 9% typical organizations provide none. Regarding usage, 47% of HPO employees use AI tools daily, against 22% in typical organizations, with 29% HPOs and 30% typical organizations using tools moderately. Rare use occurs in 13% of HPOs and 26% of typical organizations, while 10% of HPO employees and 20% of typical employees never use AI tools."
     ]
   },
   {
-    "question": "What are the key differences between Contoso's on-premises datacenter functions and their cloud-based counterparts in Azure IaaS?",
+    "question": "According to the study, what is the percentage of leaders at HPOs who believe AI is critical for their organization\u2019s success, and how does this compare to the percentage of individual contributors at typical organizations who see AI as critical?",
     "target_headers": [
-      "Azure IaaS Infrastructure as a Service",
-      "Contoso's existing IT infrastructure"
+      "Image: Perceptions of AI Value at HPOs vs. Typical Organizations by Role",
+      "HPOs are more effective at cascading their vision to all employees"
     ],
     "target_contents": [
-      "Move archival and legacy systems to cloud-based servers.\n5\nMigrate low-use apps and data out of on-premises datacenters.\n5\nAdd temporary servers and storage for end-of-quarter processing needs.\n6\nMicrosoft",
-      "Contoso uses a mostly centralized on-premises IT infrastructure, with application datacenters in the Paris headquarters.\nHeadquarters\nDMZ\nInternet\nApplication datacenters\nRemote access/ proxy\nRemote and mobile-only workers\nPublic web site\nOn-premises workers\nPartner extranet\nInternal firewall\nExternal firewall\nIn Contoso's DMZ, different sets of servers provide:\n. Remote access to the Contoso intranet and web proxying for workers in the Paris headquarters.\n\u00b7 Hosting for the Contoso public web site, from which customers can order products, parts, or supplies.\n\u00b7 Hosting for the Contoso partner extranet for partner communication and collaboration."
+      "A bar chart comparing perceptions of AI's organizational value among roles in HPOs and typical organizations. At HPOs, 91% of leaders, 63% of managers, and 54% of individual contributors believe AI is effective. In typical organizations, these figures are 65% for leaders, 51% for managers, and 24% for individual contributors. The chart highlights that individual contributors at HPOs are significantly more likely to see AI as valuable compared to their counterparts in typical organizations.",
+      "Generative artificial intelligence (AI) in our workplace is critical for my organization to be successful.\n91%\nIndividual contributors at HPOs have higher agreement that AI has organizational value compared to managers at typical 54% organizations.\n65%\n63%\n51%\n24%\nLeader\nManager\nIndividual Contributor\nHPO\nTypical organization"
     ]
   },
   {
-    "question": "Which cities are connected to Contoso's Paris headquarters via high-bandwidth WAN links, and what is the significance of these connections?",
+    "question": "How much more likely are employees at HPOs to fully support AI integration in their workplace compared to employees at typical organizations?",
     "target_headers": [
-      "Image: Contoso's Global Organizational Structure and Office Distribution"
+      "High Performing Organizations in the era of AI"
     ],
     "target_contents": [
-      "The image depicts a world map illustrating Contoso's worldwide organization, highlighting its three-tier office structure. The headquarters, located in Paris, employs 15,000 workers and houses all datacenters and internet infrastructure. Regional hubs, each with approximately 2,000 workers and serving 60% sales and support staff, are connected to Paris via high-bandwidth WAN links and are situated in cities like New York, Tokyo, Moscow, and Johannesburg. Satellite offices, with around 250 workers and 80% sales and support staff, are located in key cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, connected to regional hubs. Overall, 25% of Contoso's workforce is mobile-only, with a higher percentage in regional hubs and satellite offices, emphasizing the company's focus on supporting mobile workers."
+      "High Performing Organizations (HPOs)4 continuously exceed expectations in areas ranging from financial performance to employee engagement. There are three pillars that work together to characterize high performance at these organizations: engaged employees, productive teams, and resilient business.\nThose at HPOs are 90% more likely to say they fully support AI being integrated in their workplace.\nRespondents at HPOs were identified based on how often they reported their organization demonstrated a set of key performance indicators. The HPO category includes those who indicated that a majority of the performance indicators were 'always' demonstrated (17% of respondents).\nCompared to those at typical organizations, people at HPOs see more value in bringing AI to their organization. They are substantially more likely to say they fully support the integration of AI at their workplace and are eager to contribute to the success of the transformation.\nWhat do HPOs do differently? We see key differences about how they approach change, bring people along with the AI vision, and provide access to AI tools. We unpack these areas and what this means for leaders as we go into the era of AI.\nEmployees at HPOs see the value AI can bring to their organizations.\n70%\n70% more likely to say AI is critical for their organization to be successful\n80%\n80% more likely to say AI will distinguish their organization as an employer of choice\n70%\n70% more likely to say AI will boost their organization's revenue and financial success\nMore likely compared to employees at typical organizations"
     ]
   },
   {
-    "question": "How does Contoso's use of ExpressRoute Premium enhance its connectivity to Microsoft datacenters across different continents?",
+    "question": "What is the reported percentage of employees at HPOs who have opportunities to integrate AI into their work, and how does this compare to the percentage at typical organizations?",
     "target_headers": [
-      "Contoso's use of ExpressRoute"
+      "HPOs lead with access-driven experimentation"
     ],
     "target_contents": [
-      "ExpressRoute is a dedicated WAN connection from your location to a Microsoft peering location that connects your network to the Microsoft cloud network. ExpressRoute connections provide predictable performance and a 99.9% uptime SLA.\nWith an ExpressRoute connection, you are connected to the Microsoft cloud network and all the Microsoft datacenter locations in the same continent. The traffic between the cloud peering location and the destination Microsoft datacenter is carried over the Microsoft cloud network.\nWith ExpressRoute Premium, you can reach any Microsoft datacenter on any continent from any Microsoft peering location on any continent. The traffic between continents is carried over the Microsoft cloud network.\nBased on the analysis of current and future traffic to Microsoft's cloud offerings and its requirements for high quality of service for Skype-based communications, Contoso has performed a network assessment and implemented an any-to-any (MPLS-based) ExpressRoute Premium connection from the Paris headquarters to the Microsoft peering location in Europe."
+      "Despite the prevalence of AI tools at work, the majority of people are using at least some tools that have not been provided directly by their organization. This may cause employee hesitance to share with their peers and leaders how they are using AI in their day-to-day.\nEncouraging Al experimentation-the testing and sharing of what worked and what didn't - provides highly useful information, uncovering valuable AI use-cases across roles.\nUnderstanding the most impactful way to use AI helps move from an aspirational AI vision to one that is tangible, already tested, and rooted in the real experiences of your employees. Providing access to AI tools creates an atmosphere that will encourage more experimentation, frequent use, and the sharing of experiences.\n83% of employees at HPOs say they have opportunities to integrate AI into their work. Only 56% of employees at typical organizations say the same.\nHPOs are providing access to organization- sponsored AI tools at a substantially higher rate than typical organizations and in turn are seeing more frequent use of AI. HPO employees are more likely to report that they understand where AI could be integrated in their work (87% at HPOs versus 67% at typical organizations) and more likely to have opportunities to integrate AI tools at work (83% at HPOs versus 56% at typical organizations).\nThis experimentation is likely fueling a virtuous loop from use to realized value, in that more experimentation leads to greater realized value and vice versa. We see that 87% of those at HPOs agree there is value in integrating AI to their workplace versus 64% of employees at typical organizations.\nExtent of organization-sponsored AI tools much higher at HPOs, which could be driving high use frequency for HPO employees\nAmount of AI tools provided by their organization\nAll\n48%\n26%\nMost\n27%\n31%\nSome\n19%\n32%\nNone\n6%\n9%\nHPO\nTypical organization\nFrequency of AI tool use\nHigh\n47%\n22%\nMod\n29%\n30%\nLow\n13%\n26%\nNever\n10%\n20%\nHPO\nTypical organization\nLow frequency = A few times a month or less Moderate frequency = At least once a week High frequency = At least once a day"
     ]
   },
   {
-    "question": "What are the main components of Contoso's workplace safety and violence prevention programs, and how do they interrelate?",
+    "question": "According to the study, what is the difference in the percentage of employees at HPOs and typical organizations who report that AI has had a positive impact on their work quality?",
     "target_headers": [
-      "Purpose",
-      "Contoso Electronics' Workplace Safety Program",
-      "Workplace Safety",
-      "Workplace Violence"
+      "Image: Perceptions of AI Value at HPOs vs. Typical Organizations by Role"
     ],
     "target_contents": [
-      "The purpose of this program is to promote a safe and healthy work environment by preventing violence, threats, and abuse in the workplace. It is also intended to provide a safe, secure and protected environment for our employees, customers, and visitors.",
-      "At Contoso Electronics, we have established a comprehensive workplace safety program that is designed to protect our employees from workplace hazards. Our program includes:\n\u00b7 Hazard Identification and Risk Assessment - We strive to identify and assess potential safety hazards in the workplace and take the necessary steps to reduce or eliminate them.\n\u00b7 Training - We provide our employees with safety training to ensure that they are aware of safety procedures and protocols.\n\u00b7 Personal Protective Equipment (PPE) - We provide our employees with the necessary PPE to ensure their safety.\n\u00b7 Emergency Preparedness - We have established procedures and protocols in the event of an emergency.\n\u00b7 Reporting - We encourage our employees to report any safety concerns or incidents to our safety department.\n\u00b7 Inspections - We conduct regular safety inspections to ensure that our workplace is free from hazards.\n\u00b7 Record Keeping - We maintain accurate records of all safety incidents, inspections and training.\nWe believe that our workplace safety program is essential to providing a safe and healthy work environment for our employees. We are committed to providing a safe working environment and to protecting our employees from workplace hazards. If you have any questions or concerns related to workplace safety, please contact our safety department. Thank you for being a part of the Contoso Electronics team.",
-      "Welcome to Contoso Electronics! Our goal is to provide a safe and healthy work environment for our employees and to maintain a safe workplace that is free from recognized hazards. We believe that workplace safety is everyone's responsibility and we are committed to providing a safe working environment for all of our employees.",
-      "Workplace Violence Prevention Program\nAt Contoso Electronics, we are committed to providing a safe, respectful and healthy workplace for all of our employees. In order to ensure that we maintain this, we have developed a comprehensive Workplace Violence Prevention Program."
+      "A bar chart comparing perceptions of AI's organizational value among roles in HPOs and typical organizations. At HPOs, 91% of leaders, 63% of managers, and 54% of individual contributors believe AI is effective. In typical organizations, these figures are 65% for leaders, 51% for managers, and 24% for individual contributors. The chart highlights that individual contributors at HPOs are significantly more likely to see AI as valuable compared to their counterparts in typical organizations."
     ]
   },
   {
-    "question": "How does Contoso's Active Directory forest support cloud-based authentication and regional management autonomy?",
+    "question": "How does the level of AI tool provision (none, some, most, all) at HPOs compare to that at typical organizations, and what is the percentage of HPO employees who never use AI tools?",
     "target_headers": [
-      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+      "Image: Comparison of AI Tool Provision and Usage Between High-Performing and Typical Organizations"
     ],
     "target_contents": [
-      "The image depicts Contoso's worldwide Active Directory (AD) forest centered around the domain 'contoso.com', comprising seven regional domains: NAM (North America), EUR (Europe), AFR (Africa), MES (Middle East), ASA (Asia), and AUS (Australia). The headquarters is located in Paris, marked in green, with regional hubs in cities like Chicago, Moscow, Tokyo, Beijing, Dubai, New York, Irvine, Sao Paulo, Johannesburg, Mexico City, Bangalore, and Thames Valley, all marked in gray. Blue lines illustrate the AD forest connections between the headquarters and regional hubs. The map emphasizes centralized management with regional autonomy, supporting cloud-based authentication and authorization using accounts and groups from the contoso.com forest."
+      "The bar chart compares high-performing organizations (HPOs) and typical organizations regarding AI tool provision and usage frequency. 48% of HPOs provide many AI tools, compared to 26% of typical organizations. Both groups mostly provide a moderate number of tools (27% HPO, 31% typical), while 19% HPOs and 32% typical organizations provide only a few, and 6% HPOs versus 9% typical organizations provide none. Regarding usage, 47% of HPO employees use AI tools daily, against 22% in typical organizations, with 29% HPOs and 30% typical organizations using tools moderately. Rare use occurs in 13% of HPOs and 26% of typical organizations, while 10% of HPO employees and 20% of typical employees never use AI tools."
     ]
   },
   {
-    "question": "What are the specific security policies Contoso implements to protect customer data in the cloud, especially regarding encryption and access control?",
+    "question": "What is the percentage difference in the perception of AI's effectiveness between leaders and individual contributors at typical organizations, and how does this gap compare at HPOs?",
     "target_headers": [
-      "Security",
-      "Table with 4 rows and 2 columns.",
-      "Table with 4 rows and 3 columns."
+      "Image: Perceptions of AI Value at HPOs vs. Typical Organizations by Role",
+      "HPOs are more effective at cascading their vision to all employees"
     ],
     "target_contents": [
-      "Contoso is serious about their information security and protection. When transitioning their IT infrastructure to a cloud-inclusive one, they made sure that their on-premises security requirements were supported and implemented in Microsoft's cloud offerings.",
-      " Cell[0][0]: Strong authentication to cloud resources Cell[0][1]: Cloud resource access must be authenticated and, where possible, leverage multi-factor authentication. Cell[1][0]: Encryption for traffic across the Internet Cell[1][1]: No data sent across the Internet is in plain text form. Always use HTTPS connections, IPsec, or other end -to-end data encryption methods. Cell[2][0]: Encryption for data at rest in the cloud Cell[2][1]: All data stored on disks or elsewhere in the cloud must be in an encrypted form. Cell[3][0]: ACLs for least privilege access Cell[3][1]: Account permissions to access resources in the cloud and what they are allowed to do must follow least-privilege guidelines.",
-      " Cell[0][0]: Level 1: Low business value Cell[0][1]: Level 2: Medium business value Cell[0][2]: Level 3: High business value Cell[1][0]: Data is encrypted and available only to authenticated users Cell[1][1]: Level 1 plus strong authentication and data loss protection Cell[1][2]: Level 2 plus the highest levels of encryption, authentication, and auditing Cell[2][0]: Provided for all data stored on premises and in cloud- based storage and workloads, such as Office 365. Data\nbetween the service and client devices.\nis encrypted while it resides in the service and in transit Cell[2][1]: Strong authentication includes multi-factor authentication with SMS validation. Data loss prevention ensures that sensitive or critical information does not travel outside the on-premises network. Cell[2][2]: The highest levels of encryption for data at rest and in the cloud, compliant with regional regulations, combined with multi-factor authentication with smart cards and granular auditing and alerting. Cell[3][0]: Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers. Cell[3][1]: Examples of Level 2 data are financial and legal information and research and development data for new products. Cell[3][2]: Examples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
+      "A bar chart comparing perceptions of AI's organizational value among roles in HPOs and typical organizations. At HPOs, 91% of leaders, 63% of managers, and 54% of individual contributors believe AI is effective. In typical organizations, these figures are 65% for leaders, 51% for managers, and 24% for individual contributors. The chart highlights that individual contributors at HPOs are significantly more likely to see AI as valuable compared to their counterparts in typical organizations.",
+      "Generative artificial intelligence (AI) in our workplace is critical for my organization to be successful.\n91%\nIndividual contributors at HPOs have higher agreement that AI has organizational value compared to managers at typical 54% organizations.\n65%\n63%\n51%\n24%\nLeader\nManager\nIndividual Contributor\nHPO\nTypical organization"
     ]
   },
   {
-    "question": "How does Contoso's global network map illustrate the connection between satellite offices and regional hubs?",
+    "question": "According to the Microsoft study, what is the percentage of employees at HPOs who feel included in decisions about change, and how does this compare to the percentage at typical organizations?",
     "target_headers": [
-      "Image: Contoso's Global Networking Infrastructure"
+      "HPOs excel at ensuring people are at the center of change"
     ],
     "target_contents": [
-      "The image depicts Contoso's worldwide network map, highlighting key cities such as Chicago, New York, Irvine, Mexico City, Paris, Sao Paulo, Johannesburg, Dubai, Bangalore, Tokyo, Beijing, and Moscow. It illustrates regional hub WAN links in orange connecting regional centers like Paris, Sao Paulo, and Johannesburg to the core network, and satellite office WAN links in blue connecting satellite offices to regional hubs. Each location has on-premises networks with internet connectivity via proxy servers, and the company's public website (contoso.com) is hosted in a data center in Paris. Contoso uses a /24 public IP address range for internet connectivity, and the network spans multiple continents, demonstrating a comprehensive global infrastructure."
+      "Experiences during change at HPOs versus typical organizations uncover a people-centric approach as a key differentiator\nFelt considered and respected\nFelt included in decisions\nAble to give feedback\nFelt cared for and supported\nEncouraged to celebrate milestones\nReceived consistent communication\n59%\n94%\n60%\n94%\n66%\n98%\n64%\n96%\n66%\n98%\n66%\n98%\nTypical org\nPercent favorable\nHPO"
     ]
   },
   {
-    "question": "Which Microsoft cloud offerings are mapped to Contoso's business needs for productivity, customer management, and device management?",
+    "question": "What is the reported percentage of employees at HPOs who feel their organization\u2019s change experiences are positive, and how does this compare to the percentage at typical organizations?",
     "target_headers": [
-      "Mapping Contoso's business needs to Microsoft's cloud offerings"
+      "HPOs excel at ensuring people are at the center of change"
     ],
     "target_contents": [
-      "SaaS Software as a Service\nOffice 365: Primary personal and group productivity applications in the cloud.\n1\n3\n5\nDynamics 365: Use cloud- based customer and vendor management. Remove partner extranet in the DMZ.\n2\nIntune/EMS: Manage iOS and Android devices.\n3"
+      "Experiences during change at HPOs versus typical organizations uncover a people-centric approach as a key differentiator\nFelt considered and respected\nFelt included in decisions\nAble to give feedback\nFelt cared for and supported\nEncouraged to celebrate milestones\nReceived consistent communication\n59%\n94%\n60%\n94%\n66%\n98%\n64%\n96%\n66%\n98%\n66%\n98%\nTypical org\nPercent favorable\nHPO"
     ]
   },
   {
-    "question": "How does Contoso's network analysis inform the necessary changes to accommodate Microsoft's cloud services?",
+    "question": "How does the study describe the relationship between AI use frequency and employee engagement, and what is the percentage increase in engagement from low to high AI use?",
     "target_headers": [
-      "Contoso's network analysis"
+      "Realized Individual Value of AI (RIVA) is higher for engaged employees",
+      "Top concerns include:"
     ],
     "target_contents": [
-      "Here are the results of Contoso's analysis of the changes needed on their network to accommodate the different categories of Microsoft's cloud offerings."
+      "87%\n85%\n83%\n82%\nPercent favorable\n80%\n80%\n66%\n63%\n60%\n56%\n55%\n54%\nAI allows me to complete tasks faster\nAI helps me be more productive at work\nAI simplifies my complex tasks\nAI helps me improve the quality of my work/output\nAI helps me make better decisions\nAI helps reduce my work-related stress\nEngaged AI users\nAll other AI users",
+      "Security People want security in AI processing and storage of their personal data and organization's sensitive information. Looking for confirmation that data is protected and not misused.\nOver-reliance How and why AI models make decisions is not always easy to interpret, creating a 'black-box'. People note blindly following decisions without human validation could cause unintended harm.\nJob loss\nPeople worry AI could negatively impact certain industries and occupations, especially roles with repetitive tasks, or deskilling, with roles being reduced in scope or skill necessary to complete.\nAs you think about generative AI being integrated into the way we work, what are you most concerned about?\nWhen asked specifically about concerns, across levels, there is relative agreement that using AI at work can have risk (57% of leaders, 54% of managers, and 52% of individual contributors agree). Yet individual contributors have far more skepticism:\n. Only 56% of individual contributors say they trust the output of AI versus 82% of leaders and 71% of managers.\n. Only 47% of individual contributors agree that AI will transform work for the better versus 84% of leaders and 69% of managers.\nTop concerns across all levels and profiles include:\n1. Security and data privacy.\n2. , Over-reliance on Al for automatic decision making, particularly those decisions that have impact on employees (e.g., hiring).\n3. Potential job loss or deskilling due to AI taking over tasks traditionally done by humans.\nAddressing the concerns for your people is an important part of managing potential change resistance. To do this, uncover what the top concerns are for your organization through ongoing feedback mechanisms. Communicate what security efforts are in place to ensure the safety and accuracy of AI use. Provide skilling where AI has been integrated, both reskilling where there may be automation, and upskilling where AI may shift a workflow. As you begin to rollout AI, share success stories and quick wins.\nFear around AI may be driven by the unknown. Exposure can be helpful in reducing apprehension even for AI skeptics or people who do not feel tech savvy. Don't discount the value of surfacing concerns, this builds trust that key risks are not being overlooked and helps refine and improve your AI strategy."
     ]
   },
   {
-    "question": "What are the core values of Contoso Electronics, and how might these influence their approach to cloud security and data privacy?",
+    "question": "What percentage of employees at HPOs report that AI helps them reduce work-related stress, and how does this compare to the overall reported percentage at typical organizations?",
     "target_headers": [
-      "Values"
+      "Realized Individual Value of AI (RIVA) is higher for engaged employees"
     ],
     "target_contents": [
-      "At Contoso Electronics, we strive to create an environment that values hard work, innovation, and collaboration. Our core values serve as the foundation for our success, and they guide our employees in how we should act and interact with each other and our customers.\nCompany Values:\n1. Quality: We strive to provide the highest quality products and services to our customers.\n2. Integrity: We value honesty, respect, and trustworthiness in all our interactions.\n3. Innovation: We encourage creativity and support new ideas and approaches to our business.\n4. Teamwork: We believe that by working together, we can achieve greater success.\n5. Respect: We treat all our employees, customers, and partners with respect and dignity.\n6. Excellence: We strive to exceed expectations and provide excellent service.\n7. Accountability: We take responsibility for our actions and hold ourselves and others accountable for their performance.\n8. Community: We are committed to making a positive impact in the communities in which we work and live."
+      "87%\n85%\n83%\n82%\nPercent favorable\n80%\n80%\n66%\n63%\n60%\n56%\n55%\n54%\nAI allows me to complete tasks faster\nAI helps me be more productive at work\nAI simplifies my complex tasks\nAI helps me improve the quality of my work/output\nAI helps me make better decisions\nAI helps reduce my work-related stress\nEngaged AI users\nAll other AI users"
     ]
   },
   {
-    "question": "How does Contoso's Whistleblower Policy ensure confidentiality and prevent retaliation when reporting unethical activities?",
+    "question": "According to the study, what is the percentage of employees at HPOs who believe AI will distinguish their organization as an employer of choice, and how does this compare to employees at typical organizations?",
     "target_headers": [
-      "Whistleblower Policy",
-      "Definition:"
+      "High Performing Organizations in the era of AI"
     ],
     "target_contents": [
-      "Contoso Electronics Whistleblower Policy\nAt Contoso Electronics, we believe in maintaining a safe and transparent working environment for all of our team members. To ensure the well-being of the entire organization, we have established a Whistleblower Policy. This policy encourages employees to come forth and report any unethical or illegal activities they may witness while working at Contoso Electronics.\nThis policy applies to all Contoso Electronics employees, contractors, and other third parties.",
-      "A whistleblower is an individual who reports activities that are illegal, unethical, or otherwise not in accordance with company policy.\nReporting Procedures:\nIf you witness any activity that you believe to be illegal, unethical, or not in accordance with company policy, it is important that you report it immediately. You can do this by:\n1. Contacting the Human Resources Department.\n2. Emailing the Compliance Officer at compliance@contoso.com.\n3. Calling the Compliance Hotline at 1-800-555-1212.\nWhen making a report, please provide as much detail as possible. This information should include:\n1. The time and date of the incident.\n2. Who was involved.\n3. What happened.\n4. Any evidence you may have related to the incident.\nIf you choose to report anonymously, you may do so by calling the Compliance Hotline at 1- 800-555-1212.\nRetaliation Prohibited:\nRetaliation of any kind is strictly prohibited. Any employee who retaliates against a whistleblower will be subject to disciplinary action, up to and including termination.\nConfidentiality:\nThe identity of the whistleblower will be kept confidential to the extent permitted by law.\nInvestigation:\nAll reported incidents will be investigated promptly and thoroughly.\nThank you for taking the time to read our Whistleblower Policy. We value your commitment to ethical and responsible behavior and appreciate your efforts to help us maintain a safe and transparent working environment."
+      "High Performing Organizations (HPOs)4 continuously exceed expectations in areas ranging from financial performance to employee engagement. There are three pillars that work together to characterize high performance at these organizations: engaged employees, productive teams, and resilient business.\nThose at HPOs are 90% more likely to say they fully support AI being integrated in their workplace.\nRespondents at HPOs were identified based on how often they reported their organization demonstrated a set of key performance indicators. The HPO category includes those who indicated that a majority of the performance indicators were 'always' demonstrated (17% of respondents).\nCompared to those at typical organizations, people at HPOs see more value in bringing AI to their organization. They are substantially more likely to say they fully support the integration of AI at their workplace and are eager to contribute to the success of the transformation.\nWhat do HPOs do differently? We see key differences about how they approach change, bring people along with the AI vision, and provide access to AI tools. We unpack these areas and what this means for leaders as we go into the era of AI.\nEmployees at HPOs see the value AI can bring to their organizations.\n70%\n70% more likely to say AI is critical for their organization to be successful\n80%\n80% more likely to say AI will distinguish their organization as an employer of choice\n70%\n70% more likely to say AI will boost their organization's revenue and financial success\nMore likely compared to employees at typical organizations"
     ]
   }
 ]

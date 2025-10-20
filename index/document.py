@@ -129,7 +129,7 @@ class DocumentProcessor():
 
         if save_to_file:
             with open(save_to_file, "wb") as fout:
-                pickle.dump(result, fout)    
+                pickle.dump(results, fout)    
 
         return results
 

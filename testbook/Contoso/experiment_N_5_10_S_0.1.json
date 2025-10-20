@@ -1,0 +1,516 @@
+[
+  {
+    "questions_path": "testbook/questions.json",
+    "file_name": "experiment_N_5_10_S_0.1.json",
+    "configuration": {
+      "use_history": false,
+      "top_n": 5,
+      "knn": 10,
+      "search_type": "semantic",
+      "temperature": 0.1
+    },
+    "help": "'passed' field == (related and intent)",
+    "mean_retriever_unc": 0.9444444444444444,
+    "std_retriever_unc": 0.14487116456005888,
+    "mean_generator_unc": 0.92,
+    "std_generator_unc": 0.16,
+    "mean_oracle_unc": 0.5,
+    "std_oracle_unc": 0.5
+  },
+  {
+    "question": "How does Contoso's data classification into three levels influence its choice of Microsoft cloud security features?",
+    "answer": "Contoso's data classification into three levels significantly influences its choice of Microsoft cloud security features. For Level 1 data, which has low business value, Contoso allows broad access to all users, with data retention of 6 months and basic encryption for information protection. Level 2 data, with medium business value, restricts access to employees, subcontractors, and partners, and employs additional security measures such as MFA, TLS, and MAM, with a retention period of 2 years and hash values for data integrity. For the most sensitive Level 3 data, access is limited to executives and leads in engineering and manufacturing, with enhanced security like RMS with managed network devices, digital signatures for non-repudiation, and a retention period of 7 years [doc_4]. This tiered approach ensures that security features are appropriately aligned with the sensitivity and value of the data, optimizing protection while maintaining compliance and operational efficiency.",
+    "passed": true,
+    "cited": [
+      "Table with 4 rows and 4 columns._1"
+    ],
+    "cited_content": [
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation"
+    ],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "2 Perform data classification analysis into three levels",
+      "Table with 4 rows and 3 columns.",
+      "Table with 4 rows and 4 columns._1",
+      "Training and Education",
+      "Contoso's data sensitivity classification",
+      "Contoso's data sensitivity classification_1"
+    ],
+    "target_content": [
+      "Contoso performed a careful review and determined the three levels, which was used to determine the Microsoft cloud offering features to protect Contoso's most valuable data.\n3 Determine access, retention, and information protection policies for data levels Based on the data levels, Contoso determined detailed requirements, which will be used to qualify future IT workloads being moved to the cloud.\nCloud security resources\nMicrosoft Cloud Security for Enterprise Architects\nhttp://aka.ms/doudarchsecurity\n1811\nInformation Protection for Office 365\nhttp://aka.ms/o365infoprotect\nSecurity in a Cloud-Enabled World Microsoft Virtual Academy Course http://aka.ms/securecustomermva\nMicrosoft",
+      " Cell[0][0]: Level 1: Low business value Cell[0][1]: Level 2: Medium business value Cell[0][2]: Level 3: High business value Cell[1][0]: Data is encrypted and available only to authenticated users Cell[1][1]: Level 1 plus strong authentication and data loss protection Cell[1][2]: Level 2 plus the highest levels of encryption, authentication, and auditing Cell[2][0]: Provided for all data stored on premises and in cloud- based storage and workloads, such as Office 365. Data\nbetween the service and client devices.\nis encrypted while it resides in the service and in transit Cell[2][1]: Strong authentication includes multi-factor authentication with SMS validation. Data loss prevention ensures that sensitive or critical information does not travel outside the on-premises network. Cell[2][2]: The highest levels of encryption for data at rest and in the cloud, compliant with regional regulations, combined with multi-factor authentication with smart cards and granular auditing and alerting. Cell[3][0]: Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers. Cell[3][1]: Examples of Level 2 data are financial and legal information and research and development data for new products. Cell[3][2]: Examples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "Contoso Electronics will provide regular training and education to all employees on workplace violence prevention and response. This training will include information on recognizing potential signs of workplace violence, strategies for responding to incidents, and the company's zero tolerance policy.\nWe are committed to creating a safe and secure work environment for all of our employees. By following the guidelines outlined in this program, we can ensure that our workplace is free from violence and abuse.",
+      "Using the information in Microsoft's Data Classification Toolkit, Contoso performed an analysis of their data and determined the following levels.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
+    ],
+    "retriever_unc": 0.6666666666666666,
+    "generator_unc": 0.8,
+    "oracle_unc": 0.0
+  },
+  {
+    "question": "What percentage of Contoso's workforce is mobile-only, and how does this impact their device management strategy?",
+    "answer": "The requested information about the percentage of Contoso's workforce that is mobile-only and its impact on device management strategy is not available in the retrieved sources. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution"
+    ],
+    "target_content": [
+      "The image depicts a world map illustrating Contoso's worldwide organization, highlighting its three-tier office structure. The headquarters, located in Paris, employs 15,000 workers and houses all datacenters and internet infrastructure. Regional hubs, each with approximately 2,000 workers and serving 60% sales and support staff, are connected to Paris via high-bandwidth WAN links and are situated in cities like New York, Tokyo, Moscow, and Johannesburg. Satellite offices, with around 250 workers and 80% sales and support staff, are located in key cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, connected to regional hubs. Overall, 25% of Contoso's workforce is mobile-only, with a higher percentage in regional hubs and satellite offices, emphasizing the company's focus on supporting mobile workers."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "In which cities does Contoso have regional hubs, and what is the approximate number of employees in each hub?",
+    "answer": "The retrieved sources do not provide specific information about the cities where Contoso has regional hubs or the number of employees in each hub. Therefore, I cannot answer this question based on the available data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution"
+    ],
+    "target_content": [
+      "The image depicts a world map illustrating Contoso's worldwide organization, highlighting its three-tier office structure. The headquarters, located in Paris, employs 15,000 workers and houses all datacenters and internet infrastructure. Regional hubs, each with approximately 2,000 workers and serving 60% sales and support staff, are connected to Paris via high-bandwidth WAN links and are situated in cities like New York, Tokyo, Moscow, and Johannesburg. Satellite offices, with around 250 workers and 80% sales and support staff, are located in key cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, connected to regional hubs. Overall, 25% of Contoso's workforce is mobile-only, with a higher percentage in regional hubs and satellite offices, emphasizing the company's focus on supporting mobile workers."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "How does Contoso ensure compliance with regional data storage and encryption regulations across its global infrastructure?",
+    "answer": "Contoso ensures compliance with regional data storage and encryption regulations by adhering to specific regional requirements, which include implementing appropriate data storage and encryption practices as mandated by local authorities. This is crucial for avoiding fines and maintaining good relations with governments. Specifically, Contoso must follow regional regulatory requirements related to data storage and encryption, ensuring that their data handling practices meet local legal standards [doc_5].",
+    "passed": true,
+    "cited": [
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "cited_content": [
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "1 Adhere to regional regulatory requirements",
+      "Contoso's data sensitivity classification"
+    ],
+    "target_content": [
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations.",
+      "Using the information in Microsoft's Data Classification Toolkit, Contoso performed an analysis of their data and determined the following levels."
+    ],
+    "retriever_unc": 0.5,
+    "generator_unc": 0.8,
+    "oracle_unc": 0.0
+  },
+  {
+    "question": "What are the key differences between Contoso's on-premises datacenter functions and their cloud-based counterparts in Azure IaaS?",
+    "answer": "The requested information is not available in the retrieved data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Azure IaaS Infrastructure as a Service",
+      "Contoso's existing IT infrastructure"
+    ],
+    "target_content": [
+      "Move archival and legacy systems to cloud-based servers.\n5\nMigrate low-use apps and data out of on-premises datacenters.\n5\nAdd temporary servers and storage for end-of-quarter processing needs.\n6\nMicrosoft",
+      "Contoso uses a mostly centralized on-premises IT infrastructure, with application datacenters in the Paris headquarters.\nHeadquarters\nDMZ\nInternet\nApplication datacenters\nRemote access/ proxy\nRemote and mobile-only workers\nPublic web site\nOn-premises workers\nPartner extranet\nInternal firewall\nExternal firewall\nIn Contoso's DMZ, different sets of servers provide:\n. Remote access to the Contoso intranet and web proxying for workers in the Paris headquarters.\n\u00b7 Hosting for the Contoso public web site, from which customers can order products, parts, or supplies.\n\u00b7 Hosting for the Contoso partner extranet for partner communication and collaboration."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "Which cities are connected to Contoso's Paris headquarters via high-bandwidth WAN links, and what is the significance of these connections?",
+    "answer": "The retrieved sources do not provide specific information about the cities connected to Contoso's Paris headquarters via high-bandwidth WAN links, nor do they detail the significance of such connections. The available data focuses on performance consistency for SaaS applications at the Paris campus, data sensitivity classifications, and general company information, but does not specify network topology or inter-city connectivity details.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Image: Contoso's Global Organizational Structure and Office Distribution"
+    ],
+    "target_content": [
+      "The image depicts a world map illustrating Contoso's worldwide organization, highlighting its three-tier office structure. The headquarters, located in Paris, employs 15,000 workers and houses all datacenters and internet infrastructure. Regional hubs, each with approximately 2,000 workers and serving 60% sales and support staff, are connected to Paris via high-bandwidth WAN links and are situated in cities like New York, Tokyo, Moscow, and Johannesburg. Satellite offices, with around 250 workers and 80% sales and support staff, are located in key cities such as Toronto, Dubai, Mumbai, Singapore, and Taipei, connected to regional hubs. Overall, 25% of Contoso's workforce is mobile-only, with a higher percentage in regional hubs and satellite offices, emphasizing the company's focus on supporting mobile workers."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "How does Contoso's use of ExpressRoute Premium enhance its connectivity to Microsoft datacenters across different continents?",
+    "answer": "The retrieved sources do not provide specific information about Contoso's use of ExpressRoute Premium or how it enhances connectivity to Microsoft datacenters across different continents. Therefore, I cannot provide a detailed explanation based on the available data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Contoso's use of ExpressRoute"
+    ],
+    "target_content": [
+      "ExpressRoute is a dedicated WAN connection from your location to a Microsoft peering location that connects your network to the Microsoft cloud network. ExpressRoute connections provide predictable performance and a 99.9% uptime SLA.\nWith an ExpressRoute connection, you are connected to the Microsoft cloud network and all the Microsoft datacenter locations in the same continent. The traffic between the cloud peering location and the destination Microsoft datacenter is carried over the Microsoft cloud network.\nWith ExpressRoute Premium, you can reach any Microsoft datacenter on any continent from any Microsoft peering location on any continent. The traffic between continents is carried over the Microsoft cloud network.\nBased on the analysis of current and future traffic to Microsoft's cloud offerings and its requirements for high quality of service for Skype-based communications, Contoso has performed a network assessment and implemented an any-to-any (MPLS-based) ExpressRoute Premium connection from the Paris headquarters to the Microsoft peering location in Europe."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "What are the main components of Contoso's workplace safety and violence prevention programs, and how do they interrelate?",
+    "answer": "The requested information is not available in the retrieved data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Purpose",
+      "Contoso Electronics' Workplace Safety Program",
+      "Workplace Safety",
+      "Workplace Violence"
+    ],
+    "target_content": [
+      "The purpose of this program is to promote a safe and healthy work environment by preventing violence, threats, and abuse in the workplace. It is also intended to provide a safe, secure and protected environment for our employees, customers, and visitors.",
+      "At Contoso Electronics, we have established a comprehensive workplace safety program that is designed to protect our employees from workplace hazards. Our program includes:\n\u00b7 Hazard Identification and Risk Assessment - We strive to identify and assess potential safety hazards in the workplace and take the necessary steps to reduce or eliminate them.\n\u00b7 Training - We provide our employees with safety training to ensure that they are aware of safety procedures and protocols.\n\u00b7 Personal Protective Equipment (PPE) - We provide our employees with the necessary PPE to ensure their safety.\n\u00b7 Emergency Preparedness - We have established procedures and protocols in the event of an emergency.\n\u00b7 Reporting - We encourage our employees to report any safety concerns or incidents to our safety department.\n\u00b7 Inspections - We conduct regular safety inspections to ensure that our workplace is free from hazards.\n\u00b7 Record Keeping - We maintain accurate records of all safety incidents, inspections and training.\nWe believe that our workplace safety program is essential to providing a safe and healthy work environment for our employees. We are committed to providing a safe working environment and to protecting our employees from workplace hazards. If you have any questions or concerns related to workplace safety, please contact our safety department. Thank you for being a part of the Contoso Electronics team.",
+      "Welcome to Contoso Electronics! Our goal is to provide a safe and healthy work environment for our employees and to maintain a safe workplace that is free from recognized hazards. We believe that workplace safety is everyone's responsibility and we are committed to providing a safe working environment for all of our employees.",
+      "Workplace Violence Prevention Program\nAt Contoso Electronics, we are committed to providing a safe, respectful and healthy workplace for all of our employees. In order to ensure that we maintain this, we have developed a comprehensive Workplace Violence Prevention Program."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "How does Contoso's Active Directory forest support cloud-based authentication and regional management autonomy?",
+    "answer": "The retrieved sources do not contain specific information about Contoso's Active Directory forest or its support for cloud-based authentication and regional management autonomy. Therefore, I cannot provide a detailed answer based on the available data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Image: Contoso's Global Windows Server Active Directory Infrastructure"
+    ],
+    "target_content": [
+      "The image depicts Contoso's worldwide Active Directory (AD) forest centered around the domain 'contoso.com', comprising seven regional domains: NAM (North America), EUR (Europe), AFR (Africa), MES (Middle East), ASA (Asia), and AUS (Australia). The headquarters is located in Paris, marked in green, with regional hubs in cities like Chicago, Moscow, Tokyo, Beijing, Dubai, New York, Irvine, Sao Paulo, Johannesburg, Mexico City, Bangalore, and Thames Valley, all marked in gray. Blue lines illustrate the AD forest connections between the headquarters and regional hubs. The map emphasizes centralized management with regional autonomy, supporting cloud-based authentication and authorization using accounts and groups from the contoso.com forest."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "What are the specific security policies Contoso implements to protect customer data in the cloud, especially regarding encryption and access control?",
+    "answer": "Contoso implements several security policies to safeguard customer data in the cloud, focusing on encryption and access control. According to the retrieved sources, Contoso classifies data based on sensitivity levels and applies corresponding security measures. For high-value data (Level 3), access is restricted to executives and leads in engineering and manufacturing, with the use of Rights Management Services (RMS) and managed network devices to ensure secure access [doc_4]. Additionally, for data protection, Contoso employs digital signatures for non-repudiation, and uses hash values to maintain data integrity [doc_4]. Regarding encryption, the company mandates the use of encryption for sensitive data, especially for Level 2 and Level 3 data, to prevent unauthorized access and ensure confidentiality [doc_2]. Furthermore, Contoso adheres to regional regulatory requirements, which include compliance with data storage and encryption regulations, to prevent fines and maintain good relations with local authorities [doc_5]. These policies collectively help Contoso secure customer data effectively in the cloud environment.",
+    "passed": true,
+    "cited": [
+      "Contoso's data sensitivity classification_1",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "cited_content": [
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Security",
+      "Table with 4 rows and 2 columns.",
+      "Table with 4 rows and 3 columns."
+    ],
+    "target_content": [
+      "Contoso is serious about their information security and protection. When transitioning their IT infrastructure to a cloud-inclusive one, they made sure that their on-premises security requirements were supported and implemented in Microsoft's cloud offerings.",
+      " Cell[0][0]: Strong authentication to cloud resources Cell[0][1]: Cloud resource access must be authenticated and, where possible, leverage multi-factor authentication. Cell[1][0]: Encryption for traffic across the Internet Cell[1][1]: No data sent across the Internet is in plain text form. Always use HTTPS connections, IPsec, or other end -to-end data encryption methods. Cell[2][0]: Encryption for data at rest in the cloud Cell[2][1]: All data stored on disks or elsewhere in the cloud must be in an encrypted form. Cell[3][0]: ACLs for least privilege access Cell[3][1]: Account permissions to access resources in the cloud and what they are allowed to do must follow least-privilege guidelines.",
+      " Cell[0][0]: Level 1: Low business value Cell[0][1]: Level 2: Medium business value Cell[0][2]: Level 3: High business value Cell[1][0]: Data is encrypted and available only to authenticated users Cell[1][1]: Level 1 plus strong authentication and data loss protection Cell[1][2]: Level 2 plus the highest levels of encryption, authentication, and auditing Cell[2][0]: Provided for all data stored on premises and in cloud- based storage and workloads, such as Office 365. Data\nbetween the service and client devices.\nis encrypted while it resides in the service and in transit Cell[2][1]: Strong authentication includes multi-factor authentication with SMS validation. Data loss prevention ensures that sensitive or critical information does not travel outside the on-premises network. Cell[2][2]: The highest levels of encryption for data at rest and in the cloud, compliant with regional regulations, combined with multi-factor authentication with smart cards and granular auditing and alerting. Cell[3][0]: Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers. Cell[3][1]: Examples of Level 2 data are financial and legal information and research and development data for new products. Cell[3][2]: Examples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 0.4,
+    "oracle_unc": 1.0
+  },
+  {
+    "question": "How does Contoso's global network map illustrate the connection between satellite offices and regional hubs?",
+    "answer": "The requested information is not available in the retrieved data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Image: Contoso's Global Networking Infrastructure"
+    ],
+    "target_content": [
+      "The image depicts Contoso's worldwide network map, highlighting key cities such as Chicago, New York, Irvine, Mexico City, Paris, Sao Paulo, Johannesburg, Dubai, Bangalore, Tokyo, Beijing, and Moscow. It illustrates regional hub WAN links in orange connecting regional centers like Paris, Sao Paulo, and Johannesburg to the core network, and satellite office WAN links in blue connecting satellite offices to regional hubs. Each location has on-premises networks with internet connectivity via proxy servers, and the company's public website (contoso.com) is hosted in a data center in Paris. Contoso uses a /24 public IP address range for internet connectivity, and the network spans multiple continents, demonstrating a comprehensive global infrastructure."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "Which Microsoft cloud offerings are mapped to Contoso's business needs for productivity, customer management, and device management?",
+    "answer": "Contoso's business needs for productivity, customer management, and device management are addressed through specific Microsoft cloud offerings. For productivity, Contoso utilizes Office 365, which provides tools for collaboration and communication. Customer management is supported by Dynamics 365, a comprehensive customer relationship management (CRM) platform. Device management is handled through Intune, which allows for the management and security of devices across the organization. These services are part of the broader cloud architecture to ensure consistent performance and security, as outlined in the company's strategic plans [doc_1].",
+    "passed": true,
+    "cited": [
+      "Consistent performance for Paris campus staff for SaaS applications"
+    ],
+    "cited_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic."
+    ],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Mapping Contoso's business needs to Microsoft's cloud offerings"
+    ],
+    "target_content": [
+      "SaaS Software as a Service\nOffice 365: Primary personal and group productivity applications in the cloud.\n1\n3\n5\nDynamics 365: Use cloud- based customer and vendor management. Remove partner extranet in the DMZ.\n2\nIntune/EMS: Manage iOS and Android devices.\n3"
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 0.8,
+    "oracle_unc": 1.0
+  },
+  {
+    "question": "How does Contoso's network analysis inform the necessary changes to accommodate Microsoft's cloud services?",
+    "answer": "The retrieved sources do not provide specific information on how Contoso's network analysis informs necessary changes to accommodate Microsoft's cloud services. The sources mainly discuss performance consistency for SaaS applications, data classification, data retention, and regulatory compliance, but do not detail network analysis processes or their influence on infrastructure adjustments. Therefore, I cannot provide a detailed answer based on the current sources.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Contoso's network analysis"
+    ],
+    "target_content": [
+      "Here are the results of Contoso's analysis of the changes needed on their network to accommodate the different categories of Microsoft's cloud offerings."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "What are the core values of Contoso Electronics, and how might these influence their approach to cloud security and data privacy?",
+    "answer": "The retrieved sources do not provide specific information about the core values of Contoso Electronics. Therefore, I cannot directly address how these values might influence their approach to cloud security and data privacy. For detailed insights into their core values and related policies, additional information or sources would be needed.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Values"
+    ],
+    "target_content": [
+      "At Contoso Electronics, we strive to create an environment that values hard work, innovation, and collaboration. Our core values serve as the foundation for our success, and they guide our employees in how we should act and interact with each other and our customers.\nCompany Values:\n1. Quality: We strive to provide the highest quality products and services to our customers.\n2. Integrity: We value honesty, respect, and trustworthiness in all our interactions.\n3. Innovation: We encourage creativity and support new ideas and approaches to our business.\n4. Teamwork: We believe that by working together, we can achieve greater success.\n5. Respect: We treat all our employees, customers, and partners with respect and dignity.\n6. Excellence: We strive to exceed expectations and provide excellent service.\n7. Accountability: We take responsibility for our actions and hold ourselves and others accountable for their performance.\n8. Community: We are committed to making a positive impact in the communities in which we work and live."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  },
+  {
+    "question": "How does Contoso's Whistleblower Policy ensure confidentiality and prevent retaliation when reporting unethical activities?",
+    "answer": "The requested information is not available in the retrieved data. Please try another query or topic.",
+    "passed": false,
+    "cited": [],
+    "cited_content": [],
+    "retrieved": [
+      "Consistent performance for Paris campus staff for SaaS applications",
+      "Contoso's data sensitivity classification_1",
+      "Our Mission",
+      "Table with 4 rows and 4 columns._1",
+      "1 Adhere to regional regulatory requirements"
+    ],
+    "retrieved_content": [
+      "With 15,000 employees in the Paris campus all simultaneously accessing Office 365, Intune, and Dynamics 365, Contoso wants to ensure that that access is consistently performant and is not competing with regional Internet traffic.",
+      "Examples of Level 1 data are normal business communications (email) and files for administrative, sales, and support workers.\nExamples of Level 2 data are financial and legal information and research and development data for new products.\nExamples of Level 3 data are customer and partner personally identifiable information and product engineering specifications and proprietary manufacturing techniques.",
+      "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic components for both commercial and military aircraft. We specialize in creating cutting- edge systems that are both reliable and efficient. Our mission is to provide the highest quality aircraft components to our customers, while maintaining a commitment to safety and excellence. We are proud to have built a strong reputation in the aerospace industry and strive to continually improve our products and services. Our experienced team of engineers and technicians are dedicated to providing the best products and services to our customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come.",
+      " Cell[0][0]:  Cell[0][1]: Access Cell[0][2]: Data retention Cell[0][3]: Information protection Cell[1][0]: Level 1: Low business value Cell[1][1]: . Allow access to all Cell[1][2]: 6 months Cell[1][3]: Use encryption Cell[2][0]: Level 2: Medium business value Cell[2][1]: . Allow access to Contoso employees, subcontractors, and partners \u00b7 Use MFA, TLS, and MAM Cell[2][2]: 2 years Cell[2][3]: Use hash values for data integrity Cell[3][0]: Level 3: High business value Cell[3][1]: . Allow access to executives and leads in engineering and manufacturing \u00b7 RMS with managed network devices only Cell[3][2]: 7 years Cell[3][3]: Use digital signatures for non- repudiation",
+      "To prevent fines and maintain good relations with local governments, Contoso must ensure compliance with data storage and encryption regulations."
+    ],
+    "target": [
+      "Whistleblower Policy",
+      "Definition:"
+    ],
+    "target_content": [
+      "Contoso Electronics Whistleblower Policy\nAt Contoso Electronics, we believe in maintaining a safe and transparent working environment for all of our team members. To ensure the well-being of the entire organization, we have established a Whistleblower Policy. This policy encourages employees to come forth and report any unethical or illegal activities they may witness while working at Contoso Electronics.\nThis policy applies to all Contoso Electronics employees, contractors, and other third parties.",
+      "A whistleblower is an individual who reports activities that are illegal, unethical, or otherwise not in accordance with company policy.\nReporting Procedures:\nIf you witness any activity that you believe to be illegal, unethical, or not in accordance with company policy, it is important that you report it immediately. You can do this by:\n1. Contacting the Human Resources Department.\n2. Emailing the Compliance Officer at compliance@contoso.com.\n3. Calling the Compliance Hotline at 1-800-555-1212.\nWhen making a report, please provide as much detail as possible. This information should include:\n1. The time and date of the incident.\n2. Who was involved.\n3. What happened.\n4. Any evidence you may have related to the incident.\nIf you choose to report anonymously, you may do so by calling the Compliance Hotline at 1- 800-555-1212.\nRetaliation Prohibited:\nRetaliation of any kind is strictly prohibited. Any employee who retaliates against a whistleblower will be subject to disciplinary action, up to and including termination.\nConfidentiality:\nThe identity of the whistleblower will be kept confidential to the extent permitted by law.\nInvestigation:\nAll reported incidents will be investigated promptly and thoroughly.\nThank you for taking the time to read our Whistleblower Policy. We value your commitment to ethical and responsible behavior and appreciate your efforts to help us maintain a safe and transparent working environment."
+    ],
+    "retriever_unc": 1.0,
+    "generator_unc": 1.0,
+    "oracle_unc": NaN
+  }
+]

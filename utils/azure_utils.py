@@ -129,7 +129,7 @@ def retrieve(search_query: str, use_text=True, use_vector=True, use_semantic=Fal
     )
     return result
 
-def get_response(query: str, sys_template: str, messages: Optional[List[Dict]] = [], search_type: Optional[str] = "vector_text", use_all_sources: bool = False, openai_kwargs: Optional[Dict] = {}, output_schema: Optional[BaseModel] = None, debug: bool = False):
+def get_response(query: str, sys_template: str, messages: Optional[List[Dict]] = [], search_type: Optional[str] = "vector_text", use_all_sources: bool = False, search_kwargs: Optional[Dict] = {}, openai_kwargs: Optional[Dict] = {}, output_schema: Optional[BaseModel] = None, debug: bool = False):
     """
     Returns a response from the OpenAI client.
     """
@@ -144,7 +144,7 @@ def get_response(query: str, sys_template: str, messages: Optional[List[Dict]] =
     if use_all_sources:
         sources = get_sources_from_container()
     else:
-        sources = retrieve(query, use_text=use_text_search, use_vector=use_vector_search, use_semantic=use_semantic_search)
+        sources = retrieve(query, use_text=use_text_search, use_vector=use_vector_search, use_semantic=use_semantic_search, **search_kwargs)
     
     sources_formatted, sources_list = format_sources(sources)
 
