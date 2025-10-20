@@ -5,8 +5,10 @@
 - Azure AI Search for indexing and retrieval
 - Azure OpenAI for embedding models and chat models
 
-#### LangGraph multi-agents workflow to embed images present in pdfs into the text latent space.
+### New features:
 
-#### DeepEval, Ragas, and personalized metrics to assess the RAG performance.
+- LangGraph multi-agents workflow to embed images present in pdfs into the text latent space.
 
-#### FastAPI + Gradio for a user-friendly RAG interface.
+- DeepEval, Ragas, and personalized metrics to assess the RAG performance.
+
+- FastAPI + Gradio for a user-friendly RAG interface.
