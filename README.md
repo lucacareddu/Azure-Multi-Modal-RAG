@@ -8,3 +8,5 @@
 #### LangGraph multi-agents workflow to embed images present in pdfs into the text latent space.
 
 #### DeepEval, Ragas, and personalized metrics to assess the RAG performance.
+
+#### FastAPI + Gradio for a user-friendly RAG interface.
