@@ -1,6 +1,7 @@
 .env
 .deepeval
 .env.local
+.pytest_cache
 rag_deprecated.py
 app_deprecated/
-**/pycache/*
+**/__pycache__/*
