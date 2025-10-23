@@ -226,25 +226,28 @@ class DocumentProcessor():
                         
                     elif not table and not role:
                         content = paragraph.content
+                        content = "\n".join([x.strip() for x in content.split("\n") if len(x.strip().split()) >= 10])
+
                         page_num = int(region.page_number) + int(split_offset) - 1
 
-                        format_content = self.normalize_text(content)                        
+                        format_content = self.normalize_text(content)   
 
-                        if formatted_paragraphs and header == formatted_paragraphs[-1]["header"]:
-                            # append to existing paragraph
-                            formatted_paragraphs[-1]["raw_content"] += "\n" + content
-                            formatted_paragraphs[-1]["format_content"] += " " + format_content
-                        else:
-                            form_par = {"id": str(uuid.uuid4())} if add_id else {}
-                            
-                            formatted_paragraphs.append({
-                                **form_par,
-                                "header":header,
-                                "raw_content":content,
-                                "format_content":format_content,
-                                "page":page_num,
-                                "source":file_name,
-                                "url":url})
+                        if content.strip() != "":                     
+                            if formatted_paragraphs and header == formatted_paragraphs[-1]["header"]:
+                                # append to existing paragraph
+                                formatted_paragraphs[-1]["raw_content"] += "\n" + content
+                                formatted_paragraphs[-1]["format_content"] += " " + format_content
+                            else:
+                                form_par = {"id": str(uuid.uuid4())} if add_id else {}
+                                
+                                formatted_paragraphs.append({
+                                    **form_par,
+                                    "header":header,
+                                    "raw_content":content,
+                                    "format_content":format_content,
+                                    "page":page_num,
+                                    "source":file_name,
+                                    "url":url})
 
         return formatted_paragraphs
 

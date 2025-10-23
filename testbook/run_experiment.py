@@ -46,7 +46,7 @@ def main(config, file_name):
     answers = []
 
     cited_sources, retrieved_sources = [], []
-    retriever_uncertainities, generator_uncertainities, oracle_uncertainities = [], [], []
+    retriever_uncertainties, generator_uncertainties, oracle_uncertainties = [], [], []
 
     result_dict = []
 
@@ -78,13 +78,13 @@ def main(config, file_name):
         cited_sources.append(cited)
         retrieved_sources.append(retrieved)
 
-        retriever_uncertainity = np.nanmean([s not in retrieved for s in target]) # FN
-        generator_uncertainity = np.average([s not in cited for s in retrieved]) # FN
-        oracle_uncertainity = np.nanmean([s not in target for s in cited]) # FN
+        retriever_uncertainty = np.nanmean([s not in retrieved for s in target]) # FN
+        generator_uncertainty = np.average([s not in cited for s in retrieved]) # FN
+        oracle_uncertainty = np.nanmean([s not in target for s in cited]) # FN
 
-        retriever_uncertainities.append(retriever_uncertainity)
-        generator_uncertainities.append(generator_uncertainity)
-        oracle_uncertainities.append(oracle_uncertainity)
+        retriever_uncertainties.append(retriever_uncertainty)
+        generator_uncertainties.append(generator_uncertainty)
+        oracle_uncertainties.append(oracle_uncertainty)
 
         result_dict.append({"question": query, 
                             "answer": answer, 
@@ -95,32 +95,32 @@ def main(config, file_name):
                             "retrieved_content": retrieved_contents,
                             "target": target, 
                             "target_content": content,
-                            "retriever_unc": retriever_uncertainity,
-                            "generator_unc": generator_uncertainity, 
-                            "oracle_unc": oracle_uncertainity})
+                            "retriever_unc": retriever_uncertainty,
+                            "generator_unc": generator_uncertainty, 
+                            "oracle_unc": oracle_uncertainty})
         
         # update messages history
         history.append({"role": "user", "content": f"{query}"})
         history.append({"role": "assistant", "content": f"{answer}"})
 
-    mean_retriever_uncertainity = np.nanmean(retriever_uncertainities)
-    mean_generator_uncertainity = np.average(generator_uncertainities)
-    mean_oracle_uncertainity = np.nanmean(oracle_uncertainities)
+    mean_retriever_uncertainty = np.nanmean(retriever_uncertainties)
+    mean_generator_uncertainty = np.average(generator_uncertainties)
+    mean_oracle_uncertainty = np.nanmean(oracle_uncertainties)
 
-    std_retriever_uncertainity = np.nanstd(retriever_uncertainities)
-    std_generator_uncertainity = np.std(generator_uncertainities)
-    std_oracle_uncertainity = np.nanstd(oracle_uncertainities)
+    std_retriever_uncertainty = np.nanstd(retriever_uncertainties)
+    std_generator_uncertainty = np.std(generator_uncertainties)
+    std_oracle_uncertainty = np.nanstd(oracle_uncertainties)
 
     result_header = {"questions_path": quest_path,
                     "file_name": file_name,
                     "configuration": configuration,
                     "help": "'passed' field == (related and intent)",
-                    "mean_retriever_unc": mean_retriever_uncertainity,
-                    "std_retriever_unc": std_retriever_uncertainity,
-                    "mean_generator_unc": mean_generator_uncertainity,
-                    "std_generator_unc": std_generator_uncertainity,
-                    "mean_oracle_unc": mean_oracle_uncertainity,
-                    "std_oracle_unc": std_oracle_uncertainity,                    
+                    "mean_retriever_unc": mean_retriever_uncertainty,
+                    "std_retriever_unc": std_retriever_uncertainty,
+                    "mean_generator_unc": mean_generator_uncertainty,
+                    "std_generator_unc": std_generator_uncertainty,
+                    "mean_oracle_unc": mean_oracle_uncertainty,
+                    "std_oracle_unc": std_oracle_uncertainty,                    
                      }
     
     result_dict.insert(0, result_header)
@@ -128,12 +128,12 @@ def main(config, file_name):
     with open(res_path, "w") as res_json:
         json.dump(result_dict, res_json, indent=2)
         
-    print(f"\nMean Retriever Uncertainity: {mean_retriever_uncertainity}")
-    print(f"Std Retriever Uncertainity: {std_retriever_uncertainity}\n\n")
-    print(f"Mean Generator Uncertainity: {mean_generator_uncertainity}")
-    print(f"Std Generator Uncertainity: {std_generator_uncertainity}\n\n")
-    print(f"Mean Oracle Uncertainity: {mean_oracle_uncertainity}")
-    print(f"Std Oracle Uncertainity: {std_oracle_uncertainity}\n")
+    print(f"\nMean Retriever uncertainty: {mean_retriever_uncertainty}")
+    print(f"Std Retriever uncertainty: {std_retriever_uncertainty}\n\n")
+    print(f"Mean Generator uncertainty: {mean_generator_uncertainty}")
+    print(f"Std Generator uncertainty: {std_generator_uncertainty}\n\n")
+    print(f"Mean Oracle uncertainty: {mean_oracle_uncertainty}")
+    print(f"Std Oracle uncertainty: {std_oracle_uncertainty}\n")
 
     print(f"Results in {file_name}")
 

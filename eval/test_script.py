@@ -24,14 +24,13 @@ from ragas.metrics import (AnswerRelevancy,
 
 from utils.azure_utils import get_chatopenai_client, get_embeddings_client
 
-from math import sqrt, floor, ceil
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
 
-import time
+from plotter import plot
 
 import json
+
+import time
 
 
 ### DEEPEVAL SETUP ###
@@ -40,7 +39,7 @@ os.environ["AZURE_OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 deepeval_root = "eval"
 
-exp_path = "/home/luca/lipari-esercizi/rag/testbook/experiment_N_5_10_VTS_0.1.json"
+exp_path = "/home/luca/lipari-esercizi/rag/testbook/experiment_N_5_10_T_0.1.json"
 exp_name = os.path.basename(exp_path).replace(".json","")
 
 result_root = os.path.join(deepeval_root, exp_name)
@@ -157,9 +156,9 @@ for idx, question in enumerate(data):
                 print(f"{k.capitalize()}: {v}")
 
     print()
-    print(f"Retriever Uncertainity (FN): {question['retriever_unc']}")
-    print(f"Generator Uncertainity (FN): {question['generator_unc']}")
-    print(f"Oracle Uncertainity (FN): {question['oracle_unc']}")
+    print(f"Retriever uncertainty (FN): {question['retriever_unc']}")
+    print(f"Generator uncertainty (FN): {question['generator_unc']}")
+    print(f"Oracle uncertainty (FN): {question['oracle_unc']}")
     print()
 
     print("+++++++++++++++++++ MY SUMMARY +++++++++++++++++++\n")
@@ -167,58 +166,28 @@ for idx, question in enumerate(data):
 
     if not metrics_results:
         metrics_results = {metric.capitalize():[data["result"]["score"]] for metric, data in deepeval_summary.items()}
-        metrics_results["Retriever Uncertainity"] = [question["retriever_unc"]]
-        metrics_results["Generator Uncertainity"] = [question["generator_unc"]]
-        metrics_results["Oracle Uncertainity"] = [question["oracle_unc"]]
+        metrics_results["Retriever uncertainty"] = [question["retriever_unc"]]
+        metrics_results["Generator uncertainty"] = [question["generator_unc"]]
+        metrics_results["Oracle uncertainty"] = [question["oracle_unc"]]
     else:
         for metric, data in deepeval_summary.items():
             metrics_results[metric.capitalize()].append(data["result"]["score"])
-        metrics_results["Retriever Uncertainity"].append(question["retriever_unc"])
-        metrics_results["Generator Uncertainity"].append(question["generator_unc"])
-        metrics_results["Oracle Uncertainity"].append(question["oracle_unc"])
+        metrics_results["Retriever uncertainty"].append(question["retriever_unc"])
+        metrics_results["Generator uncertainty"].append(question["generator_unc"])
+        metrics_results["Oracle uncertainty"].append(question["oracle_unc"])
 
 
     print('\n' * 10)
 
-    # if idx % 2 == 0:
-    #     print("\nTaking a 10s nap...\n")
-    #     time.sleep(10) # because of the too many (parallel) requests per minute to OpenAI while using a free tier sub
+
+### SAVE DEEPEVAL STATISTICS
+
+with open(result_path+".json", "w") as f:
+    global_results = {metric: {"mean": np.nanmean(np.array(scores)), "std": np.nanstd(np.array(scores)), "scores": scores} for metric, scores in metrics_results.items()}
+
+    json.dump(global_results, f, indent=2)
 
 
 ### PLOT DEEPEVAL STATISTICS
 
-factor = sqrt(len(metrics_results))
-ROWS = ceil(factor)
-COLS = floor(factor)
-
-px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
-fig, ax = plt.subplots(ROWS,COLS, figsize=(1920*px, 1080*px))
-fig.suptitle("Metrics statistics", fontsize="xx-large", fontweight='bold')
-
-for i, (metric, scores) in enumerate(metrics_results.items()):
-    x,y = i//ROWS, i%ROWS
-
-    scores = np.array(scores)
-    if "hallucination" not in metric.lower() and "uncertainity" not in metric.lower():
-        passed, failed = scores[scores >= deepeval_threshold], scores[scores < deepeval_threshold]
-    else:
-        passed, failed = scores[scores < deepeval_threshold], scores[scores >= deepeval_threshold]
-
-    ax[x,y].hist([passed, failed], bins="fd", color=["green", "red"])#, edgecolor="black")
-    ax[x,y].set_xlim((0.0, 1.0))
-    ax[x,y].yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax[x,y].axvline(x = deepeval_threshold, color = 'b', linestyle = "--", linewidth = 1)
-    ax[x,y].set_title(metric)
-
-
-fig.legend(labels=["threshold", "passed", "failed"], ncols=3, fontsize="large", loc="upper right")
-plt.savefig(result_path+".png")
-plt.show()
-
-
-### SAVE GLOBAL STATISTICS
-
-with open(result_path+".json", "w") as f:
-    global_results = {metric: {"mean": np.nanmean(np.array(scores)), "std": np.nanstd(np.array(scores))} for metric, scores in metrics_results.items()}
-
-    json.dump(global_results, f, indent=2)
+plot(path_to_results=result_path+".json", threshold=deepeval_threshold, save_fig=True)
